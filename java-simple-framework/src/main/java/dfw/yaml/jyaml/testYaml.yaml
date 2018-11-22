@@ -1,0 +1,14 @@
+#以下是示例yaml结构
+
+age: 23
+children:
+  -
+    age: 8
+    name: mary1
+    sex: man
+  -
+    age: 9
+    name: simon2
+    sex: fatel
+name: simon.zhang
+sex: man

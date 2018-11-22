@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<bookstore>  
+    <book id="1" size="medium">  
+        <name >安徒生童话</name>  
+        <price>89</price>  
+        <language>英文</language>  
+        <year>2004</year>  
+    </book>  
+    <book id="2" size="lower">  
+        <name>一千零一夜</name>  
+        <price>65</price>  
+        <language>日语</language>  
+        <year>2014</year>  
+    </book>  
+    <book id="3" size="large">  
+        <name>美好</name>  
+        <price>99</price>  
+        <language>中文</language>  
+        <year>2015</year>  
+    </book>  
+</bookstore> 

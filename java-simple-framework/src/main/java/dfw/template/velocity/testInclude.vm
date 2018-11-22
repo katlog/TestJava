@@ -1,0 +1,14 @@
+<html>
+<head>
+  <title>$title</title>
+</head>
+<body>
+  <h1>$welcome</h1>
+  <hr/>
+Here is the link to <a href="${tutorial.url}">${tutorial.name}</a>!
+<p/>
+Below are a  list of topics:
+#include("list.vm")
+
+</body>
+</html>

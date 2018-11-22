@@ -1,0 +1,4 @@
+测试文件编码格式
+0123456789
+abcdefgigklmnopqrstvuwxyz
+ABCDEFGIGKLMNOPQRSTVUWXYZ
