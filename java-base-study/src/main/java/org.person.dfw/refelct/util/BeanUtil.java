@@ -12,14 +12,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.google.common.collect.Lists;
 import net.sf.json.JSONObject;
 
 import org.junit.Test;
@@ -318,8 +313,23 @@ public class BeanUtil {
 		}
 		return map;
 	}
-    
-    
+
+    /** 获取类的全部字段（含父类）
+     * @param clazz
+     * @return
+     */
+    public static List<Field> recursiveFields(Class clazz) {
+
+        return clazz.getSuperclass() == null ? Lists.newArrayList(clazz.getDeclaredFields())
+                :combine(Lists.newArrayList(clazz.getDeclaredFields()), recursiveFields(clazz.getSuperclass()));
+
+    }
+
+    private  static <T> List<T> combine(List<T> a,List<T> b) {
+        List<T> result = new ArrayList(a);
+        result.addAll(b);
+        return result;
+    }
     
     
 
