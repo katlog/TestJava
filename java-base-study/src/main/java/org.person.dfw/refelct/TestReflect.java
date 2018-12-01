@@ -263,8 +263,8 @@ public class TestReflect {
     /**枚举相关*/
     @Test
     public void enums() {
-        Class<EnumDemo> enumDemoClass = EnumDemo.class;
-        assertArrayEquals(enumDemoClass.getEnumConstants(),new Enum[]{EnumDemo.A,EnumDemo.B,EnumDemo.C});
+        Class<EnumDemo> enumClass = EnumDemo.class;
+        assertArrayEquals(enumClass.getEnumConstants(),new Enum[]{EnumDemo.A,EnumDemo.B,EnumDemo.C});
     }
 
 
