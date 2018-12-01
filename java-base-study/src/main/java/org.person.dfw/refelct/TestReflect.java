@@ -268,14 +268,27 @@ public class TestReflect {
     }
 
 
-    class Son extends Fathter implements Serializable{}
-    class Fathter{}
+    static class Son extends Fathter implements Serializable{}
+    static class Fathter{}
 
     /** 父子类关系 */
     @Test
     public void classRelation() {
         assertTrue(Fathter.class.isAssignableFrom(Son.class));
         assertTrue(Serializable.class.isAssignableFrom(Son.class));
+    }
+
+    /** 个对象强制转换成此 Class 对象所表示的类或接口 */
+    @Test
+    public void cast(){
+        Son son = new Son();
+        Fathter fathter =son;
+        Class<Son> targetClass = Son.class;
+
+        // 反射转换
+        assertEquals(son, targetClass.cast(fathter));
+        // 手动转化
+        assertEquals(son, (Son) fathter);
     }
     
 }
