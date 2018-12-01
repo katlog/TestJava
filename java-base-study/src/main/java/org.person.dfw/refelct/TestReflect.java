@@ -271,10 +271,10 @@ public class TestReflect {
     class Son extends Fathter implements Serializable{}
     class Fathter{}
 
+    /** 父子类关系 */
     @Test
     public void classRelation() {
         assertTrue(Fathter.class.isAssignableFrom(Son.class));
-
         assertTrue(Serializable.class.isAssignableFrom(Son.class));
     }
     
