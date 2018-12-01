@@ -14,6 +14,7 @@ import org.junit.Test;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
+import static org.junit.Assert.*;
 /**
  * @moudle: TestString 
  * @version:v1.0
@@ -181,5 +182,10 @@ public class TestString {
     	newStr = "$1"; 
     	String str4 = str3.replaceAll(regex, newStr);   
     	System.out.println(str4);
+    }
+
+    @Test
+    public void match() {
+        assertTrue("123433".matches("\\d+"));
     }
 }
