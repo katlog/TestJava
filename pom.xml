@@ -255,13 +255,6 @@
 			<version>1.4.3</version>
 		</dependency>
 		<!-- 邮件框架 -->
-		<!-- 定时任务 -->
-		<dependency>
-		    <groupId>org.quartz-scheduler</groupId>
-		    <artifactId>quartz</artifactId>
-			<!--<version>2.1.7</version>-->
-		</dependency>
-		<!-- 定时任务 -->
 		<!-- httpClient框架 -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -297,13 +290,6 @@
 			<version>3.3</version>
 		</dependency>
 		<!-- FTP工具 -->
-		<!-- 调度框架quartz -->
-		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz</artifactId>
-			<version>1.7.3</version>
-		</dependency>
-		<!-- 调度框架quartz -->
 		<!-- pdf框架 -->
 		<dependency>
 			<groupId>org.apache.pdfbox</groupId>

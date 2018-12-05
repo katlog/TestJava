@@ -1,4 +1,4 @@
-package dfw.quartz.simple;/*package org.person.dfw.quartz.simple;
+package dfw.quartz.simple;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.Job;
@@ -15,12 +15,7 @@ import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.triggers.SimpleTriggerImpl;
 
-*//**
- * @moudle: HelloQuartzScheduling
- * @version:v1.0
- * @date: 2017年3月21日 下午3:42:10
- *
- *//*
+
 public class HelloQuartzScheduling {
 
     public static void main(String[] args) throws SchedulerException {
@@ -38,8 +33,8 @@ public class HelloQuartzScheduling {
 //            .withSchedule(SimpleScheduleBuilder.simpleSchedule()
 //                .withIntervalInSeconds(10) //时间间隔
 //                .withRepeatCount(5)        //重复次数(将执行6次)
-            .withSchedule(CronScheduleBuilder.cronSchedule("0/2 * * * * ?") //每2秒执行一次
-                )
+                //每2秒执行一次
+            .withSchedule(CronScheduleBuilder.cronSchedule("0/2 1/3 * * * ?"))
         .build();;
         
         //注册并进行调度
@@ -49,4 +44,3 @@ public class HelloQuartzScheduling {
         scheduler.start();
     }
 }
-*/
