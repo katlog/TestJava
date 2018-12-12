@@ -5,6 +5,14 @@ public final class NameUtils {
     }
 
 
+    private static final Character A = 'A';
+    private static final Character Z = 'Z';
+    private static final Character a = 'a';
+    private static final Character z = 'z';
+
+    private static final Character UNDER_LINE = '_';
+
+
     /** 下划线转驼峰
      * @param from
      * @return
@@ -16,13 +24,13 @@ public final class NameUtils {
 
         for(int i = 0; i < sb.length(); ++i) {
             char c = sb.charAt(i);
-            if (c == '_') {
+            if (c == UNDER_LINE) {
                 meetSym = true;
             } else {
                 if (!meetSym) {
                     result.append(c);
                 } else {
-                    result.append(c > '`' && c < '{' ? (char)(c - 32) : c);
+                    result.append(c >= a && c <= z ? (char)(c - 32) : c);
                 }
 
                 meetSym = false;
@@ -40,7 +48,7 @@ public final class NameUtils {
         StringBuilder sb = new StringBuilder(string);
 
         char firstChar = string.charAt(0);
-        if (firstChar >= 'A' && firstChar <= 'Z') {
+        if (firstChar >= A && firstChar <= Z) {
             sb.delete(0, 1).insert(0, (char)(firstChar + 32));
             return sb.toString();
         }else {
@@ -56,7 +64,7 @@ public final class NameUtils {
         StringBuilder sb = new StringBuilder(string);
 
         char firstChar = string.charAt(0);
-        if (firstChar >= 'a' && firstChar <= 'z') {
+        if (firstChar >= a && firstChar <= z) {
             sb.delete(0, 1).insert(0, (char)(firstChar - 32));
             return sb.toString();
         }else {
@@ -74,8 +82,8 @@ public final class NameUtils {
 
         for(int i = 0; i < sb.length(); ++i) {
             char c = sb.charAt(i);
-            if (c >= 'A' && c <= 'Z') {
-                result.append(i == 0 ? "" : '_').append((char)(c + 32));
+            if (c >= A && c <= Z) {
+                result.append(i == 0 ? "" : '_').append((char) (c + 32));
             } else {
                 result.append(c);
             }
