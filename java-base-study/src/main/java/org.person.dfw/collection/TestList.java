@@ -8,14 +8,14 @@
  */ 
 package org.person.dfw.collection;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @moudle: TestList 
@@ -74,8 +74,18 @@ public class TestList {
 	}
 	
 	/**初始化话大小和size不同*/
-	@Test public void sizeAndInitalizeSize(){
+	@Test
+	public void sizeAndInitalizeSize(){
 		List list = new ArrayList<>(1000);
-		System.out.println(list.size());
+
+		assertEquals(0, list.size());
+	}
+
+	@Test
+	public void subList() {
+		List<Integer> a = Arrays.asList(1, 2, 3, 4);
+		List<Integer> subList = a.subList(0, 1);
+
+		assertArrayEquals(subList.toArray(),new Integer[]{1});
 	}
 }
