@@ -10,6 +10,7 @@ package org.person.dfw.collection;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -84,8 +85,20 @@ public class TestList {
 	@Test
 	public void subList() {
 		List<Integer> a = Arrays.asList(1, 2, 3, 4);
+		// [fromIndex toIndex)
 		List<Integer> subList = a.subList(0, 1);
 
 		assertArrayEquals(subList.toArray(),new Integer[]{1});
+	}
+
+	@Test
+	public void collect1() {
+		List<Integer> a = Arrays.asList(1, 2, 3, 4);
+
+		// 不会返回null
+		List<Integer> b = a.stream().filter(i -> i == 7).collect(Collectors.toList());
+		assertEquals(0,b.size());
+		List<Integer> c = b.stream().filter(i -> i == 0).collect(Collectors.toList());
+		assertEquals(0, c.size());
 	}
 }
