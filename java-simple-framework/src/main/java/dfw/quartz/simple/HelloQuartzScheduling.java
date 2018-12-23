@@ -1,5 +1,4 @@
-package dfw.quartz.simple;/*package org.person.dfw.quartz.simple;
-
+package dfw.quartz.simple;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
@@ -35,9 +34,6 @@ public class HelloQuartzScheduling {
             .withSchedule(CronScheduleBuilder.cronSchedule("0/2 * * * * ?") //每2秒执行一次
                 )
         .build();
-                //每2秒执行一次
-            .withSchedule(CronScheduleBuilder.cronSchedule("0/2 1/3 * * * ?"))
-        .build();;
 
         //注册并进行调度
         scheduler.scheduleJob(jobDetail,trigger);
