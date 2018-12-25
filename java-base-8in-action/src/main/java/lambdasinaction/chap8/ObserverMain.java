@@ -3,11 +3,13 @@ package lambdasinaction.chap8;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/** 观察者模式 */
 public class ObserverMain {
 
     public static void main(String[] args) {
         Feed f = new Feed();
+
+        // 不用lambda表达式的另一个好处是 类名能告知这个操作是干什么用的
         f.registerObserver(new NYTimes());
         f.registerObserver(new Guardian());
         f.registerObserver(new LeMonde());

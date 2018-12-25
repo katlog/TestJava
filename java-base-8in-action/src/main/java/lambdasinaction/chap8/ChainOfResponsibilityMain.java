@@ -3,7 +3,7 @@ package lambdasinaction.chap8;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-
+/** 责任链模式 */
 public class ChainOfResponsibilityMain {
 
     public static void main(String[] args) {
