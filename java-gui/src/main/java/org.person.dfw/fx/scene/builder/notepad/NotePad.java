@@ -15,7 +15,7 @@ public class NotePad extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("NotePad.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/NotePad.fxml"));
 
 
         Scene scene = new Scene(root, 600, 400);

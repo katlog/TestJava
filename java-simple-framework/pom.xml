@@ -72,5 +72,11 @@
             <systemPath>${java.home}/../lib/tools.jar</systemPath>
         </dependency>-->
         <!--*****************************ASM字节码***********************************-->
+
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.10</version>
+        </dependency>
     </dependencies>
 </project>
