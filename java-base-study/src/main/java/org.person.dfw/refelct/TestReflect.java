@@ -290,5 +290,24 @@ public class TestReflect {
         // 手动转化
         assertEquals(son, (Son) fathter);
     }
+
+    @Test
+    /** 是否是原始类型 */
+    public void isPrimitive() {
+
+        assertTrue(int.class.isPrimitive());
+        assertTrue(long.class.isPrimitive());
+        assertTrue(short.class.isPrimitive());
+        assertTrue(double.class.isPrimitive());
+        assertTrue(float.class.isPrimitive());
+        assertTrue(char.class.isPrimitive());
+        assertTrue(boolean.class.isPrimitive());
+
+
+        assertFalse(Integer.class.isPrimitive());
+        assertFalse(Long.class.isPrimitive());
+        assertFalse(Short.class.isPrimitive());
+
+    }
     
 }
