@@ -15,7 +15,6 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * @moudle: TestCalender

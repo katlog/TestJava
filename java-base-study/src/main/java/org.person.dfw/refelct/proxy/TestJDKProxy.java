@@ -6,7 +6,6 @@ import java.lang.reflect.Proxy;
 
 import org.junit.Test;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  *使用动态代理实现，接口、接口实现类的方法，增加包裹打印
