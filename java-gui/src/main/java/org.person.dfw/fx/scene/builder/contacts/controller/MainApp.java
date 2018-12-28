@@ -23,6 +23,7 @@ import org.person.dfw.fx.scene.builder.contacts.model.PersonListWrapper;
 import org.person.dfw.fx.scene.builder.contacts.view.BirthdayStatisticsController;
 import org.person.dfw.fx.scene.builder.contacts.view.PersonEditDialogController;
 import org.person.dfw.fx.scene.builder.contacts.view.PersonOverviewController;
+import org.person.dfw.fx.scene.builder.contacts.view.RootLayoutController;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -72,13 +73,17 @@ public class MainApp extends Application {
         try {
             // Load root layout from fxml file.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("../view/RootLayout.fxml"));
+            loader.setLocation(MainApp.class.getResource("/view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
+
+            // Give the controller access to the main app.
+            RootLayoutController controller = loader.getController();
+            controller.setMainApp(this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,7 +96,7 @@ public class MainApp extends Application {
         try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("../view/PersonOverview.fxml"));
+            loader.setLocation(MainApp.class.getResource("/view/PersonOverview.fxml"));
             AnchorPane personOverview = (AnchorPane) loader.load();
 
             // Set person overview into the center of root layout.
@@ -126,7 +131,7 @@ public class MainApp extends Application {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("../view/PersonEditDialog.fxml"));
+            loader.setLocation(MainApp.class.getResource("/view/PersonEditDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
             // Create the dialog Stage.
@@ -160,7 +165,7 @@ public class MainApp extends Application {
         try {
             // Load the fxml file and create a new stage for the popup.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("../view/BirthdayStatistics.fxml"));
+            loader.setLocation(MainApp.class.getResource("/view/BirthdayStatistics.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Birthday Statistics");
