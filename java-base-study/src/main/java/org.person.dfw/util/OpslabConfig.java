@@ -32,7 +32,7 @@ public class OpslabConfig {
             //获取非jar包内的配置信息
             try {
                 String config_file = new File(contextClassLoader.getResource("0opslab.properties").toURI()).getPath();
-                Map<String, String> CONFIG_MAP = PropertiesUtil.GetAllProperties(config_file);
+                Map<String, String> CONFIG_MAP = PropertiesUtil.getAllProperties(config_file);
                 INIT_MAP.putAll(CONFIG_MAP);
             } catch (Exception e) {
             }
