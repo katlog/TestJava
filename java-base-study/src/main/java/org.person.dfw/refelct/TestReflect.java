@@ -8,24 +8,20 @@
  */ 
 package org.person.dfw.refelct;
 
+import org.junit.Test;
+import sun.misc.Contended;
+import sun.net.www.protocol.file.FileURLConnection;
+
+import javax.annotation.Tainted;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.lang.annotation.Annotation;
-import java.lang.annotation.Target;
 import java.lang.reflect.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import org.junit.Test;
-
-import sun.net.www.protocol.file.FileURLConnection;
-
-import javax.persistence.Convert;
-import javax.persistence.Table;
 
 import static org.junit.Assert.*;
 
@@ -37,8 +33,8 @@ import static org.junit.Assert.*;
  *
  */
 public class TestReflect {
-    @Convert
-    @Table
+    @Contended
+    @Tainted
     class ReflectDemo{
 
         public class PublicInnerClass{}
@@ -81,7 +77,7 @@ public class TestReflect {
 
         demoClass.getAnnotatedInterfaces();
         demoClass.getAnnotatedSuperclass();
-        demoClass.getAnnotationsByType(Convert.class);
+        demoClass.getAnnotationsByType(Contended.class);
 
         /**2、类本身 */
         
@@ -120,7 +116,7 @@ public class TestReflect {
         /** @Link{https://blog.csdn.net/u014112608/article/details/73526554]*/
         System.out.println("全部注解："+Arrays.toString(stringClass.getAnnotations()));
         System.out.println("此类的全部注解："+Arrays.toString(stringClass.getDeclaredAnnotations()));
-        assertNotNull(demoClass.getAnnotation(Convert.class));                          // 特定注解
+        assertNotNull(demoClass.getAnnotation(Contended.class));                          // 特定注解
 
         /**3  类结构*/
         /**3.1 构造器*/
