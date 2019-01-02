@@ -23,6 +23,19 @@ public final class StringUtil {
         return str == null || str.equals("");
     }
 
+    public static boolean equals(String a, String b) {
+        if (a != null && b != null && !a.equals(b)) {
+            return false;
+        }
+        if (a != null && b == null) {
+            return false;
+        }
+        if (a == null && b != null) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * 把string array or list用给定的符号symbol连接成一个字符串
      *
