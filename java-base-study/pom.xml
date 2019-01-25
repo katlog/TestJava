@@ -26,6 +26,15 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/chardet-1.0.jar</systemPath>
         </dependency>
+        <!-- 1.8 版本中 移除了部分javax的东西，如mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.3</version>
+        </dependency>
+
     </dependencies>
+
+
 
 </project>

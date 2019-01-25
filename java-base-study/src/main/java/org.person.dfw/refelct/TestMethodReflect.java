@@ -2,8 +2,9 @@ package org.person.dfw.refelct;
 
 import org.junit.Test;
 
-import javax.persistence.Convert;
-import javax.persistence.Table;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
+import javax.xml.ws.Action;
 import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Method;
 
@@ -25,7 +26,7 @@ public class TestMethodReflect {
     /**  注意 异常会在构造方法中抛出 【有意思】 */
     Method method1 = TestMethodReflect.class.getMethod("method1", null);
 
-    @Convert
+    @Action
     public String method2( String[] strings){
         return strings[0];
     }
@@ -50,7 +51,8 @@ public class TestMethodReflect {
         assertEquals(TestMethodReflect.class, method1.getDeclaringClass());
     }
 
-    @Table class  A{}
+    @Resource
+    class  A{}
     public A returnTypeMethod(){
         return null;
     }
