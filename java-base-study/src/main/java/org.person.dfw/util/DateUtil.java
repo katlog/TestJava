@@ -346,7 +346,7 @@ public final class DateUtil {
             Date start = DateTimeInstance().parse(date1);
             Date end = DateTimeInstance().parse(date2);
             long cha = (end.getTime() - start.getTime()) / 1000;
-            rs = (int) cha / (60);
+            rs = (int) (cha / (60));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -362,7 +362,7 @@ public final class DateUtil {
      */
     public  static int subtractMinute(Date date1, Date date2) {
         long cha = date2.getTime() - date1.getTime();
-        return (int) cha / (1000 * 60);
+        return (int) (cha / (1000 * 60));
     }
 
     /**
@@ -374,7 +374,7 @@ public final class DateUtil {
      */
     public  static int subtractHour(Date date1, Date date2) {
         long cha = (date2.getTime() - date1.getTime()) / 1000;
-        return (int) cha / (60 * 60);
+        return (int) (cha / (60 * 60));
     }
 
     /**
@@ -390,7 +390,7 @@ public final class DateUtil {
             Date start = DateTimeInstance().parse(date1);
             Date end = DateTimeInstance().parse(date2);
             long cha = (end.getTime() - start.getTime()) / 1000;
-            rs = (int) cha / (60 * 60);
+            rs = (int) (cha / (60 * 60));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -411,7 +411,7 @@ public final class DateUtil {
             Date start = DateTimeInstance().parse(date1);
             Date end = DateTimeInstance().parse(date2);
             long sss = (end.getTime() - start.getTime()) / 1000;
-            rs = (int) sss / (60 * 60 * 24);
+            rs = (int) (sss / (60 * 60 * 24));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -427,7 +427,8 @@ public final class DateUtil {
      */
     public  static int subtractDay(Date date1, Date date2) {
         long cha = date2.getTime() - date1.getTime();
-        return (int) cha / (1000 * 60 * 60 * 24);
+        /** 原来的这种计算方式有问题：(int) cha / (1000 * 60 * 60 * 24) */
+        return (int) (cha / (1000 * 60 * 60 * 24));
     }
 
     /**
