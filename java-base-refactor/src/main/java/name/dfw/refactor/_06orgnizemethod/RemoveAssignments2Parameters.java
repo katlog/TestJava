@@ -4,8 +4,22 @@ import java.util.Date;
 
 /**
  * Created by fw on 2018/4/24
+ * 移除对参数的赋值动作
  */
 public class RemoveAssignments2Parameters {
+
+    class Demo{
+        int discountBeforeRefactor ( int inputVal, int quantity, int yearToDate) {
+            if (inputVal > 50)
+                inputVal -= 2;
+            return inputVal;
+        }
+            int discountRefactor (int inputVal, int quantity, int yearToDate) {
+                int result = inputVal;
+                if (inputVal > 50) result -= 2;
+                return result;
+            }
+    }
 
     class BeforeRefactor {
         int discount(int inputVal, int quantity, int yearToDate) {

@@ -2,6 +2,7 @@ package name.dfw.refactor._06orgnizemethod;
 
 /**
  * Created by fw on 2018/4/19
+ * 将函数内联化
  */
 public class InlineMethod {
 

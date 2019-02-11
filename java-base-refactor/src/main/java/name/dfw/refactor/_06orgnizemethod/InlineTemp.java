@@ -2,6 +2,7 @@ package name.dfw.refactor._06orgnizemethod;
 
 /**
  * Created by dell on 2018/4/24
+ * 将临时变量内联化
  */
 public class InlineTemp {
 

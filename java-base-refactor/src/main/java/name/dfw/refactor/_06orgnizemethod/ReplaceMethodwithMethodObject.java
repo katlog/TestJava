@@ -2,6 +2,7 @@ package name.dfw.refactor._06orgnizemethod;
 
 /**
  * Created by fw on 2018/4/24
+ * 以函数对象取代函数
  */
 public class ReplaceMethodwithMethodObject {
 

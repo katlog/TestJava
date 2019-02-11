@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by fw on 2018/4/19
+ * 替换算法
  */
 public class SubstituteAlgorithm {
     class Demo {

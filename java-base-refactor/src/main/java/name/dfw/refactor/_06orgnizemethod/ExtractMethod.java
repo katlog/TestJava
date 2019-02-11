@@ -4,6 +4,7 @@ import java.util.Enumeration;
 
 /**
  * Created by fw on 2018/4/19
+ * 提炼函数
  */
 
 interface Elements{
@@ -26,7 +27,6 @@ public class ExtractMethod {
 
     private class BeforeRefactor {
 
-        /** 无局部变量（No Local Variables）*/
         void printOwing() {
             Enumeration e = _orders.elements();
             double outstanding = 0.0;
@@ -46,6 +46,7 @@ public class ExtractMethod {
         }
     }
 
+    /**  无局部变量替换 */
     private class NoLocalVariableRefator {
 
         void printOwing() {
@@ -62,6 +63,7 @@ public class ExtractMethod {
             System.out.println("amount" + outstanding);
         }
 
+        /** 无局部变量（No Local Variables）*/
         void printBanner() {
             // print banner
             System.out.println("**************************");
@@ -70,6 +72,7 @@ public class ExtractMethod {
         }
     }
 
+    /**  有局部变量替换 */
     class UsingLocalVariableRefactor{
         void printOwing() {
             Enumeration e = _orders.elements();
@@ -82,6 +85,7 @@ public class ExtractMethod {
             }
             printDetails(outstanding);
         }
+        /**  有局部变量 */
         void printDetails (double outstanding) {
             System.out.println ("name:" + _name);
             System.out.println ("amount" + outstanding);
@@ -94,6 +98,7 @@ public class ExtractMethod {
         }
     }
 
+    /**  有局部变量再赋值替换 */
     class ReassigningALocalVariableRefactor{
 
         void printOwing() {
@@ -122,6 +127,7 @@ public class ExtractMethod {
         }
     }
 
+    /**  有局部变量 且代码对局部变量进行了其他处理 再赋值 */
     class ReassigningALocalVariableWhileInitializeBefore{
 
         void printOwing(double previousAmout) {
