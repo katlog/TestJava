@@ -4,6 +4,9 @@ package org.person.dfw.util.coordinates;
  * 经纬度相关的阿一些操作
  */
 public final class CoordinateUtil {
+
+    public static final int EARTH_RADIUS = 6378137;
+
     /**
      * 计算地球上任意两点(经纬度)距离
      *
@@ -15,7 +18,8 @@ public final class CoordinateUtil {
      */
     public final static double distance(double long1, double lat1, double long2, double lat2) {
         double a, b, R;
-        R = 6378137; // 地球半径
+        // 地球半径
+        R = EARTH_RADIUS;
         lat1 = lat1 * Math.PI / 180.0;
         lat2 = lat2 * Math.PI / 180.0;
         a = lat1 - lat2;

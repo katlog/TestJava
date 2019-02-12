@@ -1,6 +1,6 @@
 package org.person.dfw.util.web;
 
-import org.person.dfw.util.ConvertUtil;
+import org.person.dfw.util.TypeConvertUtil;
 import org.person.dfw.util.StringUtil;
 
 import java.io.UnsupportedEncodingException;
@@ -23,7 +23,7 @@ public final class WebUtil {
         if (StringUtil.isEmpty(str)) {
             return "";
         }
-        char[] chars =ConvertUtil.bytesToChars(ConvertUtil.encodeBytes(str.getBytes(encoding), '%'));
+        char[] chars =TypeConvertUtil.bytesToChars(TypeConvertUtil.encodeBytes(str.getBytes(encoding), '%'));
         return new String(chars);
     }
 
