@@ -1,5 +1,9 @@
 package org.person.dfw.util;
 
+
+/**
+ * 变量名、函数名 工具
+ */
 public final class NameUtils {
     private NameUtils() {
     }
@@ -13,7 +17,9 @@ public final class NameUtils {
     private static final Character UNDER_LINE = '_';
 
 
-    /** 下划线转驼峰
+    /**
+     * 下划线转驼峰
+     *
      * @param from
      * @return
      */
@@ -22,7 +28,7 @@ public final class NameUtils {
         StringBuilder result = new StringBuilder(from.length());
         boolean meetSym = false;
 
-        for(int i = 0; i < sb.length(); ++i) {
+        for (int i = 0; i < sb.length(); ++i) {
             char c = sb.charAt(i);
             if (c == UNDER_LINE) {
                 meetSym = true;
@@ -30,7 +36,7 @@ public final class NameUtils {
                 if (!meetSym) {
                     result.append(c);
                 } else {
-                    result.append(c >= a && c <= z ? (char)(c - 32) : c);
+                    result.append(c >= a && c <= z ? (char) (c - 32) : c);
                 }
 
                 meetSym = false;
@@ -40,39 +46,48 @@ public final class NameUtils {
         return result.toString();
     }
 
-    /** 首字符变小写
-     * @param string
-     * @return
-     */
-    public static String firstCharLower(String string) {
-        StringBuilder sb = new StringBuilder(string);
 
-        char firstChar = string.charAt(0);
-        if (firstChar >= A && firstChar <= Z) {
-            sb.delete(0, 1).insert(0, (char)(firstChar + 32));
-            return sb.toString();
-        }else {
-            return string;
-        }
+    private static boolean isEmpty(String str) {
+        return str == null || str.equals("") || str.trim().equals("");
     }
 
-    /** 首字符大写
-     * @param string
-     * @return
+    /**
+     * 将字符串首字母转大写
+     *
+     * @param str 需要处理的字符串
      */
-    public static String firstCharCapital(String string) {
-        StringBuilder sb = new StringBuilder(string);
-
-        char firstChar = string.charAt(0);
-        if (firstChar >= a && firstChar <= z) {
-            sb.delete(0, 1).insert(0, (char)(firstChar - 32));
-            return sb.toString();
-        }else {
-            return string;
+    public static String firstCharUpper(String str) {
+        if (isEmpty(str)) {
+            return "";
         }
+        char[] cs = str.toCharArray();
+        if ((cs[0] >= a) && (cs[0] <= z)) {
+            cs[0] -= (char) 0x20;
+        }
+        return String.valueOf(cs);
     }
 
-    /** 驼峰转下划线
+    /**
+     * 将字符串首字母转小写
+     *
+     * @param str
+     * @return
+     */
+    public static String firstCharLower(String str) {
+        if (isEmpty(str)) {
+            return "";
+        }
+        char[] cs = str.toCharArray();
+        if ((cs[0] >= A) && (cs[0] <= Z)) {
+            cs[0] += (char) 0x20;
+        }
+        return String.valueOf(cs);
+    }
+
+
+    /**
+     * 驼峰转下划线
+     *
      * @param from
      * @return
      */
@@ -80,7 +95,7 @@ public final class NameUtils {
         StringBuilder sb = new StringBuilder(from);
         StringBuilder result = new StringBuilder(from.length());
 
-        for(int i = 0; i < sb.length(); ++i) {
+        for (int i = 0; i < sb.length(); ++i) {
             char c = sb.charAt(i);
             if (c >= A && c <= Z) {
                 result.append(i == 0 ? "" : '_').append((char) (c + 32));
