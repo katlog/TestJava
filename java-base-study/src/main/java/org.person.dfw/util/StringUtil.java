@@ -14,13 +14,13 @@ import java.util.regex.Pattern;
 public final class StringUtil {
 
     /**
-     * 判断是否是空字符串 null和"" 都返回 true
+     * 判断是否是空字符串 null返回 true
      *
      * @param str 判断的字符串
      * @return 是否有效
      */
     public  static boolean isEmpty(String str) {
-        return str == null || str.equals("");
+        return str == null || str.equals("") || str.trim().equals("");
     }
 
     public static boolean equals(String a, String b) {
@@ -44,150 +44,33 @@ public final class StringUtil {
      * @return 处理后的字符串
      */
     public  static String joinString(List list, String symbol) {
-        String result = "";
+        return joinString(list, symbol, null, null);
+    }
+
+    public static String joinString(String symbol, Object... objects) {
+        return joinString(Arrays.asList(objects), symbol, null, null);
+    }
+
+    public  static String joinString(List list, String symbol,String prefix,String subfix) {
+        StringBuilder result = new StringBuilder();
         if (list != null) {
             for (Object o : list) {
                 String temp = o.toString();
                 if (temp.trim().length() > 0)
-                    result += (temp + symbol);
+                    result.append(temp).append(symbol);
             }
             if (result.length() > 1) {
-                result = result.substring(0, result.length() - 1);
+                result = new StringBuilder(result.substring(0, result.length() - 1));
             }
         }
-        return result;
-    }
-
-    /**
-     * 判定第一个字符串是否等于的第二个字符串中的某一个值
-     *
-     * @param str1 测试的字符串
-     * @param str2 字符串数组(用,分割)
-     * @return 是否包含
-     */
-    public  static boolean requals(String str1, String str2) {
-        if (str1 != null && str2 != null) {
-            str2 = str2.replaceAll("\\s*", "");
-            String[] arr = str2.split(",");
-            for (String t : arr) {
-                if (t.equals(str1.trim())) {
-                    return true;
-                }
-            }
+        if (!isEmpty(prefix) && !isEmpty(subfix)) {
+            result.insert(0, prefix);
+            result.insert(result.length(), subfix);
         }
-        return false;
-    }
 
-    /**
-     * 判定第一个字符串是否等于的第二个字符串中的某一个值
-     *
-     * @param str1  测试的字符串
-     * @param str2  字符串数组
-     * @param split str2字符串的分隔符
-     * @return 是否包含
-     */
-    public  static boolean requals(String str1, String str2, String split) {
-        if (str1 != null && str2 != null) {
-            str2 = str2.replaceAll("\\s*", "");
-            String[] arr = str2.split(split);
-            for (String t : arr) {
-                if (t.equals(str1.trim())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-
-    /**
-     * 字符串省略截取
-     * 字符串截取到指定长度size+...的形式
-     *
-     * @param subject 需要处理的字符串
-     * @param size    截取的长度
-     * @return 处理后的字符串
-     */
-    public  static String subStringOmit(String subject, int size) {
-        if (subject != null && subject.length() > size) {
-            subject = subject.substring(0, size) + "...";
-        }
-        return subject;
-    }
-
-
-    /**
-     * 截取字符串　超出的字符用symbol代替
-     *
-     * @param str    需要处理的字符串
-     * @param len    字符串长度
-     * @param symbol 最后拼接的字符串
-     * @return 测试后的字符串
-     */
-    public  static String subStringSymbol(String str, int len, String symbol) {
-        String temp = "";
-        if (str != null && str.length() > len) {
-            temp = str.substring(0, len) + symbol;
-        }
-        return temp;
-    }
-
-
-    /**
-     * 把string array or list用给定的符号symbol连接成一个字符串
-     *
-     * @param array  需要处理的字符串数组
-     * @param symbol 链接的符号
-     * @return 处理后的字符串
-     */
-    public  static String joinString(String[] array, String symbol) {
-        String result = "";
-        if (array != null) {
-            for (String temp : array) {
-                if (temp != null && temp.trim().length() > 0)
-                    result += (temp + symbol);
-            }
-            if (result.length() > 1 && valid.valid(symbol)) {
-                result = result.substring(0, result.length() - symbol.length());
-            }
-        }
-        return result;
-    }
-
-    /**
-     * 将一组字符才以指定的字符链接起来
-     * @param linkStr 链接字符
-     * @param strs  需要连接的动态参数
-     * @return
-     */
-    public  static String join(String linkStr,String ... strs){
-        StringBuffer result = new StringBuffer();
-            for (String temp : strs) {
-                if (temp != null && temp.trim().length() > 0)
-                    result.append(temp + linkStr);
-            }
-            if (result.length() > 1 && valid.valid(linkStr)) {
-                return result.substring(0, result.length() - linkStr.length());
-            }
         return result.toString();
     }
 
-
-    /**
-     * 隐藏邮件地址前缀。
-     *
-     * @param email - EMail邮箱地址 例如: ssss@koubei.com 等等...
-     * @return 返回已隐藏前缀邮件地址, 如 *********@koubei.com.
-     */
-    public  static String getHideEmailPrefix(String email) {
-        if (null != email) {
-            int index = email.lastIndexOf('@');
-            if (index > 0) {
-                email = repeat("*", index).concat(email.substring(index));
-            }
-        }
-        return email;
-    }
 
     /**
      * repeat - 通过源字符串重复生成N次组成新的字符串。
@@ -509,36 +392,7 @@ public final class StringUtil {
         return sb.toString();
     }
 
-    /**
-     * 将字符串首字母转大写
-     * @param str 需要处理的字符串
-     */
-    public  static String upperFirstChar(String str){
-        if(isEmpty(str)){
-            return "";
-        }
-        char[] cs=str.toCharArray();
-        if((cs[0] >= 'a') && (cs[0] <= 'z')){
-            cs[0] -= (char) 0x20;
-        }
-        return String.valueOf(cs);
-    }
 
-    /**
-     * 将字符串首字母转小写
-     * @param str
-     * @return
-     */
-    public  static String lowerFirstChar(String str){
-        if(isEmpty(str)){
-            return "";
-        }
-        char[] cs=str.toCharArray();
-        if((cs[0] >= 'A') && (cs[0] <= 'Z')){
-            cs[0] += (char) 0x20;
-        }
-        return String.valueOf(cs);
-    }
 
     /**
      * 判读俩个字符串右侧的length个字符串是否一样
@@ -563,42 +417,4 @@ public final class StringUtil {
     }
 
 
-    public static String underLine2Camel(String from) {
-        StringBuilder sb = new StringBuilder(from);
-        StringBuilder result = new StringBuilder(from.length());
-        boolean meetSym = false;
-
-        for(int i = 0; i < sb.length(); ++i) {
-            char c = sb.charAt(i);
-            if (c == '_') {
-                meetSym = true;
-            } else {
-                if (!meetSym) {
-                    result.append(c);
-                } else {
-                    result.append(c > '`' && c < '{' ? (char)(c - 32) : c);
-                }
-
-                meetSym = false;
-            }
-        }
-
-        return result.toString();
-    }
-
-    public static String camel2UnderLine(String from) {
-        StringBuilder sb = new StringBuilder(from);
-        StringBuilder result = new StringBuilder(from.length());
-
-        for(int i = 0; i < sb.length(); ++i) {
-            char c = sb.charAt(i);
-            if (c >= 'A' && c <= 'Z') {
-                result.append(i == 0 ? "" : '_').append((char)(c + 32));
-            } else {
-                result.append(c);
-            }
-        }
-
-        return result.toString();
-    }
 }

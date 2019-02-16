@@ -1,5 +1,7 @@
 package name.katlog.dddimpl.chapter01;
 
+import name.katlog.dddimpl.Entity;
+
 /**
  * Created by fw on 2019/2/11
  */

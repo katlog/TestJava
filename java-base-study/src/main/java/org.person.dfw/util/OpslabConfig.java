@@ -48,14 +48,6 @@ public class OpslabConfig {
     /*主机特征码*/
     public static final String HOST_FEATURE = INIT_MAP.get("HOST_FEATURE");
 
-    /*日期时间类型格式*/
-    public static final String DATETIME_FORMAT = INIT_MAP.get("DATETIME_FORMAT");
-
-    /*日期类型格式*/
-    public static final String DATE_FORMAT = INIT_MAP.get("DATE_FORMAT");
-
-    /*时间类型的格式*/
-    public static final String TIME_FORMAT = INIT_MAP.get("TIME_FORMAT");
 
     /**
      * 获取配置信息

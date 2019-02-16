@@ -80,7 +80,7 @@ public class BeanUtil {
      * author : 丰伟</br>
      * date : 2017年7月19日 下午3:35:39</br>
      * @param pros 要选择的属性，默认选择全部值不为空的属性
-     * @return map
+     * @return map key-field#getName
      */ 
     public static <T> Map<String, Object> getProVal(T bean,String... pros){
     	Map<String, Object> map = new HashMap<>();
@@ -193,12 +193,10 @@ public class BeanUtil {
                         }
                        
                     }
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
+                } catch (IllegalArgumentException | IllegalAccessException e) {
                     e.printStackTrace();
                 }
-                
+
         }
         if (!equal) {
             return "";

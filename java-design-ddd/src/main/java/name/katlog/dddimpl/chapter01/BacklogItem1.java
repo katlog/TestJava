@@ -1,5 +1,6 @@
 package name.katlog.dddimpl.chapter01;
 
+import name.katlog.dddimpl.Entity;
 import name.katlog.dddimpl.assist.DomainEventPublisher;
 
 /**
