@@ -55,6 +55,31 @@ public final class DateUtil {
         return df;
     }
 
+
+    /**
+     * 判断是否在某个时间段内
+     * @param startTime
+     * @param endTime
+     * @param date
+     * @return
+     * @throws ParseException
+     */
+    public static boolean between(String startTime,String endTime,Date date)
+            throws ParseException {
+        return between(dateTime(startTime),dateTime(endTime),date);
+    }
+
+    /**
+     * 判断在某个时间内
+     * @param startTime
+     * @param endTime
+     * @param date
+     * @return
+     */
+    public static boolean between(Date startTime,Date endTime,Date date){
+        return date.after(startTime) && date.before(endTime);
+    }
+
     /**
      *  格式化日期
      * @param a
@@ -866,29 +891,5 @@ public final class DateUtil {
             cal.setTime(date);
         }
         return cal.getTime();
-    }
-
-    /**
-     * 判断是否在某个时间段内
-     * @param startTime
-     * @param endTime
-     * @param date
-     * @return
-     * @throws ParseException
-     */
-    public static boolean between(String startTime,String endTime,Date date)
-            throws ParseException {
-        return between(dateTime(startTime),dateTime(endTime),date);
-    }
-
-    /**
-     * 判断在某个时间内
-     * @param startTime
-     * @param endTime
-     * @param date
-     * @return
-     */
-    public static boolean between(Date startTime,Date endTime,Date date){
-        return date.after(startTime) && date.before(endTime);
     }
 }

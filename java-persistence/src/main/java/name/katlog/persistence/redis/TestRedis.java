@@ -7,7 +7,7 @@
  * @date: 2017年2月23日 下午4:28:06
  * @version: V1.0  
  */ 
-package dfw.redis;
+package name.katlog.persistence.redis;
 
 import org.junit.Test;
 import redis.clients.jedis.Jedis;
