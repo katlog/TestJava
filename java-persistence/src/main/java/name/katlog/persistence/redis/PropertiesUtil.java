@@ -1,4 +1,4 @@
-package org.person.dfw.util.file;
+package name.katlog.persistence.redis;
 
 
 import org.slf4j.Logger;
@@ -61,6 +61,9 @@ public final class PropertiesUtil {
 
     public static long getLongValByKey(String filePath, String key){
         return Long.parseLong(getValueByKey(filePath, key));
+    }
+    public static boolean getBooleanValByKey(String filePath, String key){
+        return Boolean.parseBoolean(getValueByKey(filePath, key));
     }
 
     public static Map<String,String> properties(InputStream in){
