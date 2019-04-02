@@ -13,13 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.BiFunction;
 
+import org.junit.Assert;
 import org.junit.Test;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
-import net.sf.json.JSON;
-import net.sf.json.JSONObject;
 
 /**
  * @moudle: TestMap 
@@ -60,7 +57,7 @@ public class TestMap {
     /**compute()是java8在Map中新增的一个方法，相对而言较为陌生。其作用是把remappingFunction的计算结果关联到key上
      * （即remappingFunction返回值作为新value）。写一段它的简单应用的代码，并与“同级生”merge()类比加深理解*/
 	public void compute() {
-		HashMap map = new HashMap();
+		HashMap<String,String> map = new HashMap<>(3);
 		map.put("a", "c");
 		map.put("b", "h");
 		map.put("c", "e");
@@ -71,5 +68,61 @@ public class TestMap {
 		map.merge("c", "e", (k, v) -> null) ;
 		System.out.println(map.toString());
 		// 输出结果为：{a=C, b=H, d=D}
+	}
+
+	@Test
+	public void computeMerge(){
+
+		Map<String, String> myMap = new HashMap<>();
+		String keyA = "A";
+		String keyB = "B";
+		String keyC = "C";
+		String keyD = "D";
+		String keyE = "E";
+		String keyF = "F";
+		String keyG = "G";
+		String keyH = "H";
+		myMap.put(keyA, "str01A");
+		myMap.put(keyB, "str01B");
+		myMap.put(keyC, "str01C");
+
+		System.out.println("myMap initial content:"+ myMap);
+
+		myMap.merge(keyA, "merge01", String::concat);
+		myMap.merge(keyD, "merge01", String::concat);
+		System.out.println("Map merge demo content:"+ myMap);
+
+		BiFunction<String, String, String> biFunc = (t, u) -> t == null ? u : t + "." + u;
+
+		myMap.merge(keyA, "BiFuncMerge01", biFunc);
+		myMap.merge(keyE, "BiFuncMerge01", biFunc);
+		System.out.println("Map customized BiFunction merge demo content:"+ myMap);
+
+		String msg = "msgCompute";
+		myMap.compute(keyB, (k, v) -> (v == null) ? msg : v.concat(msg));
+		myMap.compute(keyF, (k, v) -> (v == null) ? msg : v.concat(msg));
+		System.out.println("Map customized BiFunction compute demo content:"+ myMap);
+
+		myMap.computeIfAbsent(keyC, TestMap::genValue);
+		myMap.computeIfAbsent(keyG, TestMap::genValue);
+		System.out.println("Map customized Function computeIfAbsent demo content:"+ myMap);
+
+		myMap.computeIfPresent(keyC, biFunc);
+		myMap.computeIfPresent(keyH, biFunc);
+		System.out.println("Map customized biFunc computeIfPresent demo content:"+ myMap);
+	}
+
+	static String genValue(String str) {
+		System.out.println("===");
+		return str + "2";
+	}
+
+	@Test
+	public void computeIfPresent(){
+		Map<Integer,String> map = new HashMap<>(1);
+		map.put(1, "a");
+
+		String s = map.computeIfPresent(1, (k, v) -> v + "a");
+		Assert.assertEquals("aa", s);
 	}
 }	

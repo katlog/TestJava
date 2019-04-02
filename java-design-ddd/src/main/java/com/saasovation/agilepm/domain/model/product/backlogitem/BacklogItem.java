@@ -7,4 +7,9 @@ import com.saasovation.supply.AggregateRoot;
  */
 @AggregateRoot
 public class BacklogItem {
+
+    private BacklogItemId backlogItemId;
+    private BusinessPriority businessPriority;
 }
+
+
