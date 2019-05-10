@@ -14,16 +14,16 @@ import java.util.regex.Pattern;
  */
 public final class DateUtil {
 
-    //日期时间类型格式
+    /** 日期时间类型格式 */
     private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
-    //日期类型格式
+    /** 日期类型格式 */
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    //时间类型的格式
+     /** 时间类型的格式 */
     private static final String TIME_FORMAT = "HH:mm:ss";
 
-    //注意SimpleDateFormat不是线程安全的
+    /** 注意SimpleDateFormat不是线程安全的 */
     private static ThreadLocal<SimpleDateFormat> ThreadDateTime = new ThreadLocal<SimpleDateFormat>();
     private static ThreadLocal<SimpleDateFormat> ThreadDate = new ThreadLocal<SimpleDateFormat>();
     private static ThreadLocal<SimpleDateFormat> ThreadTime = new ThreadLocal<SimpleDateFormat>();
@@ -613,6 +613,37 @@ public final class DateUtil {
         }
         return result;
     }
+
+    public static Date addMonth(Date date, int month) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.MONTH, month);
+        return cal.getTime();
+    }
+
+    public static Date addDay(Date date, int day) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, day);
+        return cal.getTime();
+    }
+
+    public static Date addHour(Date date, int hour) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.HOUR_OF_DAY, hour);
+        return cal.getTime();
+    }
+
+    public static Date addMinute(Date date, int minute) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.MINUTE, minute);
+        cal.add(12, minute);
+        return cal.getTime();
+    }
+
+
 
     /**
      * 获取俩个时间之前的相隔的天数
