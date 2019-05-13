@@ -38,8 +38,7 @@ public class TestStream {
 
         System.out.println("-----------------");
         list.stream()
-                .sorted()
-                .sorted(Comparator.reverseOrder())
+                .sorted((Comparator.comparingInt(o -> (int) o).reversed()))
                 .forEach(PRINTLN);
     }
 
