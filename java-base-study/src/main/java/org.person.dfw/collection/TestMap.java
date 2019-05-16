@@ -117,12 +117,49 @@ public class TestMap {
 		return str + "2";
 	}
 
+
+
 	@Test
+	/** 如果存在key就计算 */
+	public void compute1(){
+		Map<Integer,String> map = new HashMap<>(1);
+		map.put(1, "a");
+
+		String s = map.compute(1, (k, v) -> v + "a");
+		String s1 = map.compute(2, (k, v) -> v + "b");
+
+		Assert.assertEquals("aa", s);
+		Assert.assertEquals("aa", map.get(1));
+		Assert.assertEquals("nullb",map.get(2));
+		Assert.assertEquals("nullb", s1);
+
+	}
+
+	@Test
+	/** 如果存在key就计算 computeIfAbsent则相反 */
 	public void computeIfPresent(){
 		Map<Integer,String> map = new HashMap<>(1);
 		map.put(1, "a");
 
 		String s = map.computeIfPresent(1, (k, v) -> v + "a");
+		String s1 = map.computeIfPresent(2, (k, v) -> v + "b");
 		Assert.assertEquals("aa", s);
+		Assert.assertEquals("aa", map.get(1));
+		Assert.assertNull(map.get(2));
+		Assert.assertNull(s1);
+
+	}
+
+	@Test
+	/** 如果没有key则添加 */
+	public void putIfAbsent(){
+		Map<Integer,String> map = new HashMap<>(1);
+		map.put(1, "a");
+
+		map.putIfAbsent(1, "1");
+		map.putIfAbsent(2, "2");
+		Assert.assertEquals("a", map.get(1));
+		Assert.assertNull("2", map.get(2));
+
 	}
 }	

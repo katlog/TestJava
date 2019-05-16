@@ -19,6 +19,12 @@
             <version>2.9.0</version>
         </dependency>
 
+        <!--面向Java集成测试的Redis嵌入式服务器-->
+        <dependency>
+            <groupId>com.github.kstyrc</groupId>
+            <artifactId>embedded-redis</artifactId>
+            <version>0.6</version>
+        </dependency>
     </dependencies>
 
 </project>
