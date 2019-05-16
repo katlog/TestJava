@@ -159,7 +159,7 @@ public class TestMap {
 		map.putIfAbsent(1, "1");
 		map.putIfAbsent(2, "2");
 		Assert.assertEquals("a", map.get(1));
-		Assert.assertNull("2", map.get(2));
+		Assert.assertEquals("2", map.get(2));
 
 	}
 }	
