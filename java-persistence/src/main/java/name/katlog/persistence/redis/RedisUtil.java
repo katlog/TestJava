@@ -1,6 +1,7 @@
 package name.katlog.persistence.redis;
 
 import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -10,7 +11,7 @@ import java.io.*;
 import java.util.*;
 
 
-@Log4j
+@Slf4j
 public class RedisUtil {
 
     private static JedisPool jedisPool = null;
@@ -118,6 +119,7 @@ public class RedisUtil {
     private static void returnResource(final Jedis jedis) {
         if (jedis != null && jedisPool != null) {
             jedisPool.returnResource(jedis);
+            jedis.close();
         }
     }
 

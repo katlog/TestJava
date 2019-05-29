@@ -1,6 +1,8 @@
 package org.person.dfw.generic;
 
 
+import org.junit.Test;
+
 /**
  * @moudle: TestGeneric 
  * @version:v1.0
@@ -40,5 +42,19 @@ public class TestGeneric {
 		}
 		public static<T> void test4(A1<T> a) {
 		}
+	}
+	
+	class Info<T>{
+		void setVar(T t){
+			
+		}
+	}
+	
+	@Test
+	public void compileError(){
+		// 指定String为泛型类型
+		Info<?> i = new Info<String>();
+		// 设置字符串 error
+		// i.setVar("慕小然");
 	}
 }	
