@@ -117,17 +117,23 @@ public class RedisUtil {
      */
     @SuppressWarnings("deprecation")
     private static void returnResource(final Jedis jedis) {
-        if (jedis != null && jedisPool != null) {
-            jedisPool.returnResource(jedis);
+        if (jedis != null) {
             jedis.close();
         }
+        // if (jedis != null && jedisPool != null) {
+        //     jedisPool.returnResource(jedis);
+        //     jedis.close();
+        // }
     }
 
     @SuppressWarnings("deprecation")
     private static void returnBrokenResource(final Jedis jedis) {
-        if (jedis != null && jedisPool != null) {
-            jedisPool.returnBrokenResource(jedis);
+        if (jedis != null) {
+            jedis.close();
         }
+        // if (jedis != null && jedisPool != null) {
+        //     jedisPool.//returnBrokenResource(jedis);
+        // }
     }
 
     /**
@@ -143,7 +149,7 @@ public class RedisUtil {
             result = jedis.set(key, value);
         } catch (Exception e) {
             log.error("设置值失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -166,7 +172,7 @@ public class RedisUtil {
             jedis.expire(key, expire);
         } catch (Exception e) {
             log.error("设置值失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -188,7 +194,7 @@ public class RedisUtil {
             result = jedis.get(key);
         } catch (Exception e) {
             log.error("获取值失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -210,7 +216,7 @@ public class RedisUtil {
             result = jedis.expire(key, seconds);
         } catch (Exception e) {
             log.error(String.format("设置key=%s的过期时间失败：" + e.getMessage(), key), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -237,7 +243,7 @@ public class RedisUtil {
             result = jedis.exists(key);
         } catch (Exception e) {
             log.error(String.format("判断key=%s是否存在失败：" + e.getMessage(), key), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -262,7 +268,7 @@ public class RedisUtil {
             result = jedis.del(keys);
         } catch (Exception e) {
             log.error(String.format("删除key=%s失败：" + e.getMessage(), keys), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -288,7 +294,7 @@ public class RedisUtil {
             result = jedis.setnx(key, value);
         } catch (Exception e) {
             log.error("设置值失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -316,7 +322,7 @@ public class RedisUtil {
             jedis.expire(key, expire);
         } catch (Exception e) {
             log.error("设置值失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -342,7 +348,7 @@ public class RedisUtil {
             result = jedis.lpush(key, values);
         } catch (Exception e) {
             log.error("在列表key的头部插入元素失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -367,7 +373,7 @@ public class RedisUtil {
             result = jedis.rpush(key, values);
         } catch (Exception e) {
             log.error("在列表key的尾部插入元素失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -392,7 +398,7 @@ public class RedisUtil {
             result = jedis.lrange(key, start, end);
         } catch (Exception e) {
             log.error("查询列表元素失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -425,7 +431,7 @@ public class RedisUtil {
             result = jedis.llen(key);
         } catch (Exception e) {
             log.error("获取列表长度失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -450,7 +456,7 @@ public class RedisUtil {
             result = jedis.lrem(key, count, value);
         } catch (Exception e) {
             log.error("获取列表长度失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -472,7 +478,7 @@ public class RedisUtil {
             result = jedis.ltrim(key, start, end);
         } catch (Exception e) {
             log.error("获取列表长度失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -603,7 +609,7 @@ public class RedisUtil {
             result = jedis.set(key.getBytes(), data);
         } catch (Exception e) {
             log.error("设置对象失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -628,7 +634,7 @@ public class RedisUtil {
             }
         } catch (Exception e) {
             log.error("获取对象失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -660,7 +666,7 @@ public class RedisUtil {
             }
         } catch (Exception e) {
             log.error("设置List集合失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -684,7 +690,7 @@ public class RedisUtil {
             }
         } catch (Exception e) {
             log.error("获取List集合失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -706,7 +712,7 @@ public class RedisUtil {
             result = jedis.hset(key, field, value);
         } catch (Exception e) {
             log.error("缓存Map赋值失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -729,7 +735,7 @@ public class RedisUtil {
             result = jedis.hget(key, field);
         } catch (Exception e) {
             log.error("获取缓存的Map值失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -753,7 +759,7 @@ public class RedisUtil {
             map = jedis.hgetAll(key);
         } catch (Exception e) {
             log.error("获取map所有的字段和值失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -775,7 +781,7 @@ public class RedisUtil {
             return jedis.hexists(key, field);
         } catch (Exception e) {
             log.error("查看哈希表field字段是否存在失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -798,7 +804,7 @@ public class RedisUtil {
             return jedis.hkeys(key);
         } catch (Exception e) {
             log.error("获取所有哈希表中的字段失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -821,7 +827,7 @@ public class RedisUtil {
             return jedis.hvals(key);
         } catch (Exception e) {
             log.error("获取所有哈希表中的值失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -843,7 +849,7 @@ public class RedisUtil {
             return jedis.hdel(key, fields);
         } catch (Exception e) {
             log.error("map删除指定的field失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
@@ -862,7 +868,7 @@ public class RedisUtil {
             keyList = jedis.keys(pattern);
         } catch (Exception e) {
             log.error("操作keys失败：" + e.getMessage(), e);
-            returnBrokenResource(jedis);
+            //returnBrokenResource(jedis);
         } finally {
             returnResource(jedis);
         }
