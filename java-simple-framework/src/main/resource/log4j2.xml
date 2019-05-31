@@ -1,0 +1,132 @@
+<!-- status为不记录log4j本身的日志 -->
+<!--
+<configuration status="OFF">
+    <properties>
+        <property name="LOG_HOME">C:/logs</property>
+        <property name="FILE_NAME">mylog</property>
+    </properties>
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            &lt;!&ndash; ThresholdFilter相当于拦截器.info以上的命令不会被拦截. &ndash;&gt;
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </Console>
+        <File name="Error" fileName="${LOG_HOME}/error.log">
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d{yyyy.MM.dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </File>
+        <RollingFile name="RollingFile" fileName="${LOG_HOME}/${FILE_NAME}.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <root level="info">
+            <appender-ref ref="RollingFile"/>
+            <appender-ref ref="Console"/>
+            <appender-ref ref="Error" />
+        </root>
+        <Logger name="com.hlhdidi.servlet" additivity="false">
+            <appender-ref ref="RollingFile"/>
+            <appender-ref ref="Console"/>
+        </Logger>
+        <Logger name="com.hlhdidi.service" level="error" additivity="true">
+            <appender-ref ref="Console"/>
+        </Logger>
+    </loggers>
+</configuration>-->
+
+
+<!-- status="OFF"，可以去掉，它的含义为是否记录log4j2本身的event信息，默认是OFF -->
+<!-- OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<configuration status="OFF" monitorInterval="60">
+    <Properties>
+        <!-- （*必须,各应用需要修改） 部署应用的名称,命名规则 :全部小写字母、中短横线、数字,与微服务命名,disconf中命名一致 -->
+             <property name="APPNAME">user-info-rest</property>
+             <!-- （各应用需要修改）部署应用的端口号，用于一台服务器部署多台应用的情况,如果不需要，保持默认 -->
+             <property name="PORT">${sys:crtServerPort:-8080}</property>
+             <!-- （各应用需要修改）日志文件本地存放目录路径 建议各个环境跟生产环境统一起来,方便维护 -->
+             <property name="logBaseFolder">/app/user-info-rest/logs</property>
+
+             <!-- 日志文件名称的前缀部分，以下为建议值 -->
+             <property name="logFileNamePrefix">${APPNAME}</property>
+             <!-- 日志文件最小切割单位 值不做强制要求，建议300MB -->
+             <property name="every_file_size">300MB</property>
+             <!-- *必须并强制遵守 日志文件的编码 -->
+             <property name="log_charset">UTF-8</property>
+             <!-- *必须并强制遵守 日志格式说明： |日志时间|线程id|端口号|应用名称|类名|方法名|日志级别|traceId |输入参数|输出参数|耗时|任意多个扩展字段|具体打印的msg内容然后换行 -->
+             <property name="log_pattern">|%d{yyyy-MM-dd HH:mm:ss.SSS}|%t|${PORT}|${APPNAME}|%logger|%M|%p|%X{MDCCRT_GUID_TRACEID}|###+%X{MDCCRT_EXTENTS}-###|##+%X{MDCCRT_INPUT_PARAM}-##|##+%X{MDCCRT_OUTPUT_PARAM}-##|%X{MDCCRT_COST_TIME}|%m%n</property>
+    </Properties>
+    <appenders>
+        <!-- 用来控制台输出 -->
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${log_pattern}" />
+        </Console>
+
+        <RollingFile name="RollingFileInfo" fileName="${sys:user.home}/logs/info.log"
+                     filePattern="${sys:user.home}/logs/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <Filters>
+                <ThresholdFilter level="DEBUG"/>
+            </Filters>
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+
+
+        <!-- 以下是建议的日志压缩包目录的格式名称 -->
+        <!-- all File Config -->
+        <RollingRandomAccessFile  name="errorLog"
+                 filePattern="${logBaseFolder}/%d{yyyy-MM-dd}/${logFileNamePrefix}-error-%d{yyyyMMdd-HH}.%i.log"
+                 fileName="${logBaseFolder}/${logFileNamePrefix}-error.log"
+                 immediateFlush="false">
+
+         <PatternLayout charset="${log_charset}" pattern="${log_pattern}" />
+        <Policies>
+            <TimeBasedTriggeringPolicy modulate="true" interval="1" />
+            <SizeBaseDTriggeringPolicy size="${every_file_size}" />
+        </Policies>
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <Filters>
+          <!-- 只显示error信息 -->
+          <ThresholdFilter onMismatch="DENY" onMatch="ACCEPT" level="ERROR" />
+        </Filters>
+      </RollingRandomAccessFile >
+      <!-- error File Config -->
+        <RollingRandomAccessFile name="all" filePattern="${logBaseFolder}/%d{yyyy-MM-dd}/${logFileNamePrefix}-all-%d{yyyyMMdd-HH}.%i.log"
+                                 fileName="${logBaseFolder}/${logFileNamePrefix}-all.log"
+                                 immediateFlush="false">
+          <!-- 日志输出格式 -->
+          <PatternLayout charset="${log_charset}" pattern="${log_pattern}" />
+          <!-- 以下是日志压缩包目录的建议格式名称 建议1天归档依次，压缩文件上线建议为200,这里预估每个磁盘存储空间200G左右，每个压缩包最大值200MB -->
+          <Policies>
+              <TimeBasedTriggeringPolicy modulate="true" interval="1" />
+              <SizeBaseDTriggeringPolicy size="${every_file_size}" />
+          </Policies>
+          <DefaultRolloverStrategy max="1000" />
+          <Filters>
+              <!-- 显示所有信息 -->
+              <ThresholdFilter onMismatch="DENY" onMatch="ACCEPT" level="TRACE" />
+          </Filters>
+      </RollingRandomAccessFile>
+    </appenders>
+
+    <loggers>
+        <root level="ALL">
+            <!-- 各应用自行调整，日志输出至文件，自动按时间、按文件大小进行归档 ,生产环境调默认为INFO，如有特殊需求，在disconf动态调级 -->
+            <appender-ref  ref="all" />
+            <!-- 日志输出至Console，仅在IDE开发时打开方便开发人员，部署到服务器之后必须置为OFF，level设置为OFF表示禁用Console控制台日志输出 -->
+            <appender-ref  ref="console" />
+            <!-- 异常日志，不用改动 -->
+            <appender-ref  ref="errorLog" />
+                <appender-ref ref="RollingFileInfo"/>
+        </root>
+    </loggers>
+</configuration>

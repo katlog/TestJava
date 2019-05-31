@@ -58,5 +58,38 @@ public class TestInterface {
                 System.out.println("anonymous class person eat");
             }
         }.eat();
-    }  
+    }
+
+
+    interface A{
+        void i();
+    }
+    interface B{
+        void i();
+    }
+    class AB implements A,B{
+        @Override
+        public void i() {
+            // 可以实现具有相同方法签名的多个接口
+        }
+    }
+
+    interface AA{
+        default void i(){
+            System.out.println("AA = " + true);
+        }
+    }
+    interface BB{
+        default void i(){
+            System.out.println("BB = " + true);
+        }
+    }
+    class AAI implements AA{}
+    class BBI implements BB{}
+    class AABB implements AA,BB{
+        @Override
+        public void i() {
+            // 此时必须重写 i 方法
+        }
+    }
 }

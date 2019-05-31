@@ -48,6 +48,7 @@
 		<module>java-base-corejava</module>
         <module>java-base-8in-action</module>
         <module>java-design-ddd</module>
+        <module>java-persistence</module>
     </modules>
 
     <distributionManagement>

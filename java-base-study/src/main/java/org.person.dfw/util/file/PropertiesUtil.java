@@ -16,10 +16,10 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public final class PropertiesUtil {
 	
-    public static Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
 
 
-    public static final Map<String, Map<String, String>> PROPERTIES_CACHE_MAP = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, String>> PROPERTIES_CACHE_MAP = new ConcurrentHashMap<>();
 
     /**
      * 从系统属性文件中获取相应的值
@@ -27,7 +27,7 @@ public final class PropertiesUtil {
      * @param key key
      * @return 返回value
      */
-    public final static String key(String key) {
+    public static String key(String key) {
         return System.getProperty(key);
     }
 
@@ -36,7 +36,7 @@ public final class PropertiesUtil {
      *  @param filePath 属性文件
      * @param key      需要读取的属性
      */
-    public final static String getValueByKey(String filePath, String key) {
+    public static String getValueByKey(String filePath, String key) {
 
         if (PROPERTIES_CACHE_MAP.get(filePath) != null) {
             return PROPERTIES_CACHE_MAP.get(filePath).get(key);
@@ -55,7 +55,15 @@ public final class PropertiesUtil {
         }
     }
 
-    public final static Map<String,String> properties(InputStream in){
+    public static int getIntValByKey(String filePath, String key){
+       return Integer.parseInt(getValueByKey(filePath, key));
+    }
+
+    public static long getLongValByKey(String filePath, String key){
+        return Long.parseLong(getValueByKey(filePath, key));
+    }
+
+    public static Map<String,String> properties(InputStream in){
         Properties pps = new Properties();
         try {
             pps.load(in);
@@ -82,7 +90,7 @@ public final class PropertiesUtil {
      * @param filePath 读取的属性文件
      * @return 返回所有的属性 key:value<>key:value
      */
-    public final static Map<String,String> getAllProperties(String filePath) throws IOException {
+    public static Map<String,String> getAllProperties(String filePath) throws IOException {
 
         if (PROPERTIES_CACHE_MAP.get(filePath) != null) {
             return PROPERTIES_CACHE_MAP.get(filePath);
@@ -107,7 +115,7 @@ public final class PropertiesUtil {
      * @param pKey     属性名称
      * @param pValue   属性值
      */
-    public final static void WriteProperties(String filePath, String pKey, String pValue) throws IOException {
+    public static void WriteProperties(String filePath, String pKey, String pValue) throws IOException {
 
         Properties props = new Properties();
         props.load(new FileInputStream(filePath));

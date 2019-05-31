@@ -269,7 +269,7 @@ public class TestReflect {
 
     /** 父子类关系 */
     @Test
-    public void classRelation() {
+    public void isAssignableFrom() {
         assertTrue(Fathter.class.isAssignableFrom(Son.class));
         assertTrue(Serializable.class.isAssignableFrom(Son.class));
     }

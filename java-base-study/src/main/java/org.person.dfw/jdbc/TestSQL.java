@@ -42,7 +42,7 @@ public class TestSQL {
 	static{
 		InputStream in = null;
 		try {
-			TestSQL.class.forName("oracle.jdbc.driver.OracleDriver");
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 			pro = new Properties();
 			in = ClassLoader.getSystemResourceAsStream("db.properties");
 			pro.load(in);
@@ -50,11 +50,9 @@ public class TestSQL {
 			url = pro.getProperty("url");
 			username = pro.getProperty("username");
 			password = pro.getProperty("password");
-		} catch (IOException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}finally{
+		} finally{
 			try {
 				in.close();
 			} catch (IOException e) {

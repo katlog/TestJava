@@ -73,7 +73,7 @@ public class TestGenericReflect {
 
     class BBB<D,R>{}
 
-    class B extends BBB<ParamClass,String> {
+    class B  <D> extends BBB<D,String> {
     }
 
     /** 类的父类、接口泛型信息 */
@@ -150,7 +150,8 @@ public class TestGenericReflect {
     }
 }
 //region fieldclass
-class MyFieldClass {
+class MyFieldClass<D>  {
+    public List<D> dlist = new ArrayList<>();
     public List<String> stringList = new ArrayList<String>();
   }
 //endregion
@@ -161,6 +162,10 @@ class MyMethodClass {
 
     public List<String> getStringList() {
         return this.stringList;
+    }
+
+    public void setStringList(List<String> list){
+        this.stringList = list;
     }
 }
 //endregion methodclass 

@@ -14,6 +14,23 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15 -->
+        <!-- The Bouncy Castle Crypto package is a Java implementation of cryptographic algorithms.
+        This jar contains JCE provider and lightweight API for the Bouncy Castle Cryptography APIs for JDK 1.5. -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15</artifactId>
+            <version>1.45</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+        <!--The Apache Commons Codec package contains simple encoder and decoders for various formats such as Base64 and Hexadecimal.
+        In addition to these widely used encoders and decoders, the codec package also maintains a collection of phonetic encoding utilities.-->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+        </dependency>
+
     </dependencies>
 
     <build>

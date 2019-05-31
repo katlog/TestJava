@@ -1,11 +1,10 @@
 package org.person.dfw.refelct;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.TypeVariable;
-import java.lang.reflect.WildcardType;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.*;
 import java.util.Arrays;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 
@@ -17,35 +16,65 @@ import org.junit.Test;
  *
  */
 public class TestField {
-	
-	@Test public void test(){
-		
+
+	/** 类型 */
+	@Test
+	public void getType(){
 		Field[] fields = User.class.getDeclaredFields();
 		for (Field field : fields) {
-			field.setAccessible(true);
 			Class<?> type = field.getType();
-			
-			TypeVariable<?>[] typeParameters = type.getTypeParameters();
 			System.out.println(type);
-			System.out.println(Arrays.toString(typeParameters));
-			if (typeParameters.length>0) {
-				System.out.println(typeParameters[0] );
-				System.out.println(typeParameters[0] instanceof ParameterizedType);
-				System.out.println(typeParameters[0] instanceof TypeVariable);
-				System.out.println(typeParameters[0] instanceof WildcardType);
-			}
 		}
-		
 	}
 
-	
-	
+	/** 泛型类型 */
+	@Test
+	public void getGenericType(){
+		Field[] fields = User.class.getDeclaredFields();
+		for (Field field : fields) {
+			Type genericType = field.getGenericType();
+			System.out.println("genericType = " + genericType);
+		}
+
+	}
+
+	/** 不太清楚 这个方法的用意 */
+	@Test
+	public void getAnnotatedType(){
+		Field[] fields = User.class.getDeclaredFields();
+		for (Field field : fields) {
+			AnnotatedType annotatedType = field.getAnnotatedType();
+			System.out.println("annotatedType = " + annotatedType);
+		}
+	}
+
+	/** 获取字段上的注解：忽略继承注解 */
+	@Test
+	public void getDeclaredAnnotations(){
+		Field[] fields = User.class.getDeclaredFields();
+		for (Field field : fields) {
+			Annotation[] annotations = field.getDeclaredAnnotations();
+			System.out.println(Arrays.toString(annotations));
+		}
+	}
+
+	/** 获取字段上的注解 */
+	@Test
+	public void getAnnotations(){
+		Field[] fields = User.class.getDeclaredFields();
+		for (Field field : fields) {
+			Annotation[] annotations = field.getAnnotations();
+			System.out.println(Arrays.toString(annotations));
+		}
+	}
+
 }
 
 class User<T>{
 	
 	public String userName;
-	
+
+	@Deprecated
 	public String password;
 	
 	private int age;
@@ -57,6 +86,10 @@ class User<T>{
 	private User<? extends User<T>> enemy;
 	
 	private God<String,String> god;
+
+	private God god1;
+
+	private God<T, T> god2;
 }
 
 class God<K,V>{
