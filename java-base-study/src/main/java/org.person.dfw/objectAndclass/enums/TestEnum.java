@@ -6,7 +6,7 @@
  * @date: 2017年5月12日 上午11:32:48
  * @version: V1.0  
  */ 
-package org.person.dfw.objectAndclass;
+package org.person.dfw.objectAndclass.enums;
 
 import java.util.EnumMap;
 import java.util.EnumSet;

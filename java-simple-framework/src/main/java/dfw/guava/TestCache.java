@@ -1,16 +1,19 @@
 package dfw.guava;
 
 import com.alibaba.fastjson.JSON;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.CacheStats;
-import com.google.common.cache.LoadingCache;
+import com.google.common.cache.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by fw on 2019/3/28
@@ -73,7 +76,7 @@ public class TestCache {
     }
 
     @Test
-    public void test1() {
+    public void stats() {
         try {
             /* 获值 */
             // ConcurrentMap<Long, Person> asMap = cache.asMap();
@@ -138,9 +141,98 @@ public class TestCache {
             e.printStackTrace();
         }
     }
+
+    /** load 相当于 设定了 通过key获取value的函数，等到执行get时 若cache中没有的话才会放入进入  */
+    @Test
+    public void load() throws ExecutionException {
+
+        Person initPerson = new Person(0L, "init");
+
+        LoadingCache<Integer, Person> cache1 = CacheBuilder.newBuilder()
+                .build(new CacheLoader<Integer, Person>() {
+                    @Override
+                    public Person load(Integer integer) throws Exception {
+                        return initPerson;
+                    }
+                });
+        assertEquals(initPerson, cache1.get(1));
+        assertEquals(initPerson, cache1.get(2));
+        assertEquals(initPerson, cache1.get(0));
+
+        LoadingCache<Integer, Person> cache2 = CacheBuilder.newBuilder()
+                .build(new CacheLoader<Integer, Person>() {
+                    @Override
+                    public Person load(Integer integer) throws Exception {
+                        return new Person(Long.valueOf(integer),integer+"");
+                    }
+                });
+        assertEquals(new Person(1L, "1"), cache2.get(1));
+        assertEquals(new Person(0L, "0"), cache2.get(0));
+
+
+        LoadingCache<Integer, Person> cache3 = CacheBuilder.newBuilder()
+                .build(new CacheLoader<Integer, Person>() {
+                    @Override
+                    public Person load(Integer integer) throws Exception {
+                        return producePerson(integer);
+                    }
+                    private Person producePerson(Integer integer) {
+                        System.out.println(" produce  " + integer);
+                        return new Person(Long.valueOf(integer),integer+"");
+                    }
+                });
+
+        assertEquals(new Person(1L, "1"), cache3.get(1));
+        assertEquals(new Person(1L, "1"), cache3.get(1));
+        assertEquals(new Person(1L, "1"), cache3.get(1));
+        // 会发现 日志中 produce 1只执行了1次
+        assertEquals(new Person(0L, "0"), cache3.get(0));
+    }
+
+    /** 显示插入值 */
+    @Test
+    public void put(){
+    }
+
+    @Test
+    public void get() throws ExecutionException {
+
+        Cache<Integer, Person> cache = CacheBuilder.newBuilder()
+                .maximumSize(100)
+                .build();
+
+        // 非自动加载的方式(自动加载)
+        assertEquals(new Person(1L, "1"), cache.get(1, () -> {
+            System.out.println(" manual 1" );
+            return new Person(1L, "1");
+        }));
+        assertEquals(new Person(1L, "1"), cache.get(1, () -> {
+            System.out.println(" manual 2" );
+            return new Person(1L, "1");
+        }));
+    }
+    
+    /** 显示清除 */
+    @Test
+    public void invalidate(){
+        
+    }
+
+    @Test
+    public void invalidateAll(){
+
+    }
+
+    @Test
+    public void reload(){
+
+    }
+
 }
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
