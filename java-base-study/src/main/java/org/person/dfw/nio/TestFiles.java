@@ -51,18 +51,15 @@ public class TestFiles {
         IntStream.rangeClosed(1,100)
                 .forEach(value -> {
                     try {
-                        Files.write(Paths.get(""), (value+"").getBytes(), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+                        Files.write(Paths.get("src\\main\\java\\org\\person\\dfw\\nio\\files.txt"), (value+"\n").getBytes(),
+                                StandardOpenOption.APPEND, StandardOpenOption.CREATE);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 });
 	}
 	
-	@Test public void write2 (){
-		
-		
-	}
-	
+
 	/**
 	 * 从文件复制到文件：   Files.copy(Path processor, Path target, CopyOption options);
 	 * 从输入流复制到文件：Files.copy(InputStream in, Path target, CopyOption options);
