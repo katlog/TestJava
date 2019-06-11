@@ -18,6 +18,8 @@ import java.util.function.BiFunction;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 /**
  * @moudle: TestMap 
  * @version:v1.0
@@ -54,112 +56,97 @@ public class TestMap {
 	}
 
 	@Test
-    /**compute()是java8在Map中新增的一个方法，相对而言较为陌生。其作用是把remappingFunction的计算结果关联到key上
-     * （即remappingFunction返回值作为新value）。写一段它的简单应用的代码，并与“同级生”merge()类比加深理解*/
+    /**如果lambda表达式的值不为空，不论key是否已经存在，建立一种映射关系key=newValue;
+	 * 否则，不建立映射并返回null*/
 	public void compute() {
-		HashMap<String,String> map = new HashMap<>(3);
-		map.put("a", "c");
-		map.put("b", "h");
-		map.put("c", "e");
-
-		map.compute("a", (k, v) -> "C") ;
-		map.merge("b", "h", (k, v) -> "H") ;
-		map.compute("d", (k, v) -> "D") ;
-		map.merge("c", "e", (k, v) -> null) ;
-		System.out.println(map.toString());
-		// 输出结果为：{a=C, b=H, d=D}
-	}
-
-	@Test
-	public void computeMerge(){
-
-		Map<String, String> myMap = new HashMap<>();
-		String keyA = "A";
-		String keyB = "B";
-		String keyC = "C";
-		String keyD = "D";
-		String keyE = "E";
-		String keyF = "F";
-		String keyG = "G";
-		String keyH = "H";
-		myMap.put(keyA, "str01A");
-		myMap.put(keyB, "str01B");
-		myMap.put(keyC, "str01C");
-
-		System.out.println("myMap initial content:"+ myMap);
-
-		myMap.merge(keyA, "merge01", String::concat);
-		myMap.merge(keyD, "merge01", String::concat);
-		System.out.println("Map merge demo content:"+ myMap);
-
-		BiFunction<String, String, String> biFunc = (t, u) -> t == null ? u : t + "." + u;
-
-		myMap.merge(keyA, "BiFuncMerge01", biFunc);
-		myMap.merge(keyE, "BiFuncMerge01", biFunc);
-		System.out.println("Map customized BiFunction merge demo content:"+ myMap);
-
-		String msg = "msgCompute";
-		myMap.compute(keyB, (k, v) -> (v == null) ? msg : v.concat(msg));
-		myMap.compute(keyF, (k, v) -> (v == null) ? msg : v.concat(msg));
-		System.out.println("Map customized BiFunction compute demo content:"+ myMap);
-
-		myMap.computeIfAbsent(keyC, TestMap::genValue);
-		myMap.computeIfAbsent(keyG, TestMap::genValue);
-		System.out.println("Map customized Function computeIfAbsent demo content:"+ myMap);
-
-		myMap.computeIfPresent(keyC, biFunc);
-		myMap.computeIfPresent(keyH, biFunc);
-		System.out.println("Map customized biFunc computeIfPresent demo content:"+ myMap);
-	}
-
-	static String genValue(String str) {
-		System.out.println("===");
-		return str + "2";
-	}
-
-
-
-	@Test
-	/** 如果存在key就计算 */
-	public void compute1(){
 		Map<Integer,String> map = new HashMap<>(1);
 		map.put(1, "a");
 
 		String s = map.compute(1, (k, v) -> v + "a");
 		String s1 = map.compute(2, (k, v) -> v + "b");
 
-		Assert.assertEquals("aa", s);
-		Assert.assertEquals("aa", map.get(1));
-		Assert.assertEquals("nullb",map.get(2));
-		Assert.assertEquals("nullb", s1);
+		assertEquals("aa", s);
+		assertEquals("aa", map.get(1));
+		assertEquals("nullb",map.get(2));
+		assertEquals("nullb", s1);
 
+		String s3 = map.compute(3, (integer, s2) -> null);
+		assertNull(s3);
+		assertEquals(2, map.size());
 	}
 
 	@Test
-	/** 如果存在key就计算 computeIfAbsent则相反 */
+	/**
+	 * key存在并且不为空，计算remappingFunction的值value；
+	 *
+	 * 如果value不为空，保存指定key和value的映射关系；
+	 * 如果value为null，remove（key）；
+	 * 如果计算value的过程抛出了异常，computeIfPresent方法中会再次抛出，key和其对应的值不会改变
+	 * */
 	public void computeIfPresent(){
 		Map<Integer,String> map = new HashMap<>(1);
 		map.put(1, "a");
 
 		String s = map.computeIfPresent(1, (k, v) -> v + "a");
 		String s1 = map.computeIfPresent(2, (k, v) -> v + "b");
-		Assert.assertEquals("aa", s);
-		Assert.assertEquals("aa", map.get(1));
-		Assert.assertNull(map.get(2));
-		Assert.assertNull(s1);
+		assertEquals("aa", s);
+		assertEquals("aa", map.get(1));
+		assertNull(map.get(2));
+		assertNull(s1);
 
 	}
 
 	@Test
+	/**
+	 * 如果给定的key不存在（或者key对应的value为null），就去计算mappingFunction的值；
+	 *
+	 * 如果计算mappingFunction的值的过程出现异常，再次抛出异常，不记录映射关系，返回null；
+	 * */
+	public void computeIfAbsent(){
+		Map<Integer,String> map = new HashMap<>(1);
+		map.put(0, "0");
+
+		map.computeIfAbsent(0, integer -> {
+			System.out.println("integer = " + integer);
+			return "0-0";
+		});
+		assertEquals("0", map.get(0));
+
+		/** 如果mappingFunction的值不为null，就把key=value放进去； */
+		map.computeIfAbsent(1, integer -> integer + "");
+		assertEquals("1",map.get(1));
+		assertEquals(2, map.size());
+
+		/** 如果mappingFunction的值为null，就不会记录该映射关系，返回值为null； */
+		map.computeIfAbsent(2, integer -> null);
+		assertEquals(2, map.size());
+	}
+
+
+	@Test
+	public void merge(){
+		Map<Integer,String> map = new HashMap<>(10);
+		map.put(1, "a");
+
+		map.merge(1, "a1", (s, s2) -> s +"-"+ s2);
+		assertEquals("a-a1", map.get(1));
+
+		map.merge(2, "b1", (s, s2) -> s + "-" + s2);
+		assertEquals("b1", map.get(2));
+
+	}
+
+
+	@Test
 	/** 如果没有key则添加 */
 	public void putIfAbsent(){
-		Map<Integer,String> map = new HashMap<>(1);
+		Map<Integer,String> map = new HashMap<>(10);
 		map.put(1, "a");
 
 		map.putIfAbsent(1, "1");
 		map.putIfAbsent(2, "2");
-		Assert.assertEquals("a", map.get(1));
-		Assert.assertEquals("2", map.get(2));
+		assertEquals("a", map.get(1));
+		assertEquals("2", map.get(2));
 
 	}
 }	
