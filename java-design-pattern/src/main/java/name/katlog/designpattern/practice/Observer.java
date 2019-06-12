@@ -1,6 +1,7 @@
 package name.katlog.designpattern.practice;
 
 import com.google.common.collect.Lists;
+import lombok.Getter;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -12,7 +13,13 @@ import java.util.Map;
  */
 public class Observer {
 
-    class Event{}
+    class Event{
+        @Getter
+        int order;
+        public Event(int order) {
+            this.order = order;
+        }
+    }
     interface EventHandler{
         <T extends Event> void handle(T event);
     }
@@ -70,12 +77,12 @@ public class Observer {
         instance.register(Event.class, new EventHandler() {
             @Override
             public <T extends Event> void handle(T event) {
-                System.out.println("event = " + event);
+                System.out.println("event = " + event.getOrder());
             }
         });
 
-        instance.publish(new Event());
-        instance.publish(new Event());
-        instance.publish(new Event());
+        instance.publish(new Event(1));
+        instance.publish(new Event(2));
+        instance.publish(new Event(3));
     }
 }

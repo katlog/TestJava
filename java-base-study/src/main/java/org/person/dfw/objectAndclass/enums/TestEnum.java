@@ -25,25 +25,24 @@ public class TestEnum {
 	/**  
 	 * 普通枚举 
 	 * 	这段代码实际上调用了4次 Enum(String name, int ordinal)：如new Enum<ColorEnum>("red",0);
-	 */  
-    public enum ColorEnum {  
-    	
-//    	public int a = 1; //【没有一般属性】
-//    	public static int b = 1; //【没有static属性】
-        red, green, yellow, blue;  
-    }  
-      
-    /** 
-     * 枚举像普通的类一样可以添加属性和方法，可添加静态和非静态的属性或方法 
-     */  
-    public enum SeasonEnum {  
-        //注：枚举写在最前面，否则编译出错  
-        spring, summer, autumn, winter;  
-        private final static String position = "test";  
-  
-        public static SeasonEnum getSeason() {  
-        	return "test".equals(position) ? spring : winter;  
-        }  
+	 */
+    public enum ColorEnum {
+        /** 颜色 */
+        red, green, yellow, blue;
+    }
+
+    /**
+     * 枚举像普通的类一样可以添加属性和方法，可添加静态和非静态的属性或方法
+     */
+    public enum SeasonEnum {
+        //注：枚举写在最前面，否则编译出错
+        spring, summer, autumn, winter;
+        private final static String position = "test";
+        public int a = 1;
+
+        public static SeasonEnum getSeason() {
+        	return "test".equals(position) ? spring : winter;
+        }
     }  
       
     /**性别：实现带有构造器的枚举 */
@@ -84,20 +83,22 @@ public class TestEnum {
       
    @Test public void main() {  
         //枚举是一种类型，用于定义变量，以限制变量的赋值；赋值时通过“枚举名.值”取得枚举中的值  
-        ColorEnum colorEnum = ColorEnum.blue;  
-        switch (colorEnum) {  
-        case red:  
-            System.out.println("color is red");  
-            break;  
-        case green:  
-            System.out.println("color is green");  
-            break;  
-        case yellow:  
-            System.out.println("color is yellow");  
-            break;  
-        case blue:  
-            System.out.println("color is blue");  
-            break;  
+        ColorEnum colorEnum = ColorEnum.blue;
+        switch (colorEnum) {
+            case red:
+                System.out.println("color is red");
+                break;
+            case green:
+                System.out.println("color is green");
+                break;
+            case yellow:
+                System.out.println("color is yellow");
+                break;
+            case blue:
+                System.out.println("color is blue");
+                break;
+            default:
+                System.out.println("colorEnum = " + colorEnum);
         }  
           
         //遍历枚举  
@@ -141,11 +142,10 @@ public class TestEnum {
        }
 
        // EnumMap的使用
-       EnumMap<ColorEnum, String> weekMap = new EnumMap(ColorEnum.class);
+       EnumMap<ColorEnum, String> weekMap = new EnumMap<>(ColorEnum.class);
        weekMap.put(ColorEnum.red, "红色");
        weekMap.put(ColorEnum.green, "绿色");
-       for (Iterator<Entry<ColorEnum, String>> iter = weekMap.entrySet().iterator(); iter.hasNext();) {
-           Entry<ColorEnum, String> entry = iter.next();
+       for (Entry<ColorEnum, String> entry : weekMap.entrySet()) {
            System.out.println(entry.getKey().name() + ":" + entry.getValue());
        }
    }
