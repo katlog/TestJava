@@ -1,10 +1,14 @@
 package org.person.dfw.refelct;
 
+import org.junit.Test;
+
 import java.lang.annotation.Annotation;
-import java.lang.reflect.*;
+import java.lang.reflect.AnnotatedType;
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -67,6 +71,36 @@ public class TestField {
 		}
 	}
 
+	static class Data{
+		int a = 0;
+		static int b = 1;
+	}
+	static abstract class AbstractData{
+		static int c = 2;
+	}
+	interface InterfaceData{
+		int d = 3;
+	}
+	/** 获取属性值 */
+	@Test
+	public void get() throws NoSuchFieldException, IllegalAccessException {
+
+		/** 实例属性 用实例 */
+		Field aField = Data.class.getDeclaredField("a");
+		assertEquals(0, aField.get(new Data()));
+
+		/** 静态属性 用null即可(一般类) */
+		Field bField = Data.class.getDeclaredField("b");
+		assertEquals(1, bField.get(null));
+
+		/** 静态属性 用null即可（抽象类） */
+		Field cField = AbstractData.class.getDeclaredField("c");
+		assertEquals(2,cField.get(null));
+
+		/** 静态属性 用null即可（接口） */
+		Field dField = InterfaceData.class.getDeclaredField("d");
+		assertEquals(3,dField.get(null));
+	}
 }
 
 class User<T>{
