@@ -77,6 +77,11 @@ public class TestField {
 	}
 	static abstract class AbstractData{
 		static int c = 2;
+		public AbstractData() {
+		}
+		public AbstractData(int b) {
+			c = b;
+		}
 	}
 	interface InterfaceData{
 		int d = 3;
