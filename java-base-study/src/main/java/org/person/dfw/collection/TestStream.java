@@ -66,13 +66,13 @@ public class TestStream {
     /** 重复的key会报错 */
     @Test(expected = IllegalStateException.class)
     public void collect_ToMap_Exception(){
-        Lists.newArrayList("1", "2", "3", "1").stream().collect(toMap(Function.identity(), Function.identity()));
+        Lists.newArrayList("1", "2", "3", "1").stream().collect(toMap(Function.identity(), s -> s + "-value"));
     }
 
     /** key重复时 处理两个value的措施 */
     @Test
     public void collect_ToMap_Exception_resolve(){
-        Map<String, String> stringMap = Lists.newArrayList("1", "2", "3", "1").stream().collect(toMap(Function.identity(), Function.identity(), (s, s2) -> s + s2));
-        assertEquals("11", stringMap.get("1"));
+        Map<String, String> stringMap = Lists.newArrayList("1", "2", "3", "1").stream().collect(toMap(Function.identity(), s->s + "-value", (s, s2) -> s + s2));
+        assertEquals("1-value1-value", stringMap.get("1"));
     }
 }
