@@ -1,13 +1,19 @@
 package org.person.dfw.collection;
 
+import com.google.common.collect.Lists;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 import static org.junit.Assert.*;
 
 /**
@@ -41,13 +47,32 @@ public class TestStream {
     }
 
     @Test
-    public void collect(){
+    public void collect_toList(){
 
         List<Integer> list = Arrays.asList(4, 5, 13, 3, 54, 14, 56, 721);
-        List<Integer> collect = list.stream().filter(i -> i == -1).collect(Collectors.toList());
+        List<Integer> collect = list.stream().filter(i -> i == -1).collect(toList());
 
         /** collect 不会返回 null */
         assertNotNull(collect);
         assertEquals(0, collect.size());
+    }
+
+    @Test
+    public void collect_ToMap(){
+        Map<String, String> stringMap = IntStream.rangeClosed(1, 100).mapToObj(Long::valueOf).collect(Collectors.toMap(o -> o + "", o -> o + ""));
+        System.out.println("stringMap = " + stringMap);
+    }
+
+    /** 重复的key会报错 */
+    @Test(expected = IllegalStateException.class)
+    public void collect_ToMap_Exception(){
+        Lists.newArrayList("1", "2", "3", "1").stream().collect(toMap(Function.identity(), Function.identity()));
+    }
+
+    /** key重复时 处理两个value的措施 */
+    @Test
+    public void collect_ToMap_Exception_resolve(){
+        Map<String, String> stringMap = Lists.newArrayList("1", "2", "3", "1").stream().collect(toMap(Function.identity(), Function.identity(), (s, s2) -> s + s2));
+        assertEquals("11", stringMap.get("1"));
     }
 }
