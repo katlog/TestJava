@@ -1,7 +1,7 @@
 /**
  * @Title: TestRandom.java
  * @Package: org.person.dfw.common.math
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月19日 上午11:21:58
  * @version: V1.0
  */

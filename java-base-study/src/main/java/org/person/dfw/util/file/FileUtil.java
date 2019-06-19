@@ -201,7 +201,7 @@ public final class FileUtil {
 	
 	/**
 	 * Title: getLastModify</br>
-	 * author : 丰伟</br>
+	 * author : katlog</br>
 	 * date : 2017年8月2日 下午3:03:45</br>
 	 * @param path 
 	 * @return 文件最后一次修改时间
@@ -213,7 +213,7 @@ public final class FileUtil {
 	
 	/**
 	 * Title: getLastModify</br>
-	 * author : 丰伟</br>
+	 * author : katlog</br>
 	 * date : 2017年8月2日 下午3:06:18</br>
 	 * @param file
 	 * @return
@@ -230,7 +230,7 @@ public final class FileUtil {
     
 	/**
 	 * Title: readTextFile</br>
-	 * author : 丰伟</br>
+	 * author : katlog</br>
 	 * date : 2017年8月2日 下午2:02:51</br>
 	 * @param realPath 文件目录
 	 * @return 文件内容
@@ -805,7 +805,7 @@ public final class FileUtil {
     
     /** 
      * Title: listFileFilter</br>
-     * author : 丰伟</br>
+     * author : katlog</br>
      * date : 2017年8月3日 上午10:25:15</br>
      * @param path
      * @param all

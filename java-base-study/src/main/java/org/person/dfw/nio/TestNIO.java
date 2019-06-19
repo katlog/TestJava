@@ -1,17 +1,18 @@
 package org.person.dfw.nio;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.ReadOnlyBufferException;
-import java.nio.channels.FileChannel;
-import java.nio.channels.Selector;
+import java.nio.channels.*;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.junit.Test;
 /**
@@ -208,6 +209,63 @@ public class TestNIO {
 		
 
 	}
+
+	@Test
+	public void socketServer() throws IOException, InterruptedException {
+		ServerSocketChannel socketChannel = ServerSocketChannel.open();
+		socketChannel.configureBlocking(false);
+		socketChannel.bind(new InetSocketAddress(1800));
+
+		Selector selector = Selector.open();
+		SelectionKey selectionKey = socketChannel.register(selector, SelectionKey.OP_ACCEPT);
+
+		new Thread(() -> {
+			while (true) {
+				try {
+					selector.select();
+					Set<SelectionKey> selectionKeys = selector.selectedKeys();
+					Iterator<SelectionKey> iterator = selectionKeys.iterator();
+					while (iterator.hasNext()) {
+						SelectionKey next = iterator.next();
+						if (next.isReadable()) {
+							ServerSocketChannel  channel = (ServerSocketChannel) next.channel();
+							ByteBuffer byteBuffer = ByteBuffer.allocate(1204);
+							SocketChannel socketChannel1 = channel.accept();
+							socketChannel1.read(byteBuffer);
+							byteBuffer.flip();
+							System.out.println("new String(byteBuffer.array()) = " + new String(byteBuffer.array()));
+						}
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+
+		new Thread(() -> {
+			try {
+				Socket socket = new Socket(InetAddress.getByName("localhost"), 1800);
+				OutputStream outputStream = socket.getOutputStream();
+
+				BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+
+				writer.write("ahihsioahdioahsdhi\n");
+				writer.flush();
+				writer.write("dasfafasfd\n");
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}).start();
+
+		while (selectionKey.isReadable()) {
+		}
+
+		Thread.sleep(10000);
+	}
+
+
 //	int port = 8080;
 //	protected Selector getSelector() throws IOException {
 //		Selector open = Selector.open();

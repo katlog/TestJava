@@ -3,7 +3,7 @@ package name.katlog.jvm.tools;
 /**
  * @moudle: TestJVM_jstack
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年9月18日 下午4:58:42
  *
  */

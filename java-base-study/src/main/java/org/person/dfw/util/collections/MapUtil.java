@@ -14,7 +14,7 @@ import org.person.dfw.util.StringUtil;
 /**
  * @moudle: MapUtil 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月2日 下午2:33:21
  *
  */
@@ -22,7 +22,7 @@ public class MapUtil implements Print {
 
 	/**
 	 * 格式打印
-	 * author : 丰伟</br>
+	 * author : katlog</br>
 	 * date : 2017年8月2日 下午2:36:07</br>
 	 * @param <T>
 	 * @param <V>
@@ -89,7 +89,7 @@ public class MapUtil implements Print {
 
 	/**格式打印
 	 * Title: formatPrint</br>
-	 * author : 丰伟</br>
+	 * author : katlog</br>
 	 * date : 2017年8月14日 上午9:36:24</br>
 	 * @param style 
 	 * @param map
@@ -100,7 +100,7 @@ public class MapUtil implements Print {
 	
 	/**格式打印
 	 * Title: formatPrint</br>
-	 * author : 丰伟</br>
+	 * author : katlog</br>
 	 * date : 2017年8月14日 上午9:36:27</br>
 	 * @param map
 	 */ 

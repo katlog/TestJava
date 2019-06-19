@@ -2,7 +2,7 @@
 /**  
  * @Title: TestEnum.java
  * @Package: org.person.dfw.objectAndclass
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月12日 上午11:32:48
  * @version: V1.0  
  */ 
@@ -16,7 +16,7 @@ import java.util.Map.Entry;
 import org.junit.Test;
 
 /**
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月12日 上午11:32:48
  */
 public class TestEnum {

@@ -2,7 +2,7 @@
 /**  
  * @Title: TestPattern.java
  * @Package: org.person.dfw.common
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月21日 上午10:14:36
  * @version: V1.0  
  */ 

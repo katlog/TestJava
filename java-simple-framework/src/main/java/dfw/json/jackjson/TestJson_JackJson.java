@@ -2,7 +2,7 @@
 /**  
  * @Title: TestJackJson.java
  * @Package: org.person.dfw.jackjson
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月13日 上午11:51:43
  * @version: V1.0  
  */ 

@@ -4,7 +4,7 @@ package name.katlog.alg;
 /**
  * @moudle: _2_string 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月10日 下午5:01:55
  *
  */

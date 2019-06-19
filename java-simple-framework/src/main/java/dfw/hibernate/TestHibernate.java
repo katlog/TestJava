@@ -11,7 +11,7 @@ import java.io.File;
 /**
  * @moudle: TestHibernate 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年12月21日 下午4:01:23
  *
  */

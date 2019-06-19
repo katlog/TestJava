@@ -2,7 +2,7 @@
 /**  
  * @Title: FTPClientExample.java
  * @Package: org.person.dfw.ssh.util
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年6月6日 下午5:22:42
  * @version: V1.0  
  */ 

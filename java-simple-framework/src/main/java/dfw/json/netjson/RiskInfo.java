@@ -4,7 +4,7 @@ package dfw.json.netjson;
 /**
  * @moudle: RiskInfo 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年11月20日 下午2:09:35
  *
  */

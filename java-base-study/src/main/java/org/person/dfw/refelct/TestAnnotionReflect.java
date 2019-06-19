@@ -1,7 +1,7 @@
 /**
  * @Title: TestAnnotionReflect.java
  * @Package: org.person.dfw.refelct
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月13日 上午9:31:27
  * @version: V1.0
  */
@@ -20,7 +20,7 @@ import org.junit.Test;
 /**
  * @moudle: TestAnnotionReflect
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月13日 上午9:31:27
  *
  */
@@ -122,7 +122,7 @@ public class TestAnnotionReflect {
     }
 }
 
-/** --- 丰伟 2017年4月13日 start 类注解反射 start--- */
+/** --- katlog 2017年4月13日 start 类注解反射 start--- */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @interface MyClassAnnotation {
@@ -135,9 +135,9 @@ public class TestAnnotionReflect {
 class TheClass {
 }
 
-/** --- 丰伟 2017年4月13日 end 类注解反射 end--- */
+/** --- katlog 2017年4月13日 end 类注解反射 end--- */
 
-/** --- 丰伟 2017年4月13日 start 属性注解反射 start--- */
+/** --- katlog 2017年4月13日 start 属性注解反射 start--- */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 @interface MyFieldAnnotion {
@@ -151,9 +151,9 @@ class TheFieldClass {
     public String myField = null;
 }
 
-/** --- 丰伟 2017年4月13日 end 属性注解反射 end--- */
+/** --- katlog 2017年4月13日 end 属性注解反射 end--- */
 
-/** --- 丰伟 2017年4月13日 start 方法注解反射 start--- */
+/** --- katlog 2017年4月13日 start 方法注解反射 start--- */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @interface MyMethodAnnotion {
@@ -168,9 +168,9 @@ class TheMethodClass {
     }
 }
 
-/** --- 丰伟 2017年4月13日 end 方法注解反射 end--- */
+/** --- katlog 2017年4月13日 end 方法注解反射 end--- */
 
-/** --- 丰伟 2017年4月13日 start 参数注解反射 start--- */
+/** --- katlog 2017年4月13日 start 参数注解反射 start--- */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
 @interface MyParamAnnotion {
@@ -183,5 +183,5 @@ class TheParamClass {
     public static void doSomethingElse(@MyParamAnnotion(name = "aName", value = "aValue") String parameter) {
     }
 }
-/** --- 丰伟 2017年4月13日 end 参数注解反射 end--- */
+/** --- katlog 2017年4月13日 end 参数注解反射 end--- */
 

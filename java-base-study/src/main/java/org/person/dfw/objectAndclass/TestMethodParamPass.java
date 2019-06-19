@@ -3,7 +3,7 @@ package org.person.dfw.objectAndclass;
 import org.junit.Test;
 
 /**
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月27日 下午3:27:53
  */
 public class TestMethodParamPass {

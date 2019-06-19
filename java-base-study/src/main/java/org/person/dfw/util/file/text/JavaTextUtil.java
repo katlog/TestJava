@@ -16,7 +16,7 @@ import org.person.dfw.util.file.FileUtil;
 /**
  * @moudle: JavaTextUtil 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月1日 上午11:48:14
  *
  */
@@ -57,7 +57,7 @@ public final class JavaTextUtil extends TextUtil {
 	
 	/**
 	 * Title: getClassNameByFName</br>
-	 * author : 丰伟</br>
+	 * author : katlog</br>
 	 * date : 2017年8月3日 下午5:06:13</br>
 	 * @param basePath
 	 * @return map

@@ -2,7 +2,7 @@
 /**  
  * @Title: TitlePositionEditor.java
  * @Package: org.person.dfw.others.beans
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月4日 上午9:18:24
  * @version: V1.0  
  */ 

@@ -12,7 +12,7 @@ public class UrlEncodeDecodeTest {
 
     @Test
     public void encode(){
-        String encode = URLEncoder.encode("AACCC=//邸丰伟");
+        String encode = URLEncoder.encode("AACCC=//邸katlog");
         System.out.println("encode = " + encode);
     }
 

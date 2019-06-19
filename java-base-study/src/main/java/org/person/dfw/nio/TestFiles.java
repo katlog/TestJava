@@ -64,7 +64,7 @@ public class TestFiles {
 	 * 从文件复制到文件：   Files.copy(Path processor, Path target, CopyOption options);
 	 * 从输入流复制到文件：Files.copy(InputStream in, Path target, CopyOption options);
 	 * 从文件复制到输出流：Files.copy(Path processor, OutputStream out);
-	 * author : 丰伟</br>
+	 * author : katlog</br>
 	 * date : 2017年8月4日 下午9:14:48</br>
 	 */
 	@Test public void copy () throws IOException{
@@ -100,7 +100,7 @@ public class TestFiles {
 
 	/**
 	 * 读取文件属性
-	 * author : 丰伟</br>
+	 * author : katlog</br>
 	 * date : 2017年8月4日 下午9:19:01</br>
 	 */
 	@Test public void _getInfo() throws IOException{

@@ -15,7 +15,7 @@ import org.person.dfw.util.Print;
 /**
  * @moudle: TestLocales 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月16日 下午7:42:45
  *
  */

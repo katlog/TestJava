@@ -14,7 +14,7 @@ import org.person.dfw.util.Print;
  * 字符串特殊排序器
  * @moudle: TestCollator 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月16日 下午8:55:14
  *
  */

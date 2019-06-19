@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * @moudle: TestGeneric 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月9日 上午11:19:03
  *
  */

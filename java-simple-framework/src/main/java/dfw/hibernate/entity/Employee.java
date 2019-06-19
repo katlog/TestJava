@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * @moudle: Employee 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年12月21日 下午8:24:46
  *
  */

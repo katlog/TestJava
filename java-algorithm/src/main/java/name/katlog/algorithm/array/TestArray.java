@@ -8,7 +8,7 @@ import java.util.Arrays;
 /**
  * @moudle: TestArray 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年6月30日 上午11:46:04
  * 数组的操作
  */

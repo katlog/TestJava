@@ -13,7 +13,7 @@ import javax.xml.transform.stream.StreamSource;
  * XSL转换（XSLT)机制
  * @moudle: TestXML_xlst 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月11日 下午7:59:27
  *
  */

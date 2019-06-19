@@ -2,7 +2,7 @@
 /**  
  * @Title: TestArray.java
  * @Package: org.person.dfw.program.primitive
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月8日 上午11:17:27
  * @version: V1.0  
  */ 

@@ -3,7 +3,7 @@ package dfw.pdf.iText;
 /**
  * @moudle: TestIText_table 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年9月1日 下午2:57:17
  *
  */

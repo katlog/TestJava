@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * @moudle: TestStringBuffer 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年7月26日 下午5:43:42
  *
  */

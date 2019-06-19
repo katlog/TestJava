@@ -12,7 +12,7 @@ import org.person.dfw.util.StringUtil;
 /**
  * @moudle: List 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月2日 下午2:33:21
  *
  */
@@ -20,7 +20,7 @@ public class ListUtil implements Print {
 
 	/**
 	 * 格式打印
-	 * author : 丰伟</br>
+	 * author : katlog</br>
 	 * date : 2017年8月2日 下午2:36:07</br>
 	 * @param style 打印的样式
 	 * @param filterReg 过滤的内容

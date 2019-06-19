@@ -4,7 +4,7 @@ package org.person.dfw.objectAndclass;
 /**
  * 方法调用顺序
  * 
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月13日 下午4:28:39
  */
 public class TestMethodCallSequence {

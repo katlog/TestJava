@@ -2,7 +2,7 @@
 /**  
  * @Title: TestReflect.java
  * @Package: org.person.dfw.refelct
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月12日 上午9:13:10
  * @version: V1.0  
  */ 
@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
 /**
  * @moudle: TestReflect 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月12日 上午9:13:10
  *
  */

@@ -12,7 +12,7 @@ import org.person.dfw.util.collections.ListUtil;
  * 实时更新Prperties文件
  * @moudle: PropertyRTThread 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月2日 下午1:34:33
  *
  */
@@ -20,7 +20,7 @@ public class PropertyRTThread implements Runnable{
 
 	/**
 	 * Title: run</br>
-	 * author : 丰伟</br>
+	 * author : katlog</br>
 	 * date : 2017年8月2日 下午1:35:20</br>
 	 */ 
 	@Override

@@ -8,7 +8,7 @@ import org.junit.Test;
  * 方法调用测试
  * @moudle: TestMethodCall 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月8日 上午8:57:23
  *
  */

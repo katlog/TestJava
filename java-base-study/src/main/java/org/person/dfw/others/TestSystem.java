@@ -2,7 +2,7 @@
 /**  
  * @Title: TestSystem.java
  * @Package: org.person.dfw.others
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年6月23日 上午11:02:21
  * @version: V1.0  
  */ 
@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * @moudle: TestSystem 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年6月23日 上午11:02:21
  *
  */

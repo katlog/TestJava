@@ -12,7 +12,7 @@ import java.nio.channels.FileLock;
 /**
  * @moudle: TestFileLock 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年10月20日 上午11:23:14
  *
  */

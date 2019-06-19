@@ -2,7 +2,7 @@
 /**  
  * @Title: TestDay.java
  * @Package: org.person.dfw.common.time
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年6月20日 下午5:30:28
  * @version: V1.0  
  */ 
@@ -21,7 +21,7 @@ import org.junit.Test;
 /**
  * @moudle: TestDay 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年6月20日 下午5:30:28
  *
  */

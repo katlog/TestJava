@@ -14,7 +14,7 @@ import org.junit.Test;
 /**
  * @moudle: TestXMLJDOM
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年7月24日 下午1:46:40
  *
  */

@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * @moudle: TestGeneric_局限于约束 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年9月8日 上午9:34:26
  *
  */

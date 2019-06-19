@@ -2,7 +2,7 @@
 /**  
  * @Title: TestStringPrint.java
  * @Package: org.person.dfw.program.primitive
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年6月23日 上午11:35:35
  * @version: V1.0  
  */ 
@@ -16,7 +16,7 @@ import org.junit.Test;
 /**
  * @moudle: TestStringPrint 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年6月23日 上午11:35:35
  *
  */
