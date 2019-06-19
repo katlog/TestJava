@@ -17,15 +17,38 @@ public class TestClass {
 
     @Contended
     @Tainted
-    class DemoClass{
+    static class DemoClass{
 
         public class PublicInnerClass{}
+        public static class PublicStaticInnerClass{}
         private class PrivateInnerClass{}
         protected class ProtectedInnerClass{}
         // 内部类无法再嵌套接口：inner class can not have static declarations
     }
 
     private static final Class clazz = DemoClass.class;
+
+
+    /** 获取内部类:public的 */
+    @Test
+    public void getClasses(){
+        Class[] classes = clazz.getClasses();
+        assertArrayEquals(new Class[]{DemoClass.PublicStaticInnerClass.class,DemoClass.PublicInnerClass.class},
+                classes);
+    }
+
+    /** 获取全部的内部类 */
+    @Test
+    public void getDeclaredClasses(){
+        Class[] classes = clazz.getDeclaredClasses();
+        assertArrayEquals(new Class[]{
+                        DemoClass.ProtectedInnerClass.class,
+                        DemoClass.PrivateInnerClass.class,
+                        DemoClass.PublicStaticInnerClass.class,
+                        DemoClass.PublicInnerClass.class
+                        }
+                    ,classes);
+    }
 
 
     /** 类上的注解（多个，重复注解） */
