@@ -10,7 +10,7 @@ package name.fw.thread.thread;
 /**
  * @moudle: TestProducerConsumer
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年3月30日 上午11:42:45
  *
  */

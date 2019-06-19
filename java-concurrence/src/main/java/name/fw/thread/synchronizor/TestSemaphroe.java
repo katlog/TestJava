@@ -3,7 +3,7 @@ package name.fw.thread.synchronizor;
 /**
  * @moudle: TestSemaphroe
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年3月31日 上午11:29:02
  *
  */
@@ -14,7 +14,7 @@ import java.util.concurrent.Semaphore;
 @SuppressWarnings("javadoc")
 /**
  * @moudle: TestSemaphroe 
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年9月5日 上午10:19:17
  *	通过计数器控制对共享资源的访问。
  *	Semaphore 信号量，就是一个允许实现设置好的令牌。也许有1个，也许有10个或更多。 

@@ -10,7 +10,7 @@ import org.person.dfw.util.collections.MapUtil;
 /**
  * @moudle: BeanUtilTest 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月11日 上午10:05:10
  *
  */

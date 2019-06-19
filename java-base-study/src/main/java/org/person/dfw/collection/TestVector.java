@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * @moudle: TestVector 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月7日 上午11:55:20
  *	Vector与ArrayList一样，也是通过数组实现的，不同的是它支持线程的同步，即某一时刻只有一个线程能够写Vector，
  *	避免多线程同时写而引起的不一致性，但实现同步需要很高的花费，因此，访问它比访问ArrayList慢。

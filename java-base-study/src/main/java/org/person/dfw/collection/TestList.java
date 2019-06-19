@@ -2,7 +2,7 @@
 /**  
  * @Title: TestList.java
  * @Package: org.person.dfw.collection
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月16日 下午8:49:42
  * @version: V1.0  
  */ 
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @moudle: TestList 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月16日 下午8:49:42
  *
  */

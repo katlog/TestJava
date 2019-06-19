@@ -2,7 +2,7 @@
 /**  
  * @Title: TestInterface.java
  * @Package: org.person.dfw.objectAndclass.Interface
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月20日 上午9:23:49
  * @version: V1.0  
  */ 

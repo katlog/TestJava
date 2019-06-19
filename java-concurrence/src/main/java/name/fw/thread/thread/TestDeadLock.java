@@ -5,7 +5,7 @@ package name.fw.thread.thread;
 /**
  * @moudle: TestDeadLock 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年10月25日 下午8:58:20
  *
  */

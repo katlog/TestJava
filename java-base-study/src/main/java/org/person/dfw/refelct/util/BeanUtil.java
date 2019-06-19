@@ -77,7 +77,7 @@ public class BeanUtil {
 
     /**
      * Title: getBeanProVal</br>
-     * author : 丰伟</br>
+     * author : katlog</br>
      * date : 2017年7月19日 下午3:35:39</br>
      * @param pros 要选择的属性，默认选择全部值不为空的属性
      * @return map key-field#getName
@@ -228,7 +228,7 @@ public class BeanUtil {
     /**
      * 获取对象的public static final 属性
      * Title: getPublicFinalStatictPro</br>
-     * author : 丰伟</br>
+     * author : katlog</br>
      * date : 2017年8月11日 上午9:32:51</br>
      * @param o
      * @return map
@@ -255,7 +255,7 @@ public class BeanUtil {
     
     /**获取对象的public static final 属性
      * Title: getPublicFinalStatictPro</br>
-     * author : 丰伟</br>
+     * author : katlog</br>
      * date : 2017年8月11日 上午9:35:53</br>
      * @param cl 类
      * @return map

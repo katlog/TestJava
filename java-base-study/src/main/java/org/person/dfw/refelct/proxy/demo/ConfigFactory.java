@@ -2,7 +2,7 @@
 /**  
  * @Title: ConfigFactory.java
  * @Package: org.person.dfw.refelct.proxy.demo
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月20日 下午3:37:46
  * @version: V1.0  
  */ 

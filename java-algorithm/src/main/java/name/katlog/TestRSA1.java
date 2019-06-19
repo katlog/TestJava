@@ -1,7 +1,7 @@
 /**
  * @Title: TestRSA1.java
  * @Package: org.person.dfw.encrypt.asymenc
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月3日 下午5:30:53
  * @version: V1.0
  */
@@ -31,7 +31,7 @@ import org.junit.Test;
 /**
  * @moudle: TestRSA1
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月3日 下午5:30:53
  *
  */

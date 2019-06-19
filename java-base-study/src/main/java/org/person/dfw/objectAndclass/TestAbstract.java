@@ -3,7 +3,7 @@ package org.person.dfw.objectAndclass;
 /**
  * @moudle: TestAbstract 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月16日 上午9:58:02
  *
  */

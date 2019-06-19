@@ -9,7 +9,7 @@ import org.apache.commons.codec.binary.Hex;
 /**
  * @moudle: TestMDSalt 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年12月18日 下午2:11:58
  *
  */

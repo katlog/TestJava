@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @moudle: TestThreadNotifyall
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年3月30日 上午11:38:14
  *
  */

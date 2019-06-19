@@ -14,7 +14,7 @@ import org.junit.Test;
 /**
  * @moudle: TestGenricReflect
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月13日 上午10:21:26
  *
  */

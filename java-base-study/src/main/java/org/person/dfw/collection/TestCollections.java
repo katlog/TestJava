@@ -2,7 +2,7 @@
 /**  
  * @Title: TestCollections.java
  * @Package: org.person.dfw.collection
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年6月23日 下午5:35:08
  * @version: V1.0  
  */ 
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * @moudle: TestCollections 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年6月23日 下午5:35:08
  *
  */

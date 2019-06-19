@@ -17,7 +17,7 @@ import org.junit.Test;
 /**
  * @moudle: AESTest 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月7日 下午5:07:46
  *
  */
