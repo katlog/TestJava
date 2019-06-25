@@ -1,14 +1,20 @@
 package org.person.dfw.refelct;
 
-import org.junit.Assert;
 import org.junit.Test;
 import sun.misc.Contended;
+import sun.reflect.generics.factory.CoreReflectionFactory;
+import sun.reflect.generics.reflectiveObjects.TypeVariableImpl;
+import sun.reflect.generics.scope.ClassScope;
+import sun.reflect.generics.scope.Scope;
+import sun.reflect.generics.tree.FieldTypeSignature;
 
 import javax.annotation.Tainted;
 import java.lang.annotation.Annotation;
-import java.util.Arrays;
+import java.lang.reflect.TypeVariable;
+import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by fw on 2019/6/14
@@ -67,6 +73,31 @@ public class TestClass {
         assertEquals(clazz.getDeclaredAnnotationsByType(Contended.class)[0],annotation);
     }
 
+
+    /** 泛型： */
+    class Frob {}
+    class Fnorkle {}
+    class Quark<Q> {}
+    class Particle<POSITION,MOMENTUM> {}
+    @Test
+    public void getTypeParameters(){
+        List<Frob> list = new ArrayList<Frob>();
+        Map<Frob,Fnorkle> map = new HashMap<Frob,Fnorkle>();
+        Quark<Fnorkle> quark = new Quark<Fnorkle>();
+        Particle<Long,Double> p = new Particle<Long,Double>();
+
+        System.out.println(Arrays.toString(list.getClass().getTypeParameters()));
+        System.out.println(Arrays.toString(map.getClass().getTypeParameters()));
+        TypeVariable<? extends Class<? extends Quark>>[] typeParameters = quark.getClass().getTypeParameters();
+        TypeVariable<? extends Class<? extends Quark>> typeParameter = typeParameters[0];
+        System.out.println(Arrays.toString(typeParameters));
+        System.out.println(Arrays.toString(p.getClass().getTypeParameters()));
+
+        TypeVariableImpl<Class<Quark>> q = TypeVariableImpl.make(Quark.class, "Q", new FieldTypeSignature[]{}, CoreReflectionFactory.make(Quark.class, ClassScope.make(Quark.class)));
+        System.out.println("q = " + q);
+        boolean equals = typeParameter.equals(q);
+        System.out.println("equals = " + equals);
+    }
 
 
 }

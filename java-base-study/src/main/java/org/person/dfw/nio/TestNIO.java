@@ -214,10 +214,10 @@ public class TestNIO {
 	public void socketServer() throws IOException, InterruptedException {
 		ServerSocketChannel socketChannel = ServerSocketChannel.open();
 		socketChannel.configureBlocking(false);
-		socketChannel.bind(new InetSocketAddress(1800));
+		socketChannel.bind(new InetSocketAddress(18000));
 
 		Selector selector = Selector.open();
-		SelectionKey selectionKey = socketChannel.register(selector, SelectionKey.OP_ACCEPT);
+		socketChannel.register(selector, SelectionKey.OP_ACCEPT);
 
 		new Thread(() -> {
 			while (true) {
@@ -227,7 +227,7 @@ public class TestNIO {
 					Iterator<SelectionKey> iterator = selectionKeys.iterator();
 					while (iterator.hasNext()) {
 						SelectionKey next = iterator.next();
-						if (next.isReadable()) {
+						if (next.isAcceptable()) {
 							ServerSocketChannel  channel = (ServerSocketChannel) next.channel();
 							ByteBuffer byteBuffer = ByteBuffer.allocate(1204);
 							SocketChannel socketChannel1 = channel.accept();
@@ -242,25 +242,37 @@ public class TestNIO {
 			}
 		}).start();
 
+		// new Thread(() -> {
+		// 	try {
+        //
+		// 		Socket socket = new Socket(InetAddress.getByName("localhost"), 18000);
+		// 		OutputStream outputStream = socket.getOutputStream();
+        //
+		// 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+        //
+		// 		writer.write("ahihsioahdioahsdhi\n");
+		// 		// writer.flush();
+		// 		// writer.write("dasfafasfd\n");
+		// 		// writer.flush();
+		// 		writer.close();
+		// 	} catch (IOException e) {
+		// 		e.printStackTrace();
+		// 	}
+		// }).start();
+
 		new Thread(() -> {
 			try {
-				Socket socket = new Socket(InetAddress.getByName("localhost"), 1800);
-				OutputStream outputStream = socket.getOutputStream();
+				SocketChannel socketChannel1 = SocketChannel.open(new InetSocketAddress("localhost", 18000));
+				if (socketChannel1.isConnected()) {
+					System.out.println("socketChannel1 = " + socketChannel1);
 
-				BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
-
-				writer.write("ahihsioahdioahsdhi\n");
-				writer.flush();
-				writer.write("dasfafasfd\n");
-				writer.flush();
-				writer.close();
+					socketChannel1.write(ByteBuffer.wrap("SADASDADSAS".getBytes()));
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}).start();
 
-		while (selectionKey.isReadable()) {
-		}
 
 		Thread.sleep(10000);
 	}
