@@ -245,6 +245,14 @@
             <version>0.9.10</version>
         </dependency>
 
+        <!-- *******************************spring ******************************************* -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>4.2.6.RELEASE</version>
+        </dependency>
+        <!-- *******************************spring ******************************************* -->
+
         <!-- ssh工具 -->
         <dependency>
             <groupId>com.jcraft</groupId>

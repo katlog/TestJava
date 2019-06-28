@@ -2,19 +2,13 @@ package org.person.dfw.refelct;
 
 import org.junit.Before;
 import org.junit.Test;
-import sun.reflect.generics.reflectiveObjects.TypeVariableImpl;
 
 import javax.annotation.Resource;
 import javax.xml.ws.Action;
-import java.lang.reflect.AnnotatedType;
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
+import java.lang.reflect.*;
 import java.util.List;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * Created by dell on 2018/4/13
@@ -60,6 +54,14 @@ public class TestMethodReflect {
     @Test
     public void getDeclaringClass() {
         assertEquals(TestMethodReflect.class, method1.getDeclaringClass());
+    }
+
+    private void parameterMethod0(List aListParam){}
+    @Test
+    public void getParameters() throws NoSuchMethodException {
+        Parameter[] parameters = clazz.getDeclaredMethod("parameterMethod0", List.class).getParameters();
+        System.out.println("parameters = " + parameters);
+
     }
 
     private void genericParameterMethod0(List list){}
