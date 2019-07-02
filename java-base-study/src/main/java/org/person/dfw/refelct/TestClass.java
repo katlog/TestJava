@@ -15,6 +15,7 @@ import java.util.*;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by fw on 2019/6/14
@@ -99,5 +100,21 @@ public class TestClass {
         System.out.println("equals = " + equals);
     }
 
+
+    @Test
+    public void isInstance(){
+
+        assertTrue(Boolean.class.isInstance(false));
+        assertTrue(Boolean.class.isInstance(true));
+
+        assertTrue(Boolean.class.isInstance(Boolean.TRUE));
+        assertTrue(Boolean.class.isInstance(Boolean.FALSE));
+
+        // 不知为为何这两种就不行
+        // assertTrue(boolean.class.isInstance(true));
+        // assertTrue(boolean.class.isInstance(false));
+
+        assertTrue(Boolean.valueOf("true") instanceof  Boolean);
+    }
 
 }
