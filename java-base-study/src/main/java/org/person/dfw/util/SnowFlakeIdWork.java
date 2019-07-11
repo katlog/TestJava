@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 
 /**
+ * <a href="https://blog.csdn.net/m0_37041378/article/details/78125747">分布式ID生成器解决方案</a>
  * Created by fw on 2019/7/2
  */
 public class SnowFlakeIdWork {
@@ -87,6 +88,10 @@ public class SnowFlakeIdWork {
             throw new RuntimeException(String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds", this.lastTimestamp - timestamp));
         } else {
             this.lastTimestamp = timestamp;
+            /** 第一位为未使用，
+             * 接下来的41位为毫秒级时间(41位的长度可以使用69年)，
+             * 然后是5位datacenterId和5位workerId(10位的长度最多支持部署1024个节点） ，
+             * 最后12位是毫秒内的计数（12位的计数顺序号支持每个节点每毫秒产生4096个ID序号） */
             return timestamp - TWEPOCH << TIMESTAMP_LEFT_SHIFT | this.workerId << WORKER_ID_SHIFT | this.sequence;
         }
     }

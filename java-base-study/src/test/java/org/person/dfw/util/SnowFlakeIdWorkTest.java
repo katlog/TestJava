@@ -24,6 +24,6 @@ public class SnowFlakeIdWorkTest {
         System.out.println("split = " + Arrays.toString(split));
 
         System.out.println("split = " + Arrays.toString(SnowFlakeIdWork.split(1012400433719853056L)));
-        System.out.println("split = " + Arrays.toString(SnowFlakeIdWork.split(1012431775820500992L)));
+        System.out.println("split = " + Arrays.toString(SnowFlakeIdWork.split(1012441828497702912L)));
     }
 }
