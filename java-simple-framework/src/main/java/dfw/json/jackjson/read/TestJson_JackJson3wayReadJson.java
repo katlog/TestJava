@@ -2,7 +2,7 @@
 /**  
  * @Title: Test3waysReadJson.java
  * @Package: org.person.dfw.jackjson
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月13日 下午2:17:03
  * @version: V1.0  
  */ 
@@ -50,7 +50,7 @@ class User {
  *       数据绑定模式：使用最方便
                 流模式：性能最佳
                 树模式：最灵活
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月13日 下午2:21:41
  */ 
 public class TestJson_JackJson3wayReadJson {

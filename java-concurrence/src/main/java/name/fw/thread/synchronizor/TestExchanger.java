@@ -7,7 +7,7 @@ import java.util.concurrent.Exchanger;
 /**
  * @moudle: TestExchanger
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月30日 下午5:42:16 
  * 	Exchanger（交换者）是一个用于线程间协作的工具类。Exchanger用于进行线程间的数据交换。
  *        它提供一个同步点，在这个同步点两个线程可以交换彼此的数据。这两个线程通过exchange方法交换数据，

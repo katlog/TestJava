@@ -2,7 +2,7 @@
 /**  
  * @Title: MinorGC.java
  * @Package: org.dfw.jvm.garbagecollect
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月28日 上午9:53:03
  * @version: V1.0  
  */ 
@@ -11,7 +11,7 @@ package name.katlog.jvm.item03;
 /**
  * @moudle: MinorGC 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月28日 上午9:53:03
  *
  */

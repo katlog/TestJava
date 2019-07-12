@@ -2,7 +2,7 @@
 /**  
  * @Title: TestGson.java
  * @Package: org.person.dfw.gson
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月11日 上午9:18:10
  * @version: V1.0  
  */ 

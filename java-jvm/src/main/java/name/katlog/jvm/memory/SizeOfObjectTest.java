@@ -2,7 +2,7 @@
 /**  
  * @Title: SizeOfObjectTest.java
  * @Package: org.dfw.jvm.memory
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月25日 上午9:43:08
  * @version: V1.0  
  */ 

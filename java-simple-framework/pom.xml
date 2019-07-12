@@ -30,6 +30,13 @@
                 <filtering>false</filtering>
             </resource>
         </resources>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.4.1.Final</version>
+            </extension>
+        </extensions>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -38,6 +45,29 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.5.1</version>
+                <configuration>
+                    <protoSourceRoot>${basedir}/src/main/resource/protbuf</protoSourceRoot><!--默认的proto文件路径-->
+                    <!--Protobuf compiler artifact specification, in groupId:artifactId:version[:type[:classifier]] format. When this parameter is set, the plugin attempts to resolve the specified artifact as protoc executable.-->
+                    <!--os.detected.classifier 变量来源：https://github.com/trustin/os-maven-plugin-->
+                    <protocArtifact>com.google.protobuf:protoc:3.1.0:exe:${os.detected.classifier}
+                    </protocArtifact>
+                    <pluginId>grpc-java</pluginId>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
+                    </pluginArtifact>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compile-custom</goal> <!--按照指定的插件进行编译，即按照GRPC协议编译protob文件-->
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -178,6 +208,20 @@
         </dependency>
         <!-- poi框架 -->
 
+        <!-- protbuf -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <!-- protbuf格式化：如json -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+        <!-- protbuf -->
+
         <!-- 定时任务 -->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
@@ -200,6 +244,14 @@
             <artifactId>reflections</artifactId>
             <version>0.9.10</version>
         </dependency>
+
+        <!-- *******************************spring ******************************************* -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>4.2.6.RELEASE</version>
+        </dependency>
+        <!-- *******************************spring ******************************************* -->
 
         <!-- ssh工具 -->
         <dependency>
@@ -253,6 +305,12 @@
             <artifactId>hadoop-minicluster</artifactId>
             <version>${hadoop.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
 
 

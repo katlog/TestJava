@@ -2,7 +2,7 @@
 /**  
  * @Title: TestJunit4Parameter.java
  * @Package: org.person.dfw.junit
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月8日 上午11:53:22
  * @version: V1.0  
  */ 

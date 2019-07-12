@@ -2,7 +2,7 @@
 /**  
  * @Title: TestJackJsonAnnotion.java
  * @Package: org.person.dfw.jackjson
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月13日 下午1:53:58
  * @version: V1.0  
  */ 
@@ -15,7 +15,7 @@ import static org.junit.Assert.fail;
 /**
  * @moudle: TestJackJsonAnnotion 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月13日 下午1:53:58
  *
  */

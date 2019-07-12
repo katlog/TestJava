@@ -2,7 +2,7 @@
 /**  
  * @Title: HeapOOM.java
  * @Package: org.dfw.jvm.overflow
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年4月28日 上午9:42:06
  * @version: V1.0  
  */ 

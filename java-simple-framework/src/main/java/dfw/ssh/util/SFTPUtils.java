@@ -1,7 +1,7 @@
 /**  
  * @Title: SFTPUtils.java
  * @Package: org.person.dfw.ssh.util
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月15日 下午12:25:01
  * @version: V1.0  
  */
@@ -20,7 +20,7 @@ import java.util.*;
 /**
  * @moudle: SFTPUtils
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年5月15日 下午12:25:01
  */
 public class SFTPUtils {

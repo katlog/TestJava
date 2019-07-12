@@ -1,7 +1,7 @@
 /**
  * @Title: TestExcutorRunnable.java
  * @Package: org.person.dfw.excutor
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年3月31日 上午9:14:51
  * @version: V1.0
  */
@@ -10,7 +10,7 @@ package name.fw.thread.excutor;
 /**
  * @moudle: TestExcutorRunnable
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年3月31日 上午9:14:51
  *
  */

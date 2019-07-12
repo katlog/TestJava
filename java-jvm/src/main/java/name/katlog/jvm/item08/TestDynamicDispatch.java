@@ -3,7 +3,7 @@ package name.katlog.jvm.item08;
 /**
  * @moudle: TestDynamicDispatch
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年7月31日 上午9:33:14 体现的是重写：多个类相同签名的方法的选择
  */
 public class TestDynamicDispatch {

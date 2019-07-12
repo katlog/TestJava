@@ -55,6 +55,7 @@ class Mail {
 
 public class PostOffice {
   enum MailHandler {
+    /**  */
     GENERAL_DELIVERY {
       boolean handle(Mail m) {
         switch(m.generalDelivery) {

@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * @moudle: _2_List 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年8月10日 上午11:30:32
  *
  */

@@ -3,7 +3,7 @@ package name.fw.thread.excutor;
 /**
  * @moudle: TestThreadPool
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年3月31日 上午9:21:15
  *
  */

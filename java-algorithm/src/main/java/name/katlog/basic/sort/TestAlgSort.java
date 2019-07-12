@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * @moudle: TestAlgSort 
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年12月25日 上午9:45:39
  *
  */

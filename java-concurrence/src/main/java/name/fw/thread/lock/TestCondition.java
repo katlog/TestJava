@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @moudle: TestCondition
  * @version:v1.0
- * @author: 丰伟
+ * @author: katlog
  * @date: 2017年10月27日 下午5:13:57
  *
  */
