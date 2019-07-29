@@ -1,9 +1,12 @@
 package name.katlog.jvm.vm;
 
-import javax.management.MBeanServer;
+import org.junit.Test;
+
+import javax.management.*;
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by fw on 2019/6/18
@@ -38,6 +41,13 @@ public class TestManagementFactory {
         for (GarbageCollectorMXBean e : list1) {
             System.out.println(String.format("name=%s,count=%s,time=%s", e.getName(), e.getCollectionCount(), e.getCollectionTime()));
         }
+    }
+
+    @Test
+    public void getPlatformMBeanServer() throws MalformedObjectNameException {
+        MBeanServer server = ManagementFactory.getPlatformMBeanServer();
+        Set<ObjectName> objs = server.queryNames(new ObjectName("*:type=Connector,*"), Query.in(Query.attr("scheme"), new ValueExp[]{Query.value("http"), Query.value("https")}));
+        objs.forEach(objectName -> System.out.println("objectName = " + objectName));
     }
 
 }
