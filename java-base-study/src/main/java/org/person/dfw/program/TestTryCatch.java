@@ -45,15 +45,15 @@ public class TestTryCatch {
     public void test() {
         System.out.println("-------------tryCahtch1----------------");
         System.out.println(tryCahtch1());
-        System.out.println("------------tryCahtch2-----------------");
+        System.out.println("\n------------tryCahtch2-----------------");
         System.out.println(tryCahtch2());
-        System.out.println("-----------tryCahtch3------------------");
+        System.out.println("\n-----------tryCahtch3------------------");
         System.out.println(tryCahtch3());
-        System.out.println("-----------tryCahtch4------------------");
+        System.out.println("\n-----------tryCahtch4------------------");
         System.out.println(tryCahtch4());
-        System.out.println("----------tryCahtch5-------------------");
+        System.out.println("\n----------tryCahtch5-------------------");
         System.out.println(tryCahtch5());
-        System.out.println("---------tryCahtch6--------------------");
+        System.out.println("\n---------tryCahtch6--------------------");
         System.out.println(tryCahtch6());
         System.out.println("------------------------------");
     }

@@ -10,12 +10,12 @@ import java.util.EnumMap;
 /**
  * Created by fw on 2019/7/29
  */
-public class JsonValidator {
+class JsonValidator {
     private CharacterIterator it;
     private char              c;
     private int               col;
 
-    public JsonValidator(){
+    JsonValidator(){
     }
 
     /**
