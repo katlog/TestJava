@@ -282,36 +282,6 @@
             <version>1.3</version>
         </dependency>
 
-        <!--hadoop todo 待迁移-->
-        <!-- Hadoop main client artifact -->
-        <!--要想构建MapReduce作业，你只需要有hadoop-client依赖关系，它包含了和HDFS及MapReduce交互所需要的所有Hadoop client-side类-->
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-            <version>${hadoop.version}</version>
-        </dependency>
-        <!--当写MapReduce测试用例时，用mrunit类-->
-        <dependency>
-            <groupId>org.apache.mrunit</groupId>
-            <artifactId>mrunit</artifactId>
-            <version>1.1.0</version>
-            <classifier>hadoop2</classifier>
-            <scope>test</scope>
-        </dependency>
-        <!-- Hadoop test artifact for running mini clusters -->
-        <!--hadoop-minicluster库中包含了“mini－”集群，这有助于在一个单JVM中运行Hadoop集群进行测试。 -->
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-minicluster</artifactId>
-            <version>${hadoop.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-hdfs</artifactId>
-            <version>RELEASE</version>
-            <scope>compile</scope>
-        </dependency>
 
 
     </dependencies>
