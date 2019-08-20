@@ -211,6 +211,30 @@ public class TestCache {
             return new Person(1L, "1");
         }));
     }
+
+    @Test(expected = com.google.common.cache.CacheLoader.InvalidCacheLoadException.class)
+    public void get_exception() throws ExecutionException {
+        Person person = new Person();
+
+        LoadingCache<Integer, Person> cache = CacheBuilder.newBuilder()
+                .maximumSize(100)
+                .build(new CacheLoader<Integer, Person>() {
+                    @Override
+                    public Person load(Integer integer) throws Exception {
+                        if (integer != 2) {
+                            return person;
+                        }
+                        return null;
+                    }
+                });
+
+        assertEquals(person, cache.get(1));
+        assertEquals(person, cache.get(1));
+        /** guava缓存中又不会存放value为null的数据，导致抛出异常。 */
+        assertEquals(person, cache.get(2));
+        assertEquals(person, cache.get(2));
+        assertEquals(person, cache.get(3));
+    }
     
     /** 显示清除 */
     @Test

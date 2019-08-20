@@ -36,12 +36,7 @@ import java.util.List;
 
 public class TestHttpClient {  
   
-    @Test  
-    public void jUnitTest() {  
-        get();  
-    }  
-  
-    /** 
+    /**
      * HttpClient连接SSL 
      */  
     public void ssl() {  
@@ -82,17 +77,9 @@ public class TestHttpClient {
             } finally {  
                 response.close();  
             }  
-        } catch (ParseException e) {  
+        } catch (ParseException | IOException | KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
             e.printStackTrace();  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        } catch (KeyManagementException e) {  
-            e.printStackTrace();  
-        } catch (NoSuchAlgorithmException e) {  
-            e.printStackTrace();  
-        } catch (KeyStoreException e) {  
-            e.printStackTrace();  
-        } finally {  
+        } finally {
             if (httpclient != null) {  
                 try {  
                     httpclient.close();  
@@ -105,7 +92,8 @@ public class TestHttpClient {
   
     /** 
      * post方式提交表单（模拟用户登录请求） 
-     */  
+     */
+    @Test
     public void postForm() {  
         // 创建默认的httpClient实例.    
         CloseableHttpClient httpclient = HttpClients.createDefault();  
@@ -131,11 +119,7 @@ public class TestHttpClient {
             } finally {  
                 response.close();  
             }  
-        } catch (ClientProtocolException e) {  
-            e.printStackTrace();  
-        } catch (UnsupportedEncodingException e1) {  
-            e1.printStackTrace();  
-        } catch (IOException e) {  
+        } catch (IOException e) {
             e.printStackTrace();  
         } finally {  
             // 关闭连接,释放资源    
@@ -147,52 +131,11 @@ public class TestHttpClient {
         }  
     }  
   
-    /** 
-     * 发送 post请求访问本地应用并根据传递参数不同返回不同结果 
-     */  
-    public void post() {  
-        // 创建默认的httpClient实例.    
-        CloseableHttpClient httpclient = HttpClients.createDefault();  
-        // 创建httppost    
-        HttpPost httppost = new HttpPost("http://localhost:8080/myDemo/Ajax/serivceJ.action");  
-        // 创建参数队列    
-        List<NameValuePair> formparams = new ArrayList<NameValuePair>();  
-        formparams.add(new BasicNameValuePair("type", "house"));  
-        UrlEncodedFormEntity uefEntity;  
-        try {  
-            uefEntity = new UrlEncodedFormEntity(formparams, "UTF-8");  
-            httppost.setEntity(uefEntity);  
-            System.out.println("executing request " + httppost.getURI());  
-            CloseableHttpResponse response = httpclient.execute(httppost);  
-            try {  
-                HttpEntity entity = response.getEntity();  
-                if (entity != null) {  
-                    System.out.println("--------------------------------------");  
-                    System.out.println("Response content: " + EntityUtils.toString(entity, "UTF-8"));  
-                    System.out.println("--------------------------------------");  
-                }  
-            } finally {  
-                response.close();  
-            }  
-        } catch (ClientProtocolException e) {  
-            e.printStackTrace();  
-        } catch (UnsupportedEncodingException e1) {  
-            e1.printStackTrace();  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        } finally {  
-            // 关闭连接,释放资源    
-            try {  
-                httpclient.close();  
-            } catch (IOException e) {  
-                e.printStackTrace();  
-            }  
-        }  
-    }  
-  
+
     /** 
      * 发送 get请求 
-     */  
+     */
+    @Test
     public void get() {  
         CloseableHttpClient httpclient = HttpClients.createDefault();  
         try {  
@@ -217,13 +160,9 @@ public class TestHttpClient {
             } finally {  
                 response.close();  
             }  
-        } catch (ClientProtocolException e) {  
+        } catch (ParseException | IOException e) {
             e.printStackTrace();  
-        } catch (ParseException e) {  
-            e.printStackTrace();  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        } finally {  
+        } finally {
             // 关闭连接,释放资源    
             try {  
                 httpclient.close();  
@@ -261,9 +200,7 @@ public class TestHttpClient {
             } finally {  
                 response.close();  
             }  
-        } catch (ClientProtocolException e) {  
-            e.printStackTrace();  
-        } catch (IOException e) {  
+        } catch (IOException e) {
             e.printStackTrace();  
         } finally {  
             try {  
