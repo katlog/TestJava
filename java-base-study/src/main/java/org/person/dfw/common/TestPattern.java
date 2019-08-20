@@ -50,32 +50,7 @@ public class TestPattern {
          * 2.2、int flags() 返回当前Pattern的匹配flag参数. 
          */
         assertEquals(pattern.pattern(), "\\?{2}");
-        
-        /**
-         *  String[] split(CharSequence input) 和String[] split(CharSequence input, int limit)
-         *      limit：结果阈值；
-         *          如果 n 大于零，那么模式至多应用 n- 1 次，数组的长度不大于 n，并且数组的最后条目将包含除最后的匹配定界符之外的所有输入
-         *          如果 n 非正，那么将应用模式的次数不受限制，并且数组可以为任意长度。
-         *          如果 n 为零，那么应用模式的次数不受限制，数组可以为任意长度，并且将丢弃尾部空字符串。 
-         *          例子：若input="boo:and:foo"，匹配符为"o"，可知模式最多可应用4次，数组的长度最大为5；
-         */
-        String[] arr = null;
-        CharSequence input = "boo:and:foo";
-        Pattern p = Pattern.compile("o");
-        arr = p.split(input, -2);
-        System.out.println(Arrays.toString(arr));// {"b","",":and:f","",""}，共有5个元素
-        arr = p.split(input, 2);
-        System.out.println(Arrays.toString(arr));// {"b","o:and:foo"}，共有2个元素
-        arr = p.split(input, 7);
-        System.out.println(Arrays.toString(arr));// {"b","",":and:f","",""}，共有5个元素
-        arr = p.split(input, 0);
-        System.out.println(Arrays.toString(arr));// {"b","",":and:f"}，共有3个元素
-        
-        /**Pattern.quote(String s) 返回给定的字符串的字面量*/
-        String pattern2 = Pattern.quote("1252343% 8 567 hdfg gf^$545");
-        System.out.println("Pattern is : "+pattern2); //  \Q1252343% 8 567 hdfg gf^$545\E
-        
-        
+
         /**boolean matches() 最常用方法:尝试对整个目标字符展开匹配检测,也就是只有整个目标字符串完全匹配时才返回真值.*/
         Matcher matcher = pattern.matcher("??");
         assertTrue(matcher.matches());
@@ -85,53 +60,76 @@ public class TestPattern {
         matcher=pattern.matcher("?");
         assertFalse(matcher.matches());
     }
-    
-    @Test public void matcher(){
-        
+
+    @Test
+    public void split(){
+        /**
+         *  String[] splitBatchFun(CharSequence input) 和String[] splitBatchFun(CharSequence input, int limit)
+         *      limit：结果阈值；
+         *          如果 n 大于零，那么模式至多应用 n- 1 次，数组的长度不大于 n，并且数组的最后条目将包含除最后的匹配定界符之外的所有输入
+         *          如果 n 非正，那么将应用模式的次数不受限制，并且数组可以为任意长度。
+         *          如果 n 为零，那么应用模式的次数不受限制，数组可以为任意长度，并且将丢弃尾部空字符串。
+         *          例子：若input="boo:and:foo"，匹配符为"o"，可知模式最多可应用4次，数组的长度最大为5；
+         */
+        CharSequence input = "boo:and:foo";
+        Pattern p = Pattern.compile("o");
+        assertArrayEquals(p.split(input, -2),new String[]{"b","",":and:f","",""});
+        assertArrayEquals(p.split(input, 2),new String[]{"b","o:and:foo"});
+        assertArrayEquals(p.split(input, 7),new String[]{"b","",":and:f","",""});
+        assertArrayEquals(p.split(input, 0),new String[]{"b","",":and:f"});
+    }
+
+    @Test
+    /** 返回给定的字符串的 匹配模式字面量 */
+    public void quote(){
+        String pattern2 = Pattern.quote("1252343% 8 567 hdfg gf^$545");
+        assertEquals(pattern2, "\\Q1252343% 8 567 hdfg gf^$545\\E");
+    }
+
+    @Test
+    public void lookingAt(){
         /**boolean lookingAt() 对前面的字符串进行匹配,只有匹配到的字符串在最前面才会返回true*/
         Pattern p = Pattern.compile("\\d+");
         Matcher m = p.matcher("22bb23");
-        boolean match = m.lookingAt();//true
-        System.out.println(match);
+        assertTrue(m.lookingAt());
+
         m = p.matcher("bb2233");
-        match= m.lookingAt();
-        System.out.println(match);//false
-        
+        assertFalse(m.lookingAt());
+    }
+
+    @Test
+    public void find(){
         /**boolean find() 对字符串进行匹配,匹配到的字符串可以在任何位置*/
-        /**【先find后才能使用start、end、group】*/
         Pattern p1 = Pattern.compile("\\d+");
         Matcher m1 = p1.matcher("22bb23");
-        m1.find();// 返回true
-        Matcher m2 = p1.matcher("aa2223");
-        m2.find();// 返回true
-        Matcher m3 = p1.matcher("aa2223bb");
-        m3.find();// 返回true
-        Matcher m4 = p1.matcher("aabb");
-        m4.find();// 返回false
+        assertTrue(m1.find());
 
-        
+        Matcher m2 = p1.matcher("aa2223");
+        assertTrue(m2.find());
+
+        Matcher m3 = p1.matcher("aa2223bb");
+        assertTrue(m3.find());
+
+        Matcher m4 = p1.matcher("aabb");
+        assertFalse(m4.find());
+    }
+
+    @Test public void find_start_group(){
+
+        /**【先调用find后才能调用start、end、group】*/
         /**
          * int start() 返回当前匹配到的字符串在原目标字符串中的位置
          * int end() 返回当前匹配的字符串的最后一个字符在原目标字符串中的索引位置.
-         * String group() 返回匹配到的子字符串 
+         * String group() 返回匹配到的子字符串
          */
-        Pattern p2 = Pattern.compile("\\d+");
-        Matcher m5 = p2.matcher("aa22bb23");
+        Pattern p1 = Pattern.compile("\\d+");
+        Matcher m5 = p1.matcher("aa22bb23");
         m5.find();
-        int start = m5.start();//2
-        String group = m5.group();//22
-        int end = m5.end();//4
-        System.out.println(start);
-        System.out.println(group);
-        System.out.println(end);
-        
-        Matcher m6 = p1.matcher("aa1bb12ccc123");
-        while (m6.find()) {
-        	System.out.printf("匹配到的字符串:%-10s匹配到字符串的位置:%s\n",m6.group(),m6.start());
-		}
-        
-        Pattern p7 = Pattern.compile("\\d+");
-        Matcher m7 = p7.matcher("aa1bb12ccc123");
+        assertEquals(2,m5.start());
+        assertEquals("22",m5.group());
+        assertEquals(4,m5.end());
+
+        Matcher m7 = p1.matcher("aa1bb12ccc123");
         byte i = 0;
         while (m7.find()) {
         	System.out.printf("第%s匹配    匹配到的字符串:%-10s匹配到字符串的位置:%s\n",

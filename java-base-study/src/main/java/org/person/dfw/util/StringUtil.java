@@ -282,7 +282,7 @@ public final class StringUtil {
     }
 
 
-    /**  分解去除重复 split Remove Duplicates
+    /**  分解去除重复 splitBatchFun Remove Duplicates
      * @param str 原字符串
      * @param splitStr 分裂符号
      * @return
