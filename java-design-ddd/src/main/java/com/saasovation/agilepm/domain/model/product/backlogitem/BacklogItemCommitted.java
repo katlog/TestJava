@@ -1,5 +1,8 @@
-package com.saasovation.agilepm.domain.model.product;
+package com.saasovation.agilepm.domain.model.product.backlogitem;
 
+import com.saasovation.agilepm.domain.model.product.DomainEvent;
+import com.saasovation.agilepm.domain.model.product.sprint.SprintId;
+import com.saasovation.agilepm.domain.model.tenant.Tenant;
 import lombok.AccessLevel;
 import lombok.Setter;
 
@@ -27,6 +30,14 @@ public class BacklogItemCommitted implements DomainEvent {
     //     this.setCommittedToSprintId(aCommittedToSprintId);
     //     this.setTenantId(aTenantId);
     // }
+
+    public BacklogItemCommitted(Tenant aTenantId, BacklogItemId aBacklogItemId, SprintId aCommittedToSprintId) {
+        // super();
+        // this.setOccurredOn(new Date());
+        // this.setBacklogItemId(aBacklogItemId);
+        // this.setCommittedToSprintId(aCommittedToSprintId);
+        // this.setTenantId(aTenantId);
+    }
 
     @Override
     public Date occurredOn() {

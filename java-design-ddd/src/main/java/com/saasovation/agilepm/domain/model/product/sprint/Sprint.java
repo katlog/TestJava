@@ -7,4 +7,7 @@ import com.saasovation.supply.AggregateRoot;
  */
 @AggregateRoot
 public class Sprint {
+    public SprintId sprintId() {
+        return null;
+    }
 }
