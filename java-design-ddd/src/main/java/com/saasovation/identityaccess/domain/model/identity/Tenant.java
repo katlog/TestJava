@@ -50,4 +50,7 @@ public class Tenant {
     public void provisionRole() {
     }
 
+    public String id() {
+        return null;
+    }
 }

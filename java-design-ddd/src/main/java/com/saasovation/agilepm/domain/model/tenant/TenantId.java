@@ -8,7 +8,14 @@ import com.saasovation.supply.ValueObject;
  */
 @ValueObject
 public class TenantId {
-    public String id() {
-        return null;
+    private String tenanId;
+
+    public TenantId(String aTenantId) {
+        tenanId = aTenantId;
     }
+
+    public String id() {
+        return tenanId;
+    }
+
 }

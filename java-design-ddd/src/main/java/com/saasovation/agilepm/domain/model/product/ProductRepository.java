@@ -1,6 +1,7 @@
 package com.saasovation.agilepm.domain.model.product;
 
-import name.katlog.dddimpl.chapter07_domainservice.Tenant;
+import com.saasovation.agilepm.domain.model.tenant.TenantId;
+import com.saasovation.identityaccess.domain.model.identity.Tenant;
 
 import java.util.Collection;
 
@@ -11,6 +12,7 @@ public interface ProductRepository {
     public Collection<Product> allProductsOfTenant(Tenant aTenant);
 
     public Product productOfId(Tenant aTenant, ProductId aProductId);
+    public Product productOfId(TenantId aTenant, ProductId aProductId);
 
     public void remove(Product aProduct);
 
@@ -19,4 +21,6 @@ public interface ProductRepository {
     public void save(Product aProduct);
 
     public void saveAll(Collection<Product> aProductCollection);
+
+    void add(Product product);
 }

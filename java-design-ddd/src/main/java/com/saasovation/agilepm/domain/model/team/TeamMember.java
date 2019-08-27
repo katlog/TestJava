@@ -1,5 +1,6 @@
 package com.saasovation.agilepm.domain.model.team;
 
+import com.saasovation.agilepm.domain.model.tenant.TenantId;
 import com.saasovation.supply.AggregateRoot;
 
 /**
@@ -7,4 +8,5 @@ import com.saasovation.supply.AggregateRoot;
  */
 @AggregateRoot
 public class TeamMember {
+    private TenantId tenantId;
 }

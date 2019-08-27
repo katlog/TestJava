@@ -4,9 +4,9 @@ import com.saasovation.agilepm.domain.model.product.Product;
 import com.saasovation.agilepm.domain.model.product.ProductId;
 import com.saasovation.agilepm.domain.model.product.ProductRepository;
 import com.saasovation.agilepm.domain.model.tenant.TenantId;
+import com.saasovation.identityaccess.domain.model.identity.Tenant;
 import com.tangosol.net.CacheFactory;
 import com.tangosol.net.NamedCache;
-import name.katlog.dddimpl.chapter07_domainservice.Tenant;
 
 import java.util.*;
 
@@ -42,6 +42,12 @@ public class CoherenceProductRepository implements ProductRepository {
 
 
     @Override
+    public Product productOfId(TenantId aTenant, ProductId aProductId) {
+        return null;
+    }
+
+
+    @Override
     public void remove(Product aProduct) {
         this.cache(aProduct.tenant()).remove(this.idOf(aProduct));
     }
@@ -73,6 +79,11 @@ public class CoherenceProductRepository implements ProductRepository {
             }
 
         }
+    }
+
+    @Override
+    public void add(Product product) {
+
     }
 
     private String idOf(Product aProduct) {
