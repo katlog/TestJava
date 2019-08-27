@@ -1,6 +1,7 @@
 package org.person.dfw.util;
 
 
+import java.time.Instant;
 import java.util.*;
 
 public final class RandomUtil {
@@ -270,4 +271,45 @@ public final class RandomUtil {
                 + s.substring(17, 18) + s.substring(19, 23) + s.substring(24);
         return result.toUpperCase();
     }
+
+    /** 随机获取enum中的一个
+     * @param enumClass
+     * @param <D>
+     * @return
+     */
+    public static <D extends Enum> D randomEnum(Class<D> enumClass) {
+        D[]  enumConstants = enumClass.getEnumConstants();
+        return enumConstants[integer(0, enumConstants.length)];
+    }
+
+
+    public static Date randomDate(Date begin,Date end){
+        long beginTime = begin.getTime();
+        long endTime = end.getTime();
+        if (endTime < beginTime) {
+            throw new IllegalArgumentException("");
+        }
+
+        long newDateTimeDiff = (long) (new Random().nextDouble() * (endTime - beginTime)) + 1;
+        return new Date(beginTime + newDateTimeDiff);
+    }
+
+
+    public static Date randomDate(){
+        long newDateTime = (long) (new Random().nextDouble() * (Long.MAX_VALUE)) + 1;
+        return new Date(newDateTime);
+    }
+
+
+    /**
+     * 随机今年的时间
+     * @return
+     */
+    public static Date randomDateOfYear(){
+        Date date = new Date();
+        Instant instant = date.toInstant();
+        return randomDate();
+    }
+
+
 }

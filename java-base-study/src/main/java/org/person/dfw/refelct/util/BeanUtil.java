@@ -10,11 +10,14 @@ package org.person.dfw.refelct.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.google.common.collect.Lists;
+import lombok.AccessLevel;
+import lombok.Getter;
 import net.sf.json.JSONObject;
 
 import org.junit.Test;
@@ -328,6 +331,124 @@ public class BeanUtil {
         result.addAll(b);
         return result;
     }
+
+    /** 随机填充bean */
+    public static  <D> D randomFill(D bean){
+        if (bean == null) {
+            throw new IllegalStateException("should not null");
+        }
+
+        Class<?> beanClass = bean.getClass();
+
+        while (!beanClass.equals(Object.class)) {
+            Field[] declaredFields = beanClass.getDeclaredFields();
+            for (Field field: declaredFields) {
+                field.setAccessible(true);
+                try {
+                    Object fieldVal = field.get(bean);
+                    if (fieldVal != null) {
+                        continue;
+                    }
+                    Class<?> fieldType = field.getType();
+
+
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return bean;
+    }
+
+    public static  <D> D randomFill(Class<D> beanClass) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+        if (beanClass == null) {
+            throw new IllegalStateException("should not null");
+        }
+
+        if (!beanClass.equals(Object.class)) {
+            Constructor<?>[] constructors = beanClass.getConstructors();
+            Constructor mostParamCon = constructors[0];
+            for (Constructor<?> constructor : constructors) {
+                mostParamCon = constructor.getParameterCount() > mostParamCon.getParameterCount() ? constructor : mostParamCon;
+            }
+            Class[] parameterTypes = mostParamCon.getParameterTypes();
+            Object[] randomParameters =new Object[parameterTypes.length];
+
+            for (int i = 0; i < parameterTypes.length; i++) {
+               randomParameters[i] = TypeRandomEnums.random(parameterTypes[i]);
+            }
+
+            return (D) mostParamCon.newInstance(randomParameters);
+
+        }
+        throw new IllegalAccessException(" Object class");
+    }
+
+    interface TypeRandom{
+        Object typeRandom(Class clazz) throws IllegalAccessException, InstantiationException;
+    }
+
+    enum TypeRandomEnums implements TypeRandom{
+        /** 类型 */
+        STRING(String.class){
+            @Override
+            public Object typeRandom(Class clazz) throws IllegalAccessException, InstantiationException {
+                int length = random.nextInt(20);
+                char[] chars = new char[length];
+                for (int j = 0; j < length; j++) {
+                    chars[j] = (char) (0x4e00 + (int) (Math.random() * (0x9fa5 - 0x4e00 + 1)));
+                }
+                return new String(chars);
+            }
+        },
+        INT(Integer.class,int.class){
+            @Override
+            public Object typeRandom(Class clazz) throws IllegalAccessException, InstantiationException {
+                return random.nextInt(Integer.MAX_VALUE);
+            }
+        },
+        LONG(Long.class,long.class){
+            @Override
+            public Object typeRandom(Class clazz) throws IllegalAccessException, InstantiationException {
+                return random.nextLong();
+            }
+        },
+        ENUM(Enum.class){
+            @Override
+            public Object typeRandom(Class clazz) throws IllegalAccessException, InstantiationException {
+                Object[] enumConstants = clazz.getEnumConstants();
+                return enumConstants[random.nextInt(enumConstants.length)];
+            }
+        },
+
+
+        ;
+        private final static Random random = new Random();
+        @Getter(AccessLevel.PRIVATE)
+        private Class[] type;
+        TypeRandomEnums(Class... type) {
+            this.type = type;
+        }
+
+        @Override
+        public Object typeRandom(Class clazz) throws IllegalAccessException, InstantiationException {
+            return clazz.newInstance();
+        }
+
+        public static Object random(Class clazz) throws InstantiationException, IllegalAccessException {
+            TypeRandomEnums[] typeRandomEnums = TypeRandomEnums.values();
+            for (TypeRandomEnums typeRandomEnum : typeRandomEnums) {
+                Class[] classes = typeRandomEnum.getType();
+                for (Class aClass : classes) {
+                    if (aClass.equals(clazz)) {
+                        return typeRandomEnum.typeRandom(clazz);
+                    }
+                }
+            }
+            throw new IllegalAccessError("class is "+clazz.getName());
+        }
+    }
+
     
     
 

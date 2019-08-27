@@ -2,8 +2,14 @@ package org.person.dfw.refelct.util;
 
 import static org.junit.Assert.fail;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 
+import com.google.common.base.Preconditions;
+import lombok.AccessLevel;
+import lombok.Setter;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.person.dfw.util.collections.MapUtil;
 
@@ -75,4 +81,7 @@ public class BeanUtilTest {
 		}
 		MapUtil.formatPrint(map1);
 	}
+
+
+
 }
