@@ -12,4 +12,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.METHOD)
 public @interface FactoryMethod {
+
+    Source from() default Source.Aggregate;
+
+    enum Source{
+        /** 聚合 */
+        Aggregate,
+        /** 领域服务 */
+        DomainService;
+    }
 }

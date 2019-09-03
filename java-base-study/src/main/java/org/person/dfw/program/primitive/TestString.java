@@ -120,13 +120,20 @@ public class TestString {
     }
     
     @Test public void split(){
-    	System.out.println(Arrays.toString("aaa|bbb|ccc".split("|")));
+
+        assertArrayEquals(new String[]{"123", "3", "33"}, "123,3,33".split(","));
+
+        assertArrayEquals(new String[]{"a", "a", "a","|","b", "b", "b","|","c", "c", "c"}, "aaa|bbb|ccc".split("|"));
+
     	//【注意】转义字符：字符"|","*","+","$"都得加上转义字符，前面加上"\\"
-    	System.out.println(Arrays.toString("aaa|bbb|ccc".split("\\|")));
+        assertArrayEquals(new String[]{"aaa", "bbb", "ccc"}, "aaa|bbb|ccc".split("\\|"));
+
     	//而如果是"\"，那么就得写成"\\\\"。
-    	System.out.println(Arrays.toString("aaa\\bbb\\ccc".split("\\\\")));
+        assertArrayEquals(new String[]{"aaa", "bbb", "ccc"}, "aaa\\bbb\\ccc".split("\\\\"));
+
     	//有多个分割符时,可以用"|"作为连字符。
-    	System.out.println(Arrays.toString("aaa|bbb|c$cc".split("\\||\\$")));
+        assertArrayEquals(new String[]{"aaa", "bbb", "c","cc"}, "aaa|bbb|c$cc".split("\\||\\$"));
+
     }
     
     @Test public void indexof(){

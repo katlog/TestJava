@@ -1,21 +1,18 @@
 package com.saasovation.collaboration.domain.model.calendar;
 
-import com.saasovation.collaboration.domain.model.Alarm;
-import com.saasovation.collaboration.domain.model.Invitee;
-import com.saasovation.collaboration.domain.model.Repetition;
-import com.saasovation.collaboration.domain.model.TimeSpan;
+import com.saasovation.collaboration.domain.model.*;
 import com.saasovation.identityaccess.domain.model.identity.Tenant;
 import com.saasovation.identityaccess.domain.model.identity.TenantId;
 import com.saasovation.supply.FactoryMethod;
 
-import java.security.acl.Owner;
 import java.util.Set;
+import java.util.TreeSet;
 
 
 /**
  * Created by fw on 2019/3/22
  */
-public class Calender {
+public class Calendar {
 
     private Tenant tenant;
 
@@ -30,7 +27,7 @@ public class Calender {
 
 
     @FactoryMethod
-    public CalendarEntry sheduleCalenarEntry(
+    protected  CalendarEntry scheduleCalendarEntry(
             CalendarEntryId aCalendarEntryId,
             Owner anOwner,
             String aSubject,
@@ -54,11 +51,12 @@ public class Calender {
                         aRepetition,
                         aLocation,
                         anInvitees);
-
+        DomainEventPublisher
+                .instance()
+                .publish(new CalendarEntryScheduled());
 
         return calendarEntry;
     }
-
 
 
 }

@@ -1,7 +1,7 @@
 package com.saasovation.collaboration.domain.model.calendar;
 
 
-import name.katlog.dddimpl.chapter07_domainservice.Tenant;
+import com.saasovation.identityaccess.domain.model.identity.Tenant;
 
 import java.util.Collection;
 
@@ -16,12 +16,16 @@ public interface CalendarEntryRepository {
     public void removeAll(Collection<CalendarEntry> aCalendarEntryCollection);
     //...
 
-    public CalendarEntry calendarEntryOfId(Tenant aTenant,CalendarEntryId aCalendarEntryId);
+    public CalendarEntry calendarEntryOfId(Tenant aTenant, CalendarEntryId aCalendarEntryId);
 
     public Collection<CalendarEntry> calendarEntriesOfCalendar(Tenant aTenant,CalendarId aCalendarId);
 
     public Collection<CalendarEntry> overlappingCalendarEntries(Tenant aTenant, CalendarId aCalendarId/*,
                                                                 TimeSpan aTimeSpan*/);
 
+    /** 资源库额外行为 */
     int size();
+
+    CalendarEntryId nextIdentity();
+
 }

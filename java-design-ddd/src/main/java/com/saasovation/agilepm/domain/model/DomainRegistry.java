@@ -1,6 +1,7 @@
 package com.saasovation.agilepm.domain.model;
 
-import name.katlog.dddimpl.chapter07_domainservice.BacklogItemRepository;
+
+import com.saasovation.agilepm.domain.model.product.backlogitem.BacklogItemRepository;
 
 /**
  * Created by fw on 2019/3/21

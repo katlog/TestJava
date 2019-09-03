@@ -1,6 +1,7 @@
 package com.saasovation.collaboration.domain.model.forum;
 
 import com.saasovation.collaboration.domain.model.Author;
+import com.saasovation.collaboration.domain.model.DomainEventPublisher;
 import com.saasovation.identityaccess.domain.model.identity.Tenant;
 import com.saasovation.supply.FactoryMethod;
 
@@ -36,6 +37,10 @@ public class Forum {
                 aDiscussionId,
                 anAuthor,
                 aSubject);
+
+        DomainEventPublisher
+                .instance()
+                .publish(new DiscussionStarted());
 
         return discussion;
     }

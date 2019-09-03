@@ -4,7 +4,7 @@ import com.saasovation.collaboration.domain.model.calendar.CalendarEntry;
 import com.saasovation.collaboration.domain.model.calendar.CalendarEntryId;
 import com.saasovation.collaboration.domain.model.calendar.CalendarEntryRepository;
 import com.saasovation.collaboration.domain.model.calendar.CalendarId;
-import name.katlog.dddimpl.chapter07_domainservice.Tenant;
+import com.saasovation.identityaccess.domain.model.identity.Tenant;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,6 +22,7 @@ public class HibernateCalendarEntryRepository implements CalendarEntryRepository
         super();
     }
 
+    @Override
     public CalendarEntryId nextIdentity() {
         return new CalendarEntryId(UUID.randomUUID().toString().toUpperCase());
     }

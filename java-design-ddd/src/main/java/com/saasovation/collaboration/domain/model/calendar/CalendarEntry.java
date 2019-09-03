@@ -1,13 +1,9 @@
 package com.saasovation.collaboration.domain.model.calendar;
 
-import com.saasovation.collaboration.domain.model.Alarm;
-import com.saasovation.collaboration.domain.model.Invitee;
-import com.saasovation.collaboration.domain.model.Repetition;
-import com.saasovation.collaboration.domain.model.TimeSpan;
+import com.saasovation.collaboration.domain.model.*;
 import com.saasovation.identityaccess.domain.model.identity.Tenant;
 import com.saasovation.identityaccess.domain.model.identity.TenantId;
 
-import java.security.acl.Owner;
 import java.util.Set;
 
 /**
