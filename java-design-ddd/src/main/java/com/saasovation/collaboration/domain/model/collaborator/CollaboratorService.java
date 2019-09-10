@@ -7,6 +7,7 @@ import com.saasovation.supply.FactoryMethod;
 import static com.saasovation.supply.FactoryMethod.Source.DomainService;
 
 
+/**  chapter  11  工厂  该领域服务类将身份与访问上下文中的对象翻译成协作上下文中的对象。*/
 public interface CollaboratorService {
 
     @FactoryMethod(from = DomainService)

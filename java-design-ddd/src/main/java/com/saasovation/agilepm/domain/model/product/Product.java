@@ -75,6 +75,7 @@ public class Product {
      *  ·若一个待定项位于发布中，则不能将该待定项从系统中移除。
      *
      * */
+    @FactoryMethod
     public BacklogItem planBacklogItem(
             String aSummary, String aCategory,
             BacklogItemType aType, StoryPoints aStoryPoints) {

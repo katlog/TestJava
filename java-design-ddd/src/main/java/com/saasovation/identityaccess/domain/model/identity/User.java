@@ -23,6 +23,7 @@ public class User {
     public void changePersonalContractInfomation(){}
 
 
+    /**  chapter 5  实体  创建实体 */
     protected User(TenantId aTenantId, String aUsername,
                    String aPassword, Person aPerson) {
         this();
