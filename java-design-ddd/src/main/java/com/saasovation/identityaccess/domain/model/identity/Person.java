@@ -10,4 +10,8 @@ public class Person {
     public void setTenantId(TenantId tenantId) {
         this.tenantId = tenantId;
     }
+
+    public EmailAddress emailAddress() {
+        return null;
+    }
 }

@@ -1,6 +1,7 @@
 package com.saasovation.agilepm.domain.model;
 
 
+import com.saasovation.agilepm.domain.model.product.BusinessPriorityCalculator;
 import com.saasovation.agilepm.domain.model.product.backlogitem.BacklogItemRepository;
 
 /**
@@ -8,6 +9,10 @@ import com.saasovation.agilepm.domain.model.product.backlogitem.BacklogItemRepos
  */
 public class DomainRegistry {
     public static BacklogItemRepository backlogItemRepository() {
+        return null;
+    }
+
+    public static BusinessPriorityCalculator businessPriorityCalculator() {
         return null;
     }
 }

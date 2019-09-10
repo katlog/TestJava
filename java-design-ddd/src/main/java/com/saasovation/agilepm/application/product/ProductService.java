@@ -1,5 +1,6 @@
 package com.saasovation.agilepm.application.product;
 
+import com.saasovation.agilepm.domain.model.DomainRegistry;
 import com.saasovation.agilepm.domain.model.product.*;
 import com.saasovation.agilepm.domain.model.tenant.TenantId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,16 @@ public class ProductService {
 
         this.productRepository.add(product);
         return product.productId().id();
+    }
+
+
+    private BusinessPriorityTotals productBusinessPriority(String aTenantId,String aProductId) {
+        BusinessPriorityTotals productBusinessPriority =
+                DomainRegistry
+                        .businessPriorityCalculator()
+                        .businessPriorityTotals(
+                                new TenantId(aTenantId),
+                                new ProductId(aProductId));
+        return productBusinessPriority;
     }
 }

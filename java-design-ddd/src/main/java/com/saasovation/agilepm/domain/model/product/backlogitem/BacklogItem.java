@@ -100,6 +100,14 @@ public class BacklogItem {
     public void assignTeamMemberToTask(TeamMemberId teamMemberId, Team ofTeam, TaskId taskId) {
 
     }
+
+    public boolean hasBusinessPriority() {
+        return false;
+    }
+
+    public BusinessPriority businessPriority() {
+        return businessPriority;
+    }
 }
 
 

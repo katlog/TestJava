@@ -65,4 +65,28 @@ public class User {
         }
         this.username = aUsername;
     }
+
+    public boolean isEnabled() {
+        return false;
+    }
+
+    public UserDescriptor userDescriptor() {
+        return new UserDescriptor(tenantId,username, "");
+    }
+
+    public TenantId tenantId() {
+        return tenantId;
+    }
+
+    public String username() {
+        return username;
+    }
+
+    public Person person() {
+        return person;
+    }
+
+    public String password() {
+        return password;
+    }
 }
