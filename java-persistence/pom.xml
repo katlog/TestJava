@@ -25,6 +25,12 @@
             <artifactId>embedded-redis</artifactId>
             <version>0.6</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.0.4</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RetryUtil {
     interface Action{
-        void action();
+        void action() throws Exception;
     }
 
     public static void retry(int times,Action action){
@@ -29,9 +29,35 @@ public class RetryUtil {
         }
     }
 
+
+    public interface Supplier<T>{
+        T get() throws Exception;
+    }
+
+
+    public static <T> T retry(int times,Supplier<T> action){
+       return retry(times, action,"");
+    }
+    public static <T> T retry(int times,Supplier<T> action,String errorMsg){
+        if (times <= 0) {
+            return null;
+        }
+        try {
+            times--;
+            return action.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error(" retry error:{}", errorMsg, e);
+            return retry(times, action, errorMsg);
+        }
+    }
+
     public static void main(String[] args) {
         retry(3,() -> {
             System.out.println("args = " + 1/0);
         });
+
+        int i = retry(3, () -> 1 / 0);
+        System.out.println("i = " + i);
     }
 }

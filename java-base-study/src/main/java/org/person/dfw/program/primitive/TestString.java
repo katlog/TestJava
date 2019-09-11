@@ -127,6 +127,7 @@ public class TestString {
 
     	//【注意】转义字符：字符"|","*","+","$"都得加上转义字符，前面加上"\\"
         assertArrayEquals(new String[]{"aaa", "bbb", "ccc"}, "aaa|bbb|ccc".split("\\|"));
+        assertEquals("aaa", "aaa".split("\\|")[0]);
 
     	//而如果是"\"，那么就得写成"\\\\"。
         assertArrayEquals(new String[]{"aaa", "bbb", "ccc"}, "aaa\\bbb\\ccc".split("\\\\"));

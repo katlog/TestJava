@@ -1,6 +1,7 @@
 package org.person.dfw.util.file;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,10 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 提供一些常用的属性文件相关的方法
  */
+@Slf4j
 public final class PropertiesUtil {
-	
-    private static Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
-
 
     private static final Map<String, Map<String, String>> PROPERTIES_CACHE_MAP = new ConcurrentHashMap<>();
 
@@ -68,7 +67,7 @@ public final class PropertiesUtil {
         try {
             pps.load(in);
         } catch (IOException e) {
-            logger.error("load properties error:"+e.getMessage());
+            log.error("load properties error:"+e.getMessage());
         }
         return transferMap(pps);
     }
