@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.junit.Test;
 
 import java.util.*;
@@ -27,20 +30,14 @@ import static org.junit.Assert.assertEquals;
  *
  */
 public class TestJson_FastJson {
-    
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     private static class User{
-        private String name; public void setName(String name){this.name=name;}; public String getName(){return this.name;};
-        private int age;public void setAge(int age){this.age=age;}; public int getAge(){return this.age;};
-        private String password;public void setPassword(String password){this.password=password;}; public String getPassword(){return this.password;}
-		public User(String name, int age, String password) {
-			super();
-			this.name = name;
-			this.age = age;
-			this.password = password;
-		}
-		public User() {
-			super();
-		};
+        private String name;
+        private int age;
+        private String password;
     }
     
     private static String jsonText="{\"age\":27,\"name\":\"张三\",\"password\":\"12567\"}";  

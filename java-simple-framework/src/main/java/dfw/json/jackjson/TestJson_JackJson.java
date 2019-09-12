@@ -17,6 +17,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -28,26 +31,27 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 class User1 {  
-  private String name;  public String getName() {   return name;  }  public void setName(String name) {   this.name = name; }  
-  private Integer age;  public Integer getAge() {   return age;} public void setAge(Integer age) { this.age = age;  }
-  private Date birthday;  public Date getBirthday() {return birthday; } public void setBirthday(Date birthday) {this.birthday = birthday;  }
-  public User1() { super();}
-  public User1( String name, Integer age, Date birthday) { super(); this.name = name; this.age = age;this.birthday = birthday;}  
-    
+  private String name;
+  private Integer age;
+  private Date birthday;
 }
 
+@Data
 class User2 {  
-    private String name;             public String getName() {return name; } public void setName(String name) {this.name = name;}  
+    private String name;
     //不JSON序列化年龄属性  
     @JsonIgnore   
-    private Integer age;             public Integer getAge() { return age;}  public void setAge(Integer age) { this.age = age; }  
+    private Integer age;
     //格式化日期属性  
     @JsonFormat(pattern = "yyyy年MM月dd日") 
-    private Date birthday;           public Date getBirthday() {return birthday;} public void setBirthday(Date birthday) {this.birthday=birthday;}
+    private Date birthday;
     //序列化email属性为mail  
     @JsonProperty("annotion_mail")  
-    private String email;           public String getEmail() { return email;}  public void setEmail(String email) {  this.email = email;}
+    private String email;
 }
 
 public class TestJson_JackJson {

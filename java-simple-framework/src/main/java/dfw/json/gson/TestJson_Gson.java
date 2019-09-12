@@ -13,6 +13,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.Test;
 
 import java.util.*;
@@ -67,15 +69,18 @@ public class TestJson_Gson {
     /**json和map间的互相转换*/
     @Test public void json2map(){
         
-        Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();  //支持Map的key为复杂对象的形式  
+        //支持Map的key为复杂对象的形式
+        Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
 
         //map转json
-        Map<Point, String> map1 = new LinkedHashMap<Point, String>();// 使用LinkedHashMap将结果按先进先出顺序排列  
-        map1.put(new Point(5, 6), "a");  
+        // 使用LinkedHashMap将结果按先进先出顺序排列
+        Map<Point, String> map1 = new LinkedHashMap<Point, String>();
+        map1.put(new Point(5, 6), "a");
         map1.put(new Point(8, 8), "b");  
         String s = gson.toJson(map1);  
-        System.out.println(s);// 结果:[[{"x":5,"y":6},"a"],[{"x":8,"y":8},"b"]]  
-    
+        // 结果:[[{"x":5,"y":6},"a"],[{"x":8,"y":8},"b"]]
+        System.out.println(s);
+
         //json转map
         Map<Point, String> retMap = gson.fromJson(s, new TypeToken<Map<Point, String>>() {  }.getType());  
         for (Point p : retMap.keySet()) {  
@@ -88,15 +93,21 @@ public class TestJson_Gson {
     @Test public void annotion(){
         //注意这里的Gson的构建方式为GsonBuilder,区别于test1中的Gson gson = new Gson();  
         Gson gson = new GsonBuilder()  
-        .excludeFieldsWithoutExposeAnnotation() //不导出实体中没有用@Expose注解的属性  【注意这个的影响】
-        .enableComplexMapKeySerialization() //支持Map的key为复杂对象的形式  
-        .serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss:SSS")//时间转化为特定格式    
-        .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)//会把字段首字母大写,注:对于实体上使用了@SerializedName注解的不会生效.  
-        .setPrettyPrinting() //对json结果格式化.  
-        .setVersion(1.0)    //有的字段不是一开始就有的,会随着版本的升级添加进来,那么在进行序列化和返序列化的时候就会根据版本号来选择是否要序列化.  
-                            //@Since(版本号)能完美地实现这个功能.还的字段可能,随着版本的升级而删除,那么  
-                            //@Until(版本号)也能实现这个功能,GsonBuilder.setVersion(double)方法需要调用.  
-        .create();  
+        //不导出实体中没有用@Expose注解的属性  【注意这个的影响】
+        .excludeFieldsWithoutExposeAnnotation()
+        //支持Map的key为复杂对象的形式
+        .enableComplexMapKeySerialization()
+        //时间转化为特定格式
+        .serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss:SSS")
+        //会把字段首字母大写,注:对于实体上使用了@SerializedName注解的不会生效.
+        .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+        //对json结果格式化.
+        .setPrettyPrinting()
+        //有的字段不是一开始就有的,会随着版本的升级添加进来,那么在进行序列化和返序列化的时候就会根据版本号来选择是否要序列化.
+        //@Since(版本号)能完美地实现这个功能.还的字段可能,随着版本的升级而删除,那么
+        //@Until(版本号)也能实现这个功能,GsonBuilder.setVersion(double)方法需要调用.
+        .setVersion(1.0)
+        .create();
   
         // 简单的bean转为json  
         String s1 = gson.toJson(student1);  
@@ -123,14 +134,13 @@ public class TestJson_Gson {
     }
 }
 
-class Point {  //json和map间互相转换用的类  【不能使用方法局部类，否则好像无法在方法体中通过new来实例化】
-    private int x;  private int y;  
-    public Point(int x, int y) {   this.x = x;  this.y = y;}  
-    public int getX() {  return x; }  public void setX(int x) { this.x = x;  }  //X字段的getter和setter
-    public int getY() {return y;   }   public void setY(int y) {   this.y = y;  } // Y字段的getter和setter
-    @Override   public String toString() {  return "Point [x=" + x + ", y=" + y + "]";  }  
+@Data
+@AllArgsConstructor
+class Point {
+    //json和map间互相转换用的类  【不能使用方法局部类，否则好像无法在方法体中通过new来实例化】
+    private int x;  private int y;
 }
-
+@Data
 class Student {  
     private int id;  
     @Expose 
@@ -138,13 +148,4 @@ class Student {
     @Expose  
     //@SerializedName("bir")  
     private Date birthDay;  
-    public int getId() {  return id;  }  
-    public void setId(int id) {   this.id = id;  }  
-    public String getName() {     return name;    }  
-    public void setName(String name) {        this.name = name;    }  
-    public Date getBirthDay() {     return birthDay;  }  
-    public void setBirthDay(Date birthDay) {   this.birthDay = birthDay;  }  
-    @Override  public String toString() {  
-        return "Student [birthDay=" + birthDay + ", id=" + id + ", name=" + name + "]";  
-    }  
-}  
+}

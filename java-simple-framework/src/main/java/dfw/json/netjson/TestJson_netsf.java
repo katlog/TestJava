@@ -1,5 +1,6 @@
 package dfw.json.netjson;
 
+import lombok.Data;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.junit.Test;
@@ -100,7 +101,8 @@ public class TestJson_netsf {
 		
 		JSONObject jsonObject = JSONObject.fromObject("{\"no\":\"104\",\"provience\":\"陕西\",\"road\":\"高新路\",\"streate\":\"\"}");
 		
-		Address address = (Address) JSONObject.toBean(jsonObject, Address.class);//【Address需要单独出来成public class否则报错】
+		//【Address需要单独出来成public class否则报错】
+		Address address = (Address) JSONObject.toBean(jsonObject, Address.class);
 		System.out.println(address);
 	}
 	
@@ -166,5 +168,18 @@ public class TestJson_netsf {
 		JSONObject jsonObject = JSONObject.fromObject(jsonStr);
 		System.out.println(jsonObject.get("credentialsNo"));
 	}
-	
+
+	@Data
+	public static class Address {
+			private String road;
+			private String streate;
+			private String provience;
+			private String no;
+	}
+
+	@Data
+	public static class RiskInfo {
+		private int riskCode;
+		private int riskCodeValue;
+	}
 }
