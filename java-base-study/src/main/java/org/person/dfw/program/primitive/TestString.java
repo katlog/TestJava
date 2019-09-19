@@ -21,9 +21,15 @@ import static org.junit.Assert.*;
  *
  */
 public class TestString {
-    public static final String utf_8 = "utf-8";
-    public static final String utf_16 = "utf-16";
-    public static final String iso_8859_1 = "iso-8859-1";
+    private static final String UTF_8 = "utf-8";
+    private static final String UTF_16 = "utf-16";
+    private static final String ISO_8859_1 = "iso-8859-1";
+
+    @Test
+    public void _constructor() {
+        //返回一个特定的子数组的char数组参数的字符串表示形式(offset,offset+length]。2是起始位置，3是长度
+        assertEquals("cde", new String(new char[]{'a', 'b', 'c', 'd', 'e', 'f'}, 2, 3));
+    }
     
     /**
      * 测试字符串长度，和编码格式相关的部分
@@ -111,15 +117,17 @@ public class TestString {
         System.out.println(str.codePointCount(0, str.length()));//8  
     }
     
-    @Test public void getBytes() throws UnsupportedEncodingException{
+    @Test
+    public void getBytes() throws UnsupportedEncodingException{
        String str = "中国ABC";
        System.out.println(str+"-默认编码:"+Arrays.toString(str.getBytes())+"---默认解码："+new String(str.getBytes()));
-       System.out.println(str+"-utf-8编码:"+Arrays.toString(str.getBytes(utf_8))+"---对应解码："+new String(str.getBytes(utf_8),utf_8));
-       System.out.println(str+"-utf-16编码:"+Arrays.toString(str.getBytes(utf_16))+"---对应解码："+new String(str.getBytes(utf_16),utf_16));
-       System.out.println(str+"-iso-8859-1编码:"+Arrays.toString(str.getBytes(iso_8859_1))+"---对应解码："+new String(str.getBytes(iso_8859_1),iso_8859_1));
+       System.out.println(str+"-utf-8编码:"+Arrays.toString(str.getBytes(UTF_8))+"---对应解码："+new String(str.getBytes(UTF_8), UTF_8));
+       System.out.println(str+"-utf-16编码:"+Arrays.toString(str.getBytes(UTF_16))+"---对应解码："+new String(str.getBytes(UTF_16), UTF_16));
+       System.out.println(str+"-iso-8859-1编码:"+Arrays.toString(str.getBytes(ISO_8859_1))+"---对应解码："+new String(str.getBytes(ISO_8859_1), ISO_8859_1));
     }
     
-    @Test public void split(){
+    @Test
+    public void split(){
 
         assertArrayEquals(new String[]{"123", "3", "33"}, "123,3,33".split(","));
 
@@ -137,59 +145,54 @@ public class TestString {
 
     }
     
-    @Test public void indexof(){
+    @Test
+    public void indexOf(){
     	//1、int indexOf(String str) ：返回第一次出现的指定子字符串在此字符串中的索引。 
     	//2、int indexOf(String str, int startIndex)：从指定的索引处开始，返回第一次出现的指定子字符串在此字符串中的索引。 
     	//3、int lastIndexOf(String str) ：返回在此字符串中最右边出现的指定子字符串的索引。 
     	//4、int lastIndexOf(String str, int startIndex) ：从指定的索引处开始向后搜索，返回在此字符串中最后一次出现的指定子字符串的索引。
-    	
-    	System.out.println("123456789".indexOf("1")); // 0
-    	System.out.println("123456789".indexOf("a")); // -1
-    	System.out.println("123456789".indexOf("23")); // 1
-    	
-    	System.out.println("12345656789".indexOf("56")); // 4
-    	System.out.println("12345656789".indexOf("56", 4)); //4
-    	System.out.println("12345656789".indexOf("56", 5)); //6
-    	
+
+        assertEquals(0, "123456789".indexOf("1"));
+        assertEquals(-1, "123456789".indexOf("a"));
+        assertEquals(1, "123456789".indexOf("23"));
+
+        assertEquals(4, "123456789".indexOf("56"));
+        assertEquals(4, "123456789".indexOf("56", 4));
+        assertEquals(-1, "123456789".indexOf("56", 5));
     }
     
-    @Test public void substring(){
+    @Test
+    public void substring(){
     	//substring 截取 [begin,end)
-    	System.out.println("123456789".substring(2));//3456789
-    	System.out.println("123456789".substring(0, 3));//123
-    	
+    	assertEquals("3456789","123456789".substring(2));
+        assertEquals("123","123456789".substring(0, 3));
+
     	//常用按照分割符号来获取字符串   常用方式
-    	System.out.println("123456:789".substring(0, "123456:789".indexOf(":")));//123456
-    	System.out.println("123456:7:89".substring("123456:7:89".lastIndexOf(":")+1));//89
+        assertEquals("123456", ("123456:789".substring(0, "123456:789".indexOf(":"))));
+        assertEquals("89", ("123456:7:89".substring("123456:7:89".lastIndexOf(":") + 1)));
 
         String str = "2222\"3456\"68669";
         int pre = str.indexOf("\"");
         System.out.println(pre);
         int suf = str.indexOf("\"", pre+1);
         System.out.println(suf);
-        System.out.println(str.substring(pre+1,suf));
+        assertEquals("3456", str.substring(pre + 1, suf));
     }
-    
-    @Test  public void constructor() {
-    	//返回一个特定的子数组的char数组参数的字符串表示形式(offset,offset+length]。2是起始位置，3是长度
-		System.out.println(new String(new char[]{'a','b','c','d','e','f'},2,3));
-	}
 
-    @Test public void replace(){
-    	String str="wei232123jin234";
-    	String ragex = "\\d{4,}";    
-    	String newstr = "*";    
-    	String s =str.replaceAll(ragex, newstr);    
-    	System.out.println(s); 
-    	String str2 = "我...我...要..要.吃...吃...饭";   
-    	String regex = "\\.+";   
-    	String newStr = "";   
-    	String str3 = str2.replaceAll(regex, newStr);   
-    	System.out.println(str3);
-    	regex = "(.)\\1+";   
-    	newStr = "$1"; 
-    	String str4 = str3.replaceAll(regex, newStr);   
-    	System.out.println(str4);
+    @Test(expected = StringIndexOutOfBoundsException.class)
+    public void substring_error() {
+        //substring 截取 [begin,end)
+        assertEquals("3456789", "123456789".substring(2,111));
+    }
+
+
+    @Test
+    public void replaceAll(){
+        assertEquals("wei*jin234", "wei232123jin234".replaceAll("\\d{4,}", "*"));
+
+        assertEquals("我我要要吃吃饭", "我...我...要..要.吃...吃...饭".replaceAll("\\.+", ""));
+
+        assertEquals("我.我.要.要.吃.吃.饭", "我...我...要..要.吃...吃...饭".replaceAll("(.)\\1+", "$1"));
     }
 
     @Test
