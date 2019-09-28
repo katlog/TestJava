@@ -1,5 +1,6 @@
 package com.saasovation.collaboration.infrastructure.persistence;
 
+import com.saasovation.collaboration.domain.model.TimeSpan;
 import com.saasovation.collaboration.domain.model.calendar.CalendarEntry;
 import com.saasovation.collaboration.domain.model.calendar.CalendarEntryId;
 import com.saasovation.collaboration.domain.model.calendar.CalendarEntryRepository;
@@ -14,12 +15,20 @@ import java.util.Collection;
 import java.util.UUID;
 
 /**
- * Created by fw on 2019/3/20
+ * chapter 12 repository: 面向集合资源库 hibernate实现
  */
 public class HibernateCalendarEntryRepository implements CalendarEntryRepository {
 
     public HibernateCalendarEntryRepository() {
         super();
+    }
+
+    private SpringHibernateSessionProvider sessionProvider;
+    public void setSessionProvider(SpringHibernateSessionProvider aSessionProvider) {
+        this.sessionProvider = aSessionProvider;
+    }
+    private org.hibernate.Session session() {
+        return this.sessionProvider.session();
     }
 
     @Override
@@ -36,10 +45,7 @@ public class HibernateCalendarEntryRepository implements CalendarEntryRepository
         }
     }
 
-    // TODO: 2019/3/20 安放在哪
-    private Session session() {
-        return null;
-    }
+
 
     @Override
     public void addAll(Collection<CalendarEntry> aCalendarEntryCollection) {
@@ -91,7 +97,7 @@ public class HibernateCalendarEntryRepository implements CalendarEntryRepository
 
     @Override
     @SuppressWarnings("unchecked")
-    public Collection<CalendarEntry> overlappingCalendarEntries(Tenant aTenant, CalendarId aCalendarId) {
+    public Collection<CalendarEntry> overlappingCalendarEntries(Tenant aTenant, CalendarId aCalendarId,TimeSpan aTimeSpan) {
 
         Query query =
                 this.session().createQuery(
@@ -104,8 +110,8 @@ public class HibernateCalendarEntryRepository implements CalendarEntryRepository
                                 ":tsb and :tse))");
         query.setParameter("tenant", aTenant);
         query.setParameter("calendarId", aCalendarId);
-        // query.setParameter("tsb", aTimeSpan.begins(), Hibernate.DATE);
-        // query.setParameter("tse", aTimeSpan.ends(), Hibernate.DATE);
+        query.setParameter("tsb", aTimeSpan.begins(), Hibernate.DATE);
+        query.setParameter("tse", aTimeSpan.ends(), Hibernate.DATE);
         return (Collection<CalendarEntry>) query.list();
     }
 

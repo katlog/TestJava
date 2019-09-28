@@ -4,10 +4,12 @@ import com.saasovation.agilepm.domain.model.DomainRegistry;
 import com.saasovation.agilepm.domain.model.product.backlogitem.BacklogItem;
 import com.saasovation.agilepm.domain.model.tenant.Tenant;
 import com.saasovation.agilepm.domain.model.tenant.TenantId;
+import com.saasovation.supply.DomianService;
 
 /**
  * Created by fw on 2019/3/21
  */
+@DomianService
 public class BusinessPriorityCalculator {
 
     public BusinessPriorityCalculator() {

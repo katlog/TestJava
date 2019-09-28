@@ -10,7 +10,9 @@ public class UserDescriptor {
     private String username;
 
     public UserDescriptor(TenantId aTenantId, String aUsername, String anEmailAddress) {
-        //	...
+        this.tenantId = aTenantId;
+        this.username = aUsername;
+        this.emailAddress = anEmailAddress;
     }
 
     public EmailAddress emailAddress() {

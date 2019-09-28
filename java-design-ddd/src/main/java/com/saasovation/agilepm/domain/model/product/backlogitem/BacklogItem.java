@@ -1,5 +1,6 @@
 package com.saasovation.agilepm.domain.model.product.backlogitem;
 
+import com.saasovation.agilepm.domain.model.ConcurrencySafeEntity;
 import com.saasovation.agilepm.domain.model.DomainEventPublisher;
 import com.saasovation.agilepm.domain.model.product.BusinessPriority;
 import com.saasovation.agilepm.domain.model.product.ProductId;
@@ -17,7 +18,7 @@ import com.saasovation.supply.AggregateRoot;
  * Created by fw on 2019/3/20
  */
 @AggregateRoot
-public class BacklogItem {
+public class BacklogItem extends ConcurrencySafeEntity {
 
     private BacklogItemId backlogItemId;
     private BacklogItemType type;

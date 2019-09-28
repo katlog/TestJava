@@ -1,5 +1,6 @@
 package com.saasovation.agilepm.domain.model.product;
 
+import com.saasovation.agilepm.domain.model.ConcurrencySafeEntity;
 import com.saasovation.agilepm.domain.model.product.backlogitem.BacklogItem;
 import com.saasovation.agilepm.domain.model.product.backlogitem.BacklogItemId;
 import com.saasovation.agilepm.domain.model.product.backlogitem.BacklogItemType;
@@ -18,7 +19,7 @@ import java.util.Set;
  * Created by fw on 2019/3/20
  */
 @AggregateRoot
-public class Product {
+public class Product extends ConcurrencySafeEntity {
 
     private Set<ProductBacklogItem> backlogItems;
     private String description;
@@ -52,7 +53,7 @@ public class Product {
 
     @FactoryMethod
     public BacklogItem planBacklogItem(){
-        return null;
+        return new BacklogItem();
     }
 
     @FactoryMethod

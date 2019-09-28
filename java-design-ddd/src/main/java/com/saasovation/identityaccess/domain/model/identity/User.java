@@ -1,8 +1,11 @@
 package com.saasovation.identityaccess.domain.model.identity;
 
+import com.saasovation.supply.AggregateRoot;
+
 /**
  * Created by fw on 2019/3/21
  */
+@AggregateRoot
 public class User {
     private String username;
     private String password;

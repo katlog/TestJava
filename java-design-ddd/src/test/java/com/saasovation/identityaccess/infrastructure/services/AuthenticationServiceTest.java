@@ -4,6 +4,7 @@ import com.saasovation.identityaccess.domain.model.DomainRegistry;
 import com.saasovation.identityaccess.domain.model.identity.TenantId;
 import com.saasovation.identityaccess.domain.model.identity.User;
 import com.saasovation.identityaccess.domain.model.identity.UserDescriptor;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
@@ -14,6 +15,8 @@ public class AuthenticationServiceTest {
 
     private static final String FIXTURE_PASSWORD = "123123";
 
+    /** chapter 7 domain service: 测试领域服务 */
+    @Test
     public void testAuthenticationSuccess() throws Exception {
         User user = this.getUserFixture();
         DomainRegistry
@@ -37,6 +40,7 @@ public class AuthenticationServiceTest {
         return null;
     }
 
+    @Test
     public void testAuthenticationTenantFailure() throws Exception {
         User user = this.getUserFixture();
         DomainRegistry
@@ -53,6 +57,7 @@ public class AuthenticationServiceTest {
         assertNull(userDescriptor);
     }
 
+    @Test
     public void testAuthenticationUsernameFailure() throws Exception {
         User user = this.getUserFixture();
         DomainRegistry
@@ -68,6 +73,7 @@ public class AuthenticationServiceTest {
         assertNull(userDescriptor);
     }
 
+    @Test
     public void testAuthenticationPasswordFailure() throws Exception {
         User user = this.getUserFixture();
         DomainRegistry

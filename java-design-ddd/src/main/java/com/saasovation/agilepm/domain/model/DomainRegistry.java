@@ -13,6 +13,6 @@ public class DomainRegistry {
     }
 
     public static BusinessPriorityCalculator businessPriorityCalculator() {
-        return null;
+        return new BusinessPriorityCalculator();
     }
 }

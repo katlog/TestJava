@@ -1,10 +1,12 @@
 package com.saasovation.identityaccess.domain.model.identity;
 
 import com.saasovation.supply.FactoryMethod;
+import lombok.EqualsAndHashCode;
 
 /**
  * Created by fw on 2019/3/21
  */
+@EqualsAndHashCode
 public class Tenant {
 
     private boolean active;

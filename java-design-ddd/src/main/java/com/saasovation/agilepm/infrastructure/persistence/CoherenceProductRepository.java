@@ -81,11 +81,6 @@ public class CoherenceProductRepository implements ProductRepository {
         }
     }
 
-    @Override
-    public void add(Product product) {
-
-    }
-
     private String idOf(Product aProduct) {
         return this.idOf(aProduct.productId());
     }
@@ -108,5 +103,10 @@ public class CoherenceProductRepository implements ProductRepository {
     @Override
     public Product productOfId(Tenant aTenant, ProductId aProductId) {
         return (Product) this.cache(aTenant).get(this.idOf(aProductId));
+    }
+
+    @Override
+    public void add(Product product) {
+
     }
 }
