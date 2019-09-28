@@ -1,6 +1,9 @@
 package org.person.dfw.program.primitive;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 public class TestCharacter  {
     /**
@@ -32,22 +35,39 @@ public class TestCharacter  {
      * 【代码单元】UTF16编码用不同长度的编码表示所有Unicode代码点。在基本的多语言级别中，每个字符用16位表示，通常被称为代码单元（codeunit）
      *      而辅助字符采用一对连续的代码单元进行编码。这样构成的编码值一定落人基本的多语言级别中空闲的2048字节内，通常被称为替代区域（surrogatearea)[U+D800~U+DBFF用于第一个代码单元，U+DCOO-U+DFFF用于第二个代码单元]·这样设计十分巧妙，可从中迅速地知道一个代码单元是一个字符的编码，还是一个辅助字符的第一或第二部分。倒如，对于整数集合的数学符号，它的代码点是U+1D56B,并且是用两个代码单元U+D835和U+DD6B编码的
      */
-    @Test public void codepoint(){
-    	System.out.println("𠀀");					//增补字符	𠀀
-        System.out.println("\uD840\uDC10");			//增补字符	𠀐
+    @Test
+    public void codepoint(){
+    	//增补字符	𠀀
+    	System.out.println("𠀀");
+        //增补字符	𠀐
+        System.out.println("\uD840\uDC10");
         System.out.println('\uD840'+'\uDC10');
+    }
+
+    @Test public void codePointAt(){
+        char[] c = {'a', 'b', '测', '试'};
+
+        assertEquals(97,Character.codePointAt(c, 0));
+        assertEquals(98,Character.codePointAt(c, 1));
+        assertEquals(27979,Character.codePointAt(c, 2));
+        assertEquals(35797,Character.codePointAt(c, 3));
+
+        assertEquals('a', 97);
+        assertEquals('b', 98);
+        assertEquals('测', 27979);
+        assertEquals('试', 35797);
     }
     
     /**判断字符范围*/
-    @Test public void _is(){
+    @Test public void isJavaIdentifierPart(){
     	
     	//isJavaIdentifierPart检查变量名字母是否可用
     	
     	//字母包括，'A'~'Z'、'a'~'z'、'_'或在某种语言中代表字母的任何Unicode字符
-    	System.out.println(Character.isJavaIdentifierPart('a'));	//true
+        assertTrue(Character.isJavaIdentifierPart('a'));
+
     	//'+'和'©'这样的符号不能出现在变量名中，空格也不行。变量名中所有的字符都是有意义的
-    	System.out.println(Character.isJavaIdentifierPart('©'));	//false
-    	
-    	
+        assertFalse(Character.isJavaIdentifierPart('©'));
+
     }
 }

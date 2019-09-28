@@ -11,6 +11,10 @@
 
     <artifactId>java-persistence</artifactId>
 
+    <properties>
+        <protostuff.version>1.0.11</protostuff.version>
+    </properties>
+
     <dependencies>
 
         <dependency>
@@ -24,6 +28,18 @@
             <groupId>com.github.kstyrc</groupId>
             <artifactId>embedded-redis</artifactId>
             <version>0.6</version>
+        </dependency>
+
+        <!-- 序列化协议protostuff -->
+        <dependency>
+            <groupId>com.dyuproject.protostuff</groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <version>${protostuff.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dyuproject.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>${protostuff.version}</version>
         </dependency>
 
         <dependency>

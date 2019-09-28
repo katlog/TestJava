@@ -93,18 +93,7 @@ public class TestString {
             System.out.println(strCn.charAt(i)+":"+strCn.codePointAt(i));
         }
     }
-    
-    @Test public void codePointAt(){
-        char[] c = {'a', 'b', '测', '试'};  
-        System.out.println(Character.codePointAt(c, 0));//97  
-        System.out.println(Character.codePointAt(c, 1));//98  
-        System.out.println(Character.codePointAt(c, 2));//27979  
-        System.out.println(Character.codePointAt(c, 3));//35797  
-        System.out.println((char) 97);//a  
-        System.out.println((char) 98);//b  
-        System.out.println((char) 27979);//测  
-        System.out.println((char) 35797);//试  
-    }
+
     
     @Test public void test2() {
         char[] c = Character.toChars(Integer.parseInt("1D306", 16));//1D306是一个辅助平面字符  转成10进制为119558

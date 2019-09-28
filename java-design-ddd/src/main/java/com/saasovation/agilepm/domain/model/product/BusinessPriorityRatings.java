@@ -1,24 +1,39 @@
 package com.saasovation.agilepm.domain.model.product;
 
+import com.saasovation.supply.ValueObject;
+
 /**
  * Created by fw on 2019/9/9
  */
+@ValueObject
 public class BusinessPriorityRatings {
 
+    private float benefit;
+    private float penalty;
+    private float cost;
+    private float risk;
 
-    public int benefit() {
-        return 0;
+    public BusinessPriorityRatings(float benefit, float penalty, float cost, float risk) {
+        this.benefit = benefit;
+        this.penalty = penalty;
+        this.cost = cost;
+        this.risk = risk;
+    }
+    public float benefit() {
+        return benefit;
     }
 
-    public int penalty() {
-        return 0;
+    public float penalty() {
+        return penalty;
     }
 
-    public int cost() {
-        return 0;
+    public float cost() {
+        return cost;
     }
 
-    public int risk() {
-        return 0;
+    public float risk() {
+        return risk;
     }
+
+
 }

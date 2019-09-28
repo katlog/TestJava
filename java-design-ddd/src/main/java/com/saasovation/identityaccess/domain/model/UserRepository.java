@@ -7,4 +7,6 @@ public interface UserRepository {
     User userFromAuthenticCredentials(TenantId aTenantId, String aUsername, String encryptedPassword);
 
     void add(User user);
+
+    User userWithUsername(TenantId tenantId, String aUsername);
 }

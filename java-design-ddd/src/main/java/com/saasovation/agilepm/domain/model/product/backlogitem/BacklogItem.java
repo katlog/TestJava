@@ -1,6 +1,7 @@
 package com.saasovation.agilepm.domain.model.product.backlogitem;
 
 import com.saasovation.agilepm.domain.model.DomainEventPublisher;
+import com.saasovation.agilepm.domain.model.product.BusinessPriority;
 import com.saasovation.agilepm.domain.model.product.ProductId;
 import com.saasovation.agilepm.domain.model.product.StoryPoints;
 import com.saasovation.agilepm.domain.model.product.sprint.Sprint;
