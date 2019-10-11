@@ -1,7 +1,7 @@
 package com.saasovation.identityaccess.domain.model;
 
 import com.saasovation.identityaccess.application.AccessService;
-import com.saasovation.identityaccess.application.GroupMemberService;
+import com.saasovation.identityaccess.domain.model.identity.GroupMemberService;
 import com.saasovation.identityaccess.domain.model.identity.AuthenticationService;
 
 /**

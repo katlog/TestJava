@@ -2,12 +2,14 @@ package com.saasovation.collaboration.infrastructure.services;
 
 import com.saasovation.collaboration.domain.model.collaborator.Collaborator;
 import com.saasovation.common.media.RepresentationReader;
+import com.saasovation.supply.Translator;
 
 import java.lang.reflect.Constructor;
 
 /**
  * Created by fw on 2019/9/10
  */
+@Translator
 public class CollaboratorTranslator {
     public CollaboratorTranslator() {
         super();

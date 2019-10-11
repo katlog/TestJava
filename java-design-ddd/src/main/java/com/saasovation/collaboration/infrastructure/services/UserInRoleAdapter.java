@@ -1,15 +1,15 @@
-package com.saasovation.collaboration.infrastructure.adaper;
+package com.saasovation.collaboration.infrastructure.services;
 
-import com.saasovation.collaboration.domain.model.Author;
 import com.saasovation.collaboration.domain.model.collaborator.Collaborator;
-import com.saasovation.collaboration.infrastructure.services.CollaboratorTranslator;
 import com.saasovation.identityaccess.domain.model.identity.Tenant;
+import com.saasovation.supply.Adapter;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 
 /**
  * Created by fw on 2019/8/31
  */
+@Adapter
 public class UserInRoleAdapter {
     private UserInRoleAdapter() {
     }

@@ -3,12 +3,19 @@ package com.saasovation.identityaccess.application;
 import com.saasovation.common.media.OvationsMediaType;
 import com.saasovation.identityaccess.domain.model.DomainRegistry;
 import com.saasovation.identityaccess.domain.model.identity.User;
+import com.saasovation.supply.Adapter;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+
+/**
+ * UserResource类是RESTful HTTP端口的适配器
+ * @author difengwei
+ */
+@Adapter
 @Path("/tenants/{tenantId}/users")
 public class UserResource {
 
@@ -22,6 +29,7 @@ public class UserResource {
             @PathParam("tenantId") String aTenantId,
             @PathParam("username") String aUsername,
             @PathParam("role") String aRoleName) {
+
         // 消费方可通过以下方式发出请求 : GET/tenants/{tenantId}/users/{username}/inRole/{role}
 
         //			HTTP/1.1 200 OK
