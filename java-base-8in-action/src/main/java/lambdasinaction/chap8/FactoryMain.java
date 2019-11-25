@@ -1,8 +1,9 @@
 package lambdasinaction.chap8;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class FactoryMain {
@@ -14,6 +15,12 @@ public class FactoryMain {
         Product p2 = loanSupplier.get();
 
         Product p3 = ProductFactory.createProductLambda("loan");
+
+        List<String> strings = Stream.of("katlog", "muran", "luodayou", "3p")
+                .filter(s -> s.length() > 3)
+                .collect(Collectors.toList());
+
+        System.out.println("strings = " + strings);
 
     }
 
@@ -29,8 +36,9 @@ public class FactoryMain {
 
         public static Product createProductLambda(String name){
             Supplier<Product> p = map.get(name);
-            if(p != null) return p.get();
-            throw new RuntimeException("No such product " + name);
+            return Optional.ofNullable(p).map(Supplier::get).orElseThrow(() -> new RuntimeException("No such product " + name));
+            // if(p != null) return p.get();
+            // throw new RuntimeException("No such product " + name);
         }
     }
 

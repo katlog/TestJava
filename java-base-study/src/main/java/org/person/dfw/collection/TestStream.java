@@ -75,4 +75,10 @@ public class TestStream {
         Map<String, String> stringMap = Lists.newArrayList("1", "2", "3", "1").stream().collect(toMap(Function.identity(), s->s + "-value", (s, s2) -> s + s2));
         assertEquals("1-value1-value", stringMap.get("1"));
     }
+
+    @Test
+    public void create() {
+        // Arrays.asList(1, 4, 9).stream()
+
+    }
 }

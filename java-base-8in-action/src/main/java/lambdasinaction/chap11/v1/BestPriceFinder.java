@@ -14,8 +14,10 @@ import java.util.concurrent.ThreadFactory;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import lambdasinaction.chap11.Discount;
 import lambdasinaction.chap11.ExchangeService;
 import lambdasinaction.chap11.ExchangeService.Money;
+import lambdasinaction.chap11.Quote;
 
 public class BestPriceFinder {
 
@@ -51,6 +53,7 @@ public class BestPriceFinder {
                 shops.stream()
                 .map(shop -> CompletableFuture.supplyAsync(() -> shop.getName() + " price is "
                         + shop.getPrice(product), executor))
+                //.map(CompletableFuture::join) 直接在这join的话会顺序执行？
                 .collect(Collectors.toList());
 
         List<String> prices = priceFutures.stream()

@@ -5,13 +5,7 @@ import static java.time.temporal.TemporalAdjusters.nextOrSame;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Month;
+import java.time.*;
 import java.time.chrono.JapaneseDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -75,6 +69,12 @@ public class DateTimeExamples {
         LocalDateTime dt4 = date.atTime(time);
         LocalDateTime dt5 = time.atDate(date);
         System.out.println(dt1);
+
+        Instant instant1 = dt1.toInstant(ZoneOffset.MIN);
+        long l = instant1.toEpochMilli();
+        Calendar instance = Calendar.getInstance();
+        instance.setTimeInMillis(l);
+        Date time2 = instance.getTime();
 
         LocalDate date1 = dt1.toLocalDate();
         System.out.println(date1);
