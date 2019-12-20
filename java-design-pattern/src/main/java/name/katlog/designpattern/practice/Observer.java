@@ -21,12 +21,9 @@ public class Observer {
         }
     }
     interface EventHandler{
-        <T extends Event> void handle(T event);
+        void handle(Event event);
     }
-   static abstract class A{
-        abstract <T extends Event> void register(Class<T> eventClass, EventHandler handler);
-    }
-    static class EventPublisher extends A{
+    static class EventPublisher {
         private static final EventPublisher INSTANCE = new EventPublisher();
         private Map<Class<?>,List<EventHandler>> subscribers = new HashMap<>();
 
@@ -36,7 +33,6 @@ public class Observer {
             return INSTANCE;
         }
 
-        @Override
         <T extends Event> void register(Class<T> eventClass, EventHandler handler) {
 
             // 旧方式
@@ -64,22 +60,31 @@ public class Observer {
         }
 
         void publish(Event e){
-            subscribers.forEach((aClass, eventHandlers) -> {
+            subscribers.computeIfPresent(e.getClass(), (aClass, eventHandlers) -> {
                 eventHandlers.forEach(handler -> handler.handle(e));
+                return eventHandlers;
             });
+
+            // subscribers.forEach((aClass, eventHandlers) -> {
+            //     eventHandlers.forEach(handler -> handler.handle(e));
+            // });
         }
     }
 
 
     @Test
     public void test(){
+
+        System.out.println(3 | 9);
         EventPublisher instance = EventPublisher.getInstance();
-        instance.register(Event.class, new EventHandler() {
-            @Override
-            public <T extends Event> void handle(T event) {
-                System.out.println("event = " + event.getOrder());
-            }
-        });
+        // instance.register(Event.class, new EventHandler() {
+        //     @Override
+        //     public <T extends Event> void handle(T event) {
+        //         System.out.println("event = " + event.getOrder());
+        //     }大话设计模式
+        // });
+
+        instance.register(Event.class, event -> System.out.println("event = " + event));
 
         instance.publish(new Event(1));
         instance.publish(new Event(2));
