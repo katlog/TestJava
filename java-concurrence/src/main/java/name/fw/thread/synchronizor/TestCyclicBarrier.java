@@ -39,12 +39,13 @@ public class TestCyclicBarrier {
 			}.start();
 		}
 		barrier.await();
+		System.out.println("barrier await for all first ! ");
 		// --------------第二次：开始准备循环使用--------------
 		for (int i = 0; i < THREAD_COUNT; i++) {
 			new Thread("Task " + i) {
 				public void run() {
 					// do something
-					System.out.println(Thread.currentThread().getName() + " finished!!");
+					System.out.println(Thread.currentThread().getName() + " prepared again !!");
 					try {
 						barrier.await();
 					} catch (InterruptedException e) {
@@ -52,9 +53,11 @@ public class TestCyclicBarrier {
 					} catch (BrokenBarrierException e) {
 						e.printStackTrace();
 					}
+					System.out.println(Thread.currentThread().getName() + " finished again !!");
 				};
 			}.start();
 		}
 		barrier.await();
+		System.out.println("barrier await for all last ! ");
 	}
 }
