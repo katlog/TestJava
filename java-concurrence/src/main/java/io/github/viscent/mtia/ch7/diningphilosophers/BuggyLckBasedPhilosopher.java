@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.locks.ReentrantLock;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+// import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 public class BuggyLckBasedPhilosopher extends AbstractPhilosopher {
   /**
@@ -51,8 +51,8 @@ public class BuggyLckBasedPhilosopher extends AbstractPhilosopher {
     }
   }
 
-  @SuppressFBWarnings(value = "UL_UNRELEASED_LOCK",
-      justification = "筷子对应的锁由应用自身保障总是能够被释放")
+  // @SuppressFBWarnings(value = "UL_UNRELEASED_LOCK",
+  //     justification = "筷子对应的锁由应用自身保障总是能够被释放")
   protected boolean pickUpChopstick(Chopstick chopstick) {
     final ReentrantLock lock = LOCK_MAP.get(chopstick);
     lock.lock();

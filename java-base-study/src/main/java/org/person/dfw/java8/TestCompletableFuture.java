@@ -49,7 +49,8 @@ public class TestCompletableFuture {
             System.out.println("run end ...");
         });
         // 返回 null
-        System.out.println(future.get());
+        Void x = future.get();
+        System.out.println(x);
     }
 
     /** 支持返回值 */
@@ -156,6 +157,36 @@ public class TestCompletableFuture {
         System.out.println(result);
     }
 
+    @Test
+    public void thenApply1() throws Exception {
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+        CompletableFuture cf = CompletableFuture.supplyAsync(() -> {
+            try {
+                //休眠200秒
+                Thread.sleep(200000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println("supplyAsync " + Thread.currentThread().getName());
+            return "hello ";
+        },executorService).thenAccept(s -> {
+            try {
+                System.out.println("world " + s);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        System.out.println(Thread.currentThread().getName());
+        while (true) {
+            if (cf.isDone()) {
+                System.out.println("CompletedFuture...isDown");
+                break;
+            }
+        }
+    }
+
 
     /** 接收任务的处理结果，并消费处理，无返回结果。
      *  该方法只是消费执行完成的任务，并可以根据上面的任务返回的结果进行处理。并没有后续的输错操作
@@ -257,8 +288,8 @@ public class TestCompletableFuture {
     /** 两个CompletionStage，谁执行返回的结果快，我就用那个CompletionStage的结果进行下一步的转化操作。 */
     @Test
     public void applyToEither () throws ExecutionException, InterruptedException {
-        CompletableFuture<Integer> f1 = CompletableFuture.supplyAsync(() -> {
-            int t = new Random().nextInt(3);
+        CompletableFuture<Integer> dep1 = CompletableFuture.supplyAsync(() -> {
+            int t = new Random().nextInt(3000);
             try {
                 TimeUnit.SECONDS.sleep(t);
             } catch (InterruptedException e) {
@@ -267,8 +298,9 @@ public class TestCompletableFuture {
             System.out.println("f1="+t);
             return t;
         });
-        CompletableFuture<Integer> f2 = CompletableFuture.supplyAsync(() -> {
-            int t = new Random().nextInt(3);
+        System.out.println("dep1 = " + dep1);
+        CompletableFuture<Integer> dep2 = CompletableFuture.supplyAsync(() -> {
+            int t = new Random().nextInt(3000);
             try {
                 TimeUnit.SECONDS.sleep(t);
             } catch (InterruptedException e) {
@@ -277,11 +309,12 @@ public class TestCompletableFuture {
             System.out.println("f2="+t);
             return t;
         });
-
-        CompletableFuture<Integer> result = f1.applyToEither(f2, t -> {
+        System.out.println("dep2 = " + dep2);
+        CompletableFuture<Integer> result = dep1.applyToEither(dep2, t -> {
             System.out.println(t);
             return t * 2;
         });
+        System.out.println("result = " + result);
         System.out.println(result.get());
     }
 

@@ -1,20 +1,22 @@
 package org.person.dfw.collection;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Streams;
+import lombok.AccessLevel;
+import lombok.Setter;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by fw on 2018/12/24
@@ -22,6 +24,12 @@ import static org.junit.Assert.*;
 public class TestStream {
 
     public static final Consumer<Integer> PRINTLN = System.out::println;
+
+
+    @Test
+    public void _construct(){
+
+    }
 
     @Test
     public void sorted() {
@@ -52,6 +60,12 @@ public class TestStream {
         List<Integer> list = Arrays.asList(4, 5, 13, 3, 54, 14, 56, 721);
         List<Integer> collect = list.stream().filter(i -> i == -1).collect(toList());
 
+        List<Long> list1 = list.stream()
+                .map(String::valueOf)
+                .map(Long::valueOf)
+                .filter(aLong -> aLong > 10)
+                .collect(Collectors.toList());
+
         /** collect 不会返回 null */
         assertNotNull(collect);
         assertEquals(0, collect.size());
@@ -81,4 +95,123 @@ public class TestStream {
         // Arrays.asList(1, 4, 9).stream()
 
     }
+
+
+    @Test
+    public void debug(){
+        java.util.stream.Stream<Integer> headStream = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19).stream();
+
+        java.util.stream.Stream<Integer> firstStream = headStream
+                .map(i -> i * 3);
+
+        java.util.stream.Stream<Integer> secondStream = firstStream
+                .map(i -> i - 1);
+
+        java.util.stream.Stream<Integer> lastStream = secondStream
+                .filter(i -> i > 30);
+
+        Set<Integer> set = lastStream
+                .collect(Collectors.toSet());
+    }
+
+    @Test
+    public void createStreamTest(){
+
+        List<Integer> list = Arrays.asList(1, 3, 4, 6, 7);
+        Stream.of(list)
+                .map(o -> o * o)
+                .map(o -> o - 1)
+                .map(String::valueOf)
+                .end();
+
+
+    }
+
+   static class Stream<T,R>{
+        @Setter(AccessLevel.PRIVATE)
+        Stream next;
+        @Setter(AccessLevel.PRIVATE)
+        Stream pervious;
+        @Setter(AccessLevel.PRIVATE)
+
+        Stream head;
+       Wrapper<T,R> func;
+
+        static interface Wrapper<IN,OUT>{
+            OUT accept(IN in);
+        }
+
+        abstract class BaseWapper<IN,OUT> implements Wrapper<IN,OUT>{
+
+
+
+            protected final Wrapper<IN,OUT> downstream;
+
+            public BaseWapper(Wrapper<IN,OUT> downstream) {
+                this.downstream = Objects.requireNonNull(downstream);
+            }
+
+        }
+
+
+
+
+        @Setter(AccessLevel.PRIVATE)
+        List<T> srouce;
+
+       public Stream(Wrapper<T, R> func) {
+           this.func = func;
+       }
+
+
+       public Stream(Stream next, Stream pervious, Stream head, Wrapper<T, R> func) {
+           this.next = next;
+           this.pervious = pervious;
+           this.head = head;
+           this.func = func;
+       }
+
+       public Stream() {
+       }
+
+       static <T,R> Stream<T,R> of(List<T> list) {
+           Stream<T,R> stream = new Stream<>();
+           stream.setSrouce(list);
+           stream.setHead(stream);
+           stream.setPervious(null);
+           return stream;
+        }
+
+       Stream<T,R> map(Function<T,R> function){
+
+
+
+           Stream<T,R> current = new Stream<>(null, this, head, new BaseWapper<T, R>(null) {
+               @Override
+               public R accept(T t) {
+                   return function.apply(t);
+               }
+           });
+           this.setNext(current);
+           return current;
+       }
+
+       List<R> end(){
+           List<R> end = new ArrayList<>();
+           for (Object t : head.srouce) {
+               Stream curr = head.next;
+               Object o = t;
+               while (curr != null && curr.func != null ) {
+                   curr.func.accept(o);
+                   Object e = curr.func.accept((T) o);
+                   curr = curr.next;
+                   o = e;
+               }
+               end.add((R) o);
+           }
+           return end;
+       }
+    }
+
+
 }

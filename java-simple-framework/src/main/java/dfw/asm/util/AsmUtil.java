@@ -12,7 +12,7 @@ public final class AsmUtil {
 
 
 
-    public static void createNoArgsConstructor(ClassWriter cw) {
+    public static void addNoArgsConstructor(ClassWriter cw) {
 
         //初始化一个无参的构造函数
         MethodVisitor constructor = cw.visitMethod(Opcodes.ACC_PUBLIC, "<init>", "()V", null, null);

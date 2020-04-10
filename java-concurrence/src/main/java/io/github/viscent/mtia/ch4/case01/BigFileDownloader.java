@@ -27,9 +27,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class BigFileDownloader {
   protected final URL requestURL;
   protected final long fileSize;
-  /**
-   * 负责已下载数据的存储
-   */
+
+  /** 负责已下载数据的存储  */
   protected final Storage storage;
   protected final AtomicBoolean taskCanceled = new AtomicBoolean(false);
 

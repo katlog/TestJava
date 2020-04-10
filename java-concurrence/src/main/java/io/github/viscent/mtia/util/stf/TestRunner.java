@@ -129,7 +129,7 @@ public class TestRunner {
       final Expect[] expects) {
     SortedMap<Integer, ExpectInfo> map = new ConcurrentSkipListMap<Integer, ExpectInfo>();
     for (Expect expect : expects) {
-      map.put(Integer.valueOf(expect.expected()), new ExpectInfo(expect.desc()));
+      map.put(expect.expected(), new ExpectInfo(expect.desc()));
     }
     return map;
   }

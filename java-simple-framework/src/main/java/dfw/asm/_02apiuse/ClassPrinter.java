@@ -33,12 +33,12 @@ public class ClassPrinter extends ClassVisitor {
     }
 
     public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
-        System.out.println("    " + desc + " " + name);
+        System.out.println("filed:\t\t    " + desc + " " + name);
         return null;
     }
 
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-        System.out.println(" " + name + desc);
+        System.out.println("method:\t\t " + name + desc);
         return null;
     }
 

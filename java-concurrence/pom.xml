@@ -26,6 +26,25 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305 -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.findbugs/annotations -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>annotations</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjdk.jcstress/jcstress-core -->
+        <dependency>
+            <groupId>org.openjdk.jcstress</groupId>
+            <artifactId>jcstress-core</artifactId>
+            <version>0.1.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>

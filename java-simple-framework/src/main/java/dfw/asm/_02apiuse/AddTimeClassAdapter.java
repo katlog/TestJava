@@ -19,8 +19,10 @@ public class AddTimeClassAdapter extends ClassVisitor {
     public void visit(int version, int access, String name, String signature,
                       String superName, String[] interfaces) {
         cv.visit(version, access, name, signature, superName, interfaces);
-        owner = name; // the internal name of the class
-        isInterface = (access & Opcodes.ACC_INTERFACE) != 0; // 判断类是否是接口
+        // the internal name of the class
+        owner = name;
+        // 判断类是否是接口
+        isInterface = (access & Opcodes.ACC_INTERFACE) != 0;
     }
 
     @Override

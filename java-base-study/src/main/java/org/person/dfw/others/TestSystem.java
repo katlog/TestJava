@@ -8,11 +8,16 @@
  */ 
 package org.person.dfw.others;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Random;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -47,6 +52,12 @@ public class TestSystem {
 			System.out.println(key+"\t\t\t"+properties.getProperty(key.toString()));
 		}
 		
+	}
+
+	@Test
+	public void getenv_notExists(){
+		String exists = System.getenv("NotExists");
+		Assert.assertNull(exists);
 	}
 	
 	@Test public void arraycopy(){
@@ -112,6 +123,32 @@ public class TestSystem {
 		  String str4 = "hello";
 		  //由于他们引用的是常量池中的同一个对象 所以他们的HashCode是一样的
 		  System.out.println(System.identityHashCode(str3) + " : "+ System.identityHashCode(str4));
+
+	}
+
+
+	@Test
+	public void exit(){
+
+		new Thread(() -> {
+			try {
+				System.out.println("entrance socket thread.");
+				Socket socket = new Socket("www.baidu.com", 80);
+				System.out.println("new socket");
+				OutputStream outputStream = socket.getOutputStream();
+				System.out.println(" get out put stream." );
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}).run();
+
+		new Thread(() -> {
+
+			while (new Random().nextInt(5) < 100) {
+
+			}
+			System.out.println("close the endless loop thread.");
+		}).run();
 
 	}
 }

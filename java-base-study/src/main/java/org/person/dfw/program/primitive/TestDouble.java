@@ -26,4 +26,10 @@ public class TestDouble {
         assertNotEquals(subtract1.doubleValue(), 0.9,0.00000000);
     }
 
+    @Test
+    public void minMax(){
+        System.out.println("true = " + Double.MAX_VALUE);
+        System.out.println("true = " + Double.MIN_VALUE);
+    }
+
 }

@@ -24,7 +24,7 @@ public class GenerateMethod {
 
         cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC,"com/method/Getter", null, "java/lang/Object", null);
 
-        AsmUtil.createNoArgsConstructor(cw);
+        AsmUtil.addNoArgsConstructor(cw);
 
         cw.visitField(Opcodes.ACC_PRIVATE, "f", "I", null, null).visitEnd();
 

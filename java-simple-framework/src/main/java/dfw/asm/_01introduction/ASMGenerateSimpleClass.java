@@ -35,7 +35,7 @@ public class ASMGenerateSimpleClass {
         //声明一个类，使用JDK1.8版本，public的类，父类是java.lang.Object，没有实现任何接口
         cw.visit(Opcodes.V1_8, Opcodes.ACC_PUBLIC, className.replace('.', '/'), null, "java/lang/Object", null);
 
-        AsmUtil.createNoArgsConstructor(cw);
+        AsmUtil.addNoArgsConstructor(cw);
 
         createVoidMethod(message, cw);
 

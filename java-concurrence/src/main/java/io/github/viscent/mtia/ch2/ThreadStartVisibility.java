@@ -27,6 +27,7 @@ public class ThreadStartVisibility {
         Tools.randomPause(50);
 
         // 读取并打印变量data的值
+        System.out.println("thread update" );
         System.out.println(data);
       }
     };
@@ -40,6 +41,7 @@ public class ThreadStartVisibility {
 
     // 在子线程thread启动后更新变量data的值
     data = 2;// 语句②
+    System.out.println(" main update " );
 
   }
 }

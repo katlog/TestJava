@@ -84,7 +84,7 @@ public class JITReorderingDemo {
   }
 
   public static void main(String[] args) throws InstantiationException,
-      IllegalAccessException {
+          IllegalAccessException {
     // 调用测试工具运行测试代码
     TestRunner.runTest(JITReorderingDemo.class);
   }

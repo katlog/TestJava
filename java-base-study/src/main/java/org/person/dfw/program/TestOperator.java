@@ -3,6 +3,7 @@ package org.person.dfw.program;
 import java.util.Arrays;
 
 import org.junit.Test;
+import org.person.dfw.util.Print;
 
 /**
  * 运算符测试
@@ -66,16 +67,22 @@ public class TestOperator {
 	
 
     /**位运算*/
-    @Test  public void _6_bit() { 
+    @Test
+	public void _6_bit() {
         // 1、左移( << )
         // 0000 0000 0000 0000 0000 0000 0000 0101 然后左移2位后，低位补0
+		Print.bin(5);
         // 0000 0000 0000 0000 0000 0000 0001 0100 换算成10进制为20
-        System.out.println("5 << 2:"+(5 << 2));// 运行结果是20
+        System.out.println("5 << 2:"+(5 << 2));
+        // 运行结果是20
+		Print.bin(20);
 
         // 2、右移( >> ) 高位补符号位
         // 0000 0000 0000 0000 0000 0000 0000 0101 然后右移2位，高位补0：
         // 0000 0000 0000 0000 0000 0000 0000 0001
-        System.out.println("5 >> 2:"+(5 >> 2));// 运行结果是1
+        System.out.println("5 >> 2:"+(5 >> 2));
+        // 运行结果是1
+		Print.bin(1);
 
         // 3、无符号右移( >>> ) 高位补0
         // 0000 0000 0000 0000 0000 0000 0000 0101    :5
@@ -84,10 +91,16 @@ public class TestOperator {
         // 0000 0000 0000 0000 0000 0000 0000 0000  :0          为5的二进制 右移三位  高位补符号位(0)
         // 1111 1111 1111 1111 1111 1111 1111 1111  :-1         为-5的二进制 右移三位  高位补符号位(1)
         // 0001 1111 1111 1111 1111 1111 1111 1111  :536870911  为-5的二进制 右移三位  高位补0
-        System.out.println("5 >> 3:"+(5 >> 3));// 结果是0
-        System.out.println("-5 >> 3:"+(-5 >> 3));// 结果是-1
-        System.out.println("-1 >>> 3:"+(-1 >>> 3));// 结果是536870911  正数和>>相同，负数好像多移动了一位
-        System.out.println("-5 >>> 3:"+(-5 >>> 3));// 结果是536870911
+        System.out.println("5 >> 3:"+(5 >> 3));
+        // 结果是0
+		Print.bin(0);
+        System.out.println("-5 >> 3:"+(-5 >> 3));
+        // 结果是-1
+		Print.bin(-1);
+        System.out.println("-1 >>> 3:"+(-1 >>> 3));
+        // 结果是536870911  正数和>>相同，负数好像多移动了一位
+        System.out.println("-5 >>> 3:"+(-5 >>> 3));
+        // 结果是536870911
 
         // 4、位与( & )
         // 位与：第一个操作数的的第n位于第二个操作数的第n位如果都是1，那么结果的第n为也为1，否则为0
@@ -95,12 +108,14 @@ public class TestOperator {
         // 0000 0000 0000 0000 0000 0000 0000 0011     :3
         //-----------------------------------------------与
         // 0000 0000 0000 0000 0000 0000 0000 0001     :1
-        System.out.println("5 & 3:"+(5 & 3));// 结果为1
+        // 结果为1
+        System.out.println("5 & 3:"+(5 & 3));
         // 0000 0000 0000 0000 0000 0000 0000 0101     :5
         // 1111 1111 1111 1111 1111 1111 1111 1101     :-3
         //-----------------------------------------------与
         // 0000 0000 0000 0000 0000 0000 0000 0101     :5
-        System.out.println("5 & -3:"+(5 & -3));// 结果为1
+        // 结果为1
+        System.out.println("5 & -3:"+(5 & -3));
 
         // 5、位或( | )
         // 第一个操作数的的第n位于第二个操作数的第n位 只要有一个是1，那么结果的第n为也为1，否则为0
@@ -125,6 +140,31 @@ public class TestOperator {
         System.out.println("~5:"+(~5));// 结果为-6
      
         System.out.println(formatBin((5)));
+    }
+
+    /** 位移 */
+    @Test
+    public void _bit_op(){
+		int count_bits = 29;
+
+		Print.bin(1);
+		Print.bin(-1);
+
+		int running    = -1 << count_bits;
+		Print.bin(running);
+
+		int shutdown   =  0 << count_bits;
+		Print.bin(shutdown);
+
+		int stop       =  1 << count_bits;
+		Print.bin(stop);
+
+		int tidying    =  2 << count_bits;
+		Print.bin(tidying);
+
+		int terminated =  3 << count_bits;
+		Print.bin(terminated);
+
     }
     
     /**
