@@ -10,9 +10,32 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+
     <groupId>name.fw.java</groupId>
     <artifactId>java-concurrence</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>1</id>-->
+            <!--<url>https://repo.spring.io/plugins-release/</url>-->
+        <!--</repository>-->
+    <!--</repositories>-->
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--            jcstress version to use with this project.          -->
+        <jcstress.version>0.5</jcstress.version>
+
+        <!--            Java source/target to use for compilation.          -->
+        <javac.target>8</javac.target>
+
+        <!--            Name of the test Uber-JAR to generate.          -->
+        <uberjar.name>jcstress-learning</uberjar.name>
+    </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -26,25 +49,22 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305 -->
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.2</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.code.findbugs/annotations -->
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>annotations</artifactId>
-            <version>3.0.1</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.openjdk.jcstress/jcstress-core -->
         <dependency>
             <groupId>org.openjdk.jcstress</groupId>
             <artifactId>jcstress-core</artifactId>
-            <version>0.1.2</version>
+            <version>${jcstress.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.openjdk.jcstress</groupId>
+            <artifactId>jcstress-samples</artifactId>
+            <version>${jcstress.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/edu.umd.cs.findbugs/findbugs -->
+        <dependency>
+            <groupId>edu.umd.cs.findbugs</groupId>
+            <artifactId>findbugs</artifactId>
+            <version>1.3.9</version>
+        </dependency>
     </dependencies>
 
     <build>

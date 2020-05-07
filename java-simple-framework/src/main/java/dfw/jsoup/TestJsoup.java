@@ -99,12 +99,12 @@ public class TestJsoup {
         }
     }
 
-    File input = new File(this.getClass().getResource("katlog.html").getFile());
-    Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/");
 
     @Test
     /** 用元素选择器查找 */
-    public void select(){
+    public void select() throws IOException {
+    File input = new File(this.getClass().getResource("katlog.html").getFile());
+    Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/");
         //带有href属性的a元素
         Elements links = doc.select("a[href]");
         System.out.println("links = " + links);
@@ -196,10 +196,27 @@ public class TestJsoup {
         String unsafe =
                 "<p><a href='http://example.com/' onclick='stealCookies()'>Link</a></p>";
         String safe = Jsoup.clean(unsafe, Whitelist.basic());
+
+
+
         // now: <p><a href="http://example.com/" rel="nofollow">Link</a></p>
         System.out.println("safe = " + safe);
     }
     /** -------------------------------------------html清理---------------------------------------------- */
 
+
+    @Test
+    public void  getMagent() throws IOException {
+
+        // 直接发送HTTP请求获得
+        Document doc = Jsoup.connect("https://www.kan84.tv/bdhd/bttokyohot.html").get();
+        Elements downurl = doc.getElementsByClass("downurl");
+
+        Element element = downurl.get(0);
+        for (Element child : element.children()) {
+            String href = child.child(0).attr("href");
+            System.out.println( href);
+        }
+    }
 
 }

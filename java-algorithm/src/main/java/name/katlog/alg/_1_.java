@@ -116,9 +116,9 @@ public class _1_ {
     }
     
     
-   /* public static List<Integer>  lexicalOrder4 (int n) {
+   /* public static NodeList<Integer>  lexicalOrder4 (int n) {
     	
-    	List<Integer> list = new ArrayList<Integer>();
+    	NodeList<Integer> list = new ArrayList<Integer>();
     	
     	char[] chars = new char[]{'0','1','2','3','4','5','6','7','8','9'};
     	Integer i = new Integer(1);
@@ -144,7 +144,7 @@ public class _1_ {
     
 	public static void main(String[] args) {
 
-//		List<Integer> list = lexicalOrder(5000);
+//		NodeList<Integer> list = lexicalOrder(5000);
 //		System.out.println(list);
 		List<Integer> list1 = lexicalOrder1(192);
 		System.out.println(list1);

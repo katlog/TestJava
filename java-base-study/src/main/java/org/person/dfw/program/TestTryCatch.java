@@ -56,6 +56,8 @@ public class TestTryCatch {
         System.out.println("\n---------tryCahtch6--------------------");
         System.out.println(tryCahtch6());
         System.out.println("------------------------------");
+
+        System.out.println("tryFinally_Exception "+tryFinally_Exception());
     }
 
     private String tryCahtch1() {
@@ -213,7 +215,24 @@ public class TestTryCatch {
         } catch (Exception e){  
             e.printStackTrace();  
         }  
-    }  
+    }
+
+    public String  tryFinally_Exception(){
+        String result = "" ;
+        try {
+            System.out.println("execute try");
+            result+=" try ";
+            if (result.length()>1) {
+                System.out.println("throw exception");
+                throw new Exception();
+            }
+            return result+" reTry";
+        } finally {
+            System.out.println("execute finally");
+            result+=" finally ";
+            return result+" reFinally";
+        }
+    }
     
 
 }

@@ -25,6 +25,7 @@
                 <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.xls</include>
+                    <include>**/*.properties</include>
                     <!--<include>**/*.xml</include>-->
                 </includes>
                 <filtering>false</filtering>
@@ -51,7 +52,7 @@
                 <artifactId>protobuf-maven-plugin</artifactId>
                 <version>0.5.1</version>
                 <configuration>
-                    <protoSourceRoot>${basedir}/src/main/resource/protbuf</protoSourceRoot><!--默认的proto文件路径-->
+                    <protoSourceRoot>src/main/resources/protbuf</protoSourceRoot><!--默认的proto文件路径-->
                     <!--Protobuf compiler artifact specification, in groupId:artifactId:version[:type[:classifier]] format. When this parameter is set, the plugin attempts to resolve the specified artifact as protoc executable.-->
                     <!--os.detected.classifier 变量来源：https://github.com/trustin/os-maven-plugin-->
                     <protocArtifact>com.google.protobuf:protoc:3.1.0:exe:${os.detected.classifier}
@@ -113,11 +114,6 @@
         </dependency>
 
         <!-- **********************************mq*******************************-->
-        <dependency>
-            <groupId>com.rabbitmq</groupId>
-            <artifactId>amqp-client</artifactId>
-            <version>5.1.1</version>
-        </dependency>
         <!-- **********************************mq*******************************-->
 
         <!-- guava -->
