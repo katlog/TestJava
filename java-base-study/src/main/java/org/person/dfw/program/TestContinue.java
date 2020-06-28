@@ -1,13 +1,14 @@
 package org.person.dfw.program;
 
 import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * Created by dell on 2018/4/28
  */
 public class TestContinue {
 
-    @org.junit.Test
+    @Test
     public void test() {
 
         int i = 0;
