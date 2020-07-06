@@ -1,7 +1,6 @@
 package org.person.dfw.collection;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Streams;
 import lombok.AccessLevel;
 import lombok.Setter;
 import org.junit.Test;
@@ -11,7 +10,6 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
@@ -118,7 +116,7 @@ public class TestStream {
     public void createStreamTest(){
 
         List<Integer> list = Arrays.asList(1, 3, 4, 6, 7);
-        Stream.of(list)
+        List<Object> end = MyStream.of(list)
                 .map(o -> o * o)
                 .map(o -> o - 1)
                 .map(String::valueOf)
@@ -127,14 +125,14 @@ public class TestStream {
 
     }
 
-   static class Stream<T,R>{
+   static class MyStream<T,R>{
         @Setter(AccessLevel.PRIVATE)
-        Stream next;
+        MyStream next;
         @Setter(AccessLevel.PRIVATE)
-        Stream pervious;
+        MyStream pervious;
         @Setter(AccessLevel.PRIVATE)
 
-        Stream head;
+        MyStream head;
        Wrapper<T,R> func;
 
         static interface Wrapper<IN,OUT>{
@@ -159,34 +157,34 @@ public class TestStream {
         @Setter(AccessLevel.PRIVATE)
         List<T> srouce;
 
-       public Stream(Wrapper<T, R> func) {
+       public MyStream(Wrapper<T, R> func) {
            this.func = func;
        }
 
 
-       public Stream(Stream next, Stream pervious, Stream head, Wrapper<T, R> func) {
+       public MyStream(MyStream next, MyStream pervious, MyStream head, Wrapper<T, R> func) {
            this.next = next;
            this.pervious = pervious;
            this.head = head;
            this.func = func;
        }
 
-       public Stream() {
+       public MyStream() {
        }
 
-       static <T,R> Stream<T,R> of(List<T> list) {
-           Stream<T,R> stream = new Stream<>();
+       static <T,R> MyStream<T,R> of(List<T> list) {
+           MyStream<T,R> stream = new MyStream<>();
            stream.setSrouce(list);
            stream.setHead(stream);
            stream.setPervious(null);
            return stream;
         }
 
-       Stream<T,R> map(Function<T,R> function){
+       MyStream<T,R> map(Function<T,R> function){
 
 
 
-           Stream<T,R> current = new Stream<>(null, this, head, new BaseWapper<T, R>(null) {
+           MyStream<T,R> current = new MyStream<>(null, this, head, new BaseWapper<T, R>(null) {
                @Override
                public R accept(T t) {
                    return function.apply(t);
@@ -199,7 +197,7 @@ public class TestStream {
        List<R> end(){
            List<R> end = new ArrayList<>();
            for (Object t : head.srouce) {
-               Stream curr = head.next;
+               MyStream curr = head.next;
                Object o = t;
                while (curr != null && curr.func != null ) {
                    curr.func.accept(o);

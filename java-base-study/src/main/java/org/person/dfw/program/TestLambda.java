@@ -69,7 +69,7 @@ public class TestLambda {
 
 		//例3 用Lambda表达式进行List迭代 
 		//Prior Java 8 :  
-		List<String> features = Arrays.asList("Lambdas", "Default Method", "Stream API", "Date and Time API");  
+		List<String> features = Arrays.asList("Lambdas", "Default Method", "MyStream API", "Date and Time API");
 		for (String feature : features) {  
 		    System.out.println(feature);  
 		}  

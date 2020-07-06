@@ -119,9 +119,9 @@ public class TestThreadInterrupt extends Object implements Runnable {
      * 测试 interrupted方法
      * 
      * Thread.interrupted()方法来检查当前线程的中断状态（并隐式重置为 false）。因为静态方
-法，因此不能在特定的线程上使用，而只能报告调用它的线程的中断状态，如果线程被中断，而且中断状态尚不
-清楚，那么，这个方法返回 true。与 isInterrupted()不同，它将自动重置中断状态为 false，第二次调用 Threa
-d.interrupted()方法，总是返回 false，除非中断了线程
+        法，因此不能在特定的线程上使用，而只能报告调用它的线程的中断状态，如果线程被中断，而且中断状态尚不
+        清楚，那么，这个方法返回 true。与 isInterrupted()不同，它将自动重置中断状态为 false，
+        第二次调用 Thread.interrupted()方法，总是返回 false，除非中断了线程
      * <p>Title: testInterrupted</p>
      * <p>date : 2017年3月30日 上午10:51:06</p>
      */ 
