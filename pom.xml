@@ -38,7 +38,6 @@
     <modules>
 		<module>java-advance-effective-java</module>
 		<module>java-advance-thinkinginjava</module>
-		<module>java-algorithm</module>
         <module>java-base-refactor</module>
 		<module>java-base-study</module>
 		<module>java-concurrence</module>

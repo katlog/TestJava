@@ -1,5 +1,7 @@
 package name.fw.thread.object;
 
+import org.junit.Test;
+
 public class TestThreadWaitNotify {
     public static void main(String[] args) {
         final MissedNotify mn = new MissedNotify();
@@ -41,6 +43,56 @@ public class TestThreadWaitNotify {
         MissedNotify.print("about to invoke interrupt() on threadA");
         threadA.interrupt();
     }
+
+
+    /** 测试wait被唤醒后 没获取到锁时wait有没有返回，能不能再次被唤醒 */
+    @Test
+    public void waitNotify() throws InterruptedException {
+        Object lock = new Object();
+
+        new Thread(() -> {
+            synchronized (lock) {
+                try {
+                    System.out.println("wait1 before wait" );
+                    lock.wait();
+                    System.out.println("exit wait1" );
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
+        new Thread(() -> {
+            synchronized (lock) {
+                try {
+                    System.out.println("wait2 before wait" );
+                    lock.wait();
+                    System.out.println("exit wait2" );
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        Thread.sleep(10);
+
+        new Thread(() -> {
+            synchronized (lock) {
+                System.out.println("first notify all " );
+                lock.notifyAll();
+                try {
+                    Thread.sleep(3);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        Thread.sleep(10);
+
+    }
+
 }
 
 class MissedNotify extends Object {
@@ -92,7 +144,7 @@ class MissedNotifyFix extends Object {
     }
 
     public void waitToProceed()
-        throws InterruptedException {
+            throws InterruptedException {
         print("in waitToProceed() - entered");
         synchronized (proceedLock) {
             print("in waitToProceed() - entered sync block");
@@ -164,4 +216,5 @@ class MissedNotifyFix extends Object {
         print("about to invoke interrupt() on threadA");
         threadA.interrupt();
     }
+
 }

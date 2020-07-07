@@ -62,6 +62,7 @@ public class TestStream {
                 .map(String::valueOf)
                 .map(Long::valueOf)
                 .filter(aLong -> aLong > 10)
+                .limit(10)
                 .collect(Collectors.toList());
 
         /** collect 不会返回 null */

@@ -1,6 +1,9 @@
 package name.fw.thread.synchronizor;
 
-import java.util.concurrent.CountDownLatch;
+import org.junit.Test;
+
+import java.util.Random;
+import java.util.concurrent.*;
 
 /**
  * @moudle: TestCountDownLatch
@@ -24,7 +27,9 @@ public class TestCountDownLatch {
 	// 在finishedSingal的初始化记数量通过调用finishedSingal.countDown()减少为0时调用了finishedSingal.await()的线程一直阻塞
 	private static final CountDownLatch finishedSingal = new CountDownLatch(THREAD_COUNT);
 
-	public static void main(String[] args) throws InterruptedException {
+	/** 互为等待线程 */
+	@Test
+	public void countDown() throws InterruptedException {
 		
 		for (int i = 0; i < THREAD_COUNT; i++) {
 			new Thread("Task " + i) {
@@ -45,4 +50,67 @@ public class TestCountDownLatch {
 		finishedSingal.await();// 等待所有的线程完成!!
 		System.out.println("All task are finished!!");
 	}
+	
+	/** 一个等待线程 boss */
+	@Test
+	public void workBoss() throws InterruptedException {
+		ExecutorService executor = new ThreadPoolExecutor(
+				10, 15, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100), new ThreadFactory() {
+			@Override
+			public Thread newThread(Runnable r) {
+				return new Thread(r,"myThread");
+			}
+		});
+
+		CountDownLatch latch = new CountDownLatch(3);
+
+		executor.execute(new Worker(latch,"王二"));
+		executor.execute(new Worker(latch,"李四"));
+		executor.execute(new Worker(latch,"张三"));
+		executor.execute(new Boss(latch));
+
+		executor.shutdown();
+
+		Thread.sleep(10000);
+	}
+
+
+	class Worker implements Runnable{
+		private CountDownLatch downLatch;
+		private String name;
+		Worker(CountDownLatch downLatch, String name){
+			this.downLatch = downLatch;
+			this.name = name;
+		}
+		@Override
+		public void run() {
+			this.doWork();
+			try{
+				TimeUnit.SECONDS.sleep(new Random().nextInt(10));
+			}catch(InterruptedException ie){
+			}
+			System.out.println(this.name + "活干完了！");
+			this.downLatch.countDown();
+
+		}
+		private void doWork(){
+			System.out.println(this.name + "正在干活!");
+		}
+	}
+	class Boss implements Runnable {
+		private CountDownLatch downLatch;
+		Boss(CountDownLatch downLatch) {
+			this.downLatch = downLatch;
+		}
+		@Override
+		public void run() {
+			System.out.println("老板正在等所有的工人干完活......");
+			try {
+				this.downLatch.await();
+			} catch (InterruptedException e) {
+			}
+			System.out.println("工人活都干完了，老板开始检查了！");
+		}
+	}
+
 }

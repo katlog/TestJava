@@ -49,7 +49,22 @@ public class TestThreadPool {
         
         Thread.sleep(5000);
     }
-    
+
+
+    @Test(expected = java.lang.ArithmeticException.class)
+    public void submit() throws ExecutionException, InterruptedException {
+        ExecutorService threadPool = Executors.newCachedThreadPool();
+        Future<Boolean> submit = threadPool.submit(() -> {
+            System.out.println("threadPool = " + 1 / 0);
+            return true;
+        });
+        threadPool.submit(() -> {
+            System.out.println("threadPool = " + 2 / 0);
+            return true;
+        });
+        Boolean aBoolean = submit.get();
+        // System.out.println("aBoolean = " + aBoolean);
+    }
     
     @Test public void test2() throws InterruptedException{
     	

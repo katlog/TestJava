@@ -7,6 +7,7 @@
  */
 package name.fw.thread.thread;
 
+import org.checkerframework.checker.units.qual.Time;
 import org.junit.Test;
 
 /**
@@ -132,5 +133,40 @@ public class TestThreadInterrupt extends Object implements Runnable {
         Thread.currentThread().interrupt();
         System.out.println("Point Y: Thread.interrupted()=" + Thread.interrupted());
         System.out.println("Point Z: Thread.interrupted()=" + Thread.interrupted());
+    }
+
+
+    Object lock1 = new Object();
+    Object lock2 = new Object();
+
+    @Test
+    public void test11() throws InterruptedException {
+       new Thread(() -> {
+           try {
+               a();
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+       }).start();
+        b();
+
+
+    }
+    public void  a() throws InterruptedException {
+        synchronized (lock1){
+            Thread.sleep(500);
+            synchronized (lock2){
+
+            }
+        }
+    }
+
+    public void  b() throws InterruptedException {
+        synchronized (lock2){
+            Thread.sleep(500);
+            synchronized (lock1){
+
+            }
+        }
     }
 }
