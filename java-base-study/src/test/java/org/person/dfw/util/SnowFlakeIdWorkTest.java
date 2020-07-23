@@ -16,14 +16,12 @@ public class SnowFlakeIdWorkTest {
 
     @Test
     public void split(){
-        SnowFlakeIdWork.getInstance().nextId();
-        SnowFlakeIdWork.getInstance().nextId();
-        SnowFlakeIdWork.getInstance().nextId();
         long l = SnowFlakeIdWork.getInstance().nextId();
-        long[] split = SnowFlakeIdWork.split(l);
+        String [] split = SnowFlakeIdWork.splitFormat(0, l);
         System.out.println("splitBatchFun = " + Arrays.toString(split));
 
-        System.out.println("splitBatchFun = " + Arrays.toString(SnowFlakeIdWork.split(1012400433719853056L)));
-        System.out.println("splitBatchFun = " + Arrays.toString(SnowFlakeIdWork.split(1012441828497702912L)));
+        System.out.println("splitBatchFun = " + Arrays.toString(SnowFlakeIdWork.splitFormat(0,1104000353513795584L)));
+        // System.out.println("splitBatchFun = " + Arrays.toString(SnowFlakeIdWork.split(1104000353513795584L)));
+        System.out.println("splitBatchFun = " + Arrays.toString(SnowFlakeIdWork.splitFormat(0, 1012441828497702912L)));
     }
 }

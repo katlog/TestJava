@@ -7,10 +7,8 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Iterator;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -97,10 +95,19 @@ public class SnowFlakeIdWork {
     }
 
     public static long[] split(long id){
-        long timeDiff = id >> TIMESTAMP_LEFT_SHIFT;
+        long timeDiff = (id >> TIMESTAMP_LEFT_SHIFT )+TWEPOCH;
         long workId = id >> WORKER_ID_SHIFT & MAX_WORKER_ID;
         long sequence = id & SEQUENCE_MASK;
         return new long[]{timeDiff, workId, sequence};
+    }
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
+
+    public static String[] splitFormat(long twepoch, long id){
+        long timeDiff = (id >> TIMESTAMP_LEFT_SHIFT) + (twepoch > 0 ? twepoch : TWEPOCH);
+        long workId = id >> WORKER_ID_SHIFT & MAX_WORKER_ID;
+        long sequence = id & SEQUENCE_MASK;
+        return new String[]{"time:" + sdf.format(new Date(timeDiff)), "workId:" + workId, "sequence:" + sequence};
     }
 
     private long tilNextMillis(long lastTimestamp) {
