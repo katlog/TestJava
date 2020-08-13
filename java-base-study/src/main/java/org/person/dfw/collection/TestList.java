@@ -45,6 +45,10 @@ public class TestList {
 			list.add(i);
 		}
 		System.out.println(list.toString());
+		for (Object o : list) {
+			System.out.print(o+",");
+		}
+		System.out.println();
 		Collections.sort(list);
 		System.out.println(list.toString());
 	}
@@ -100,5 +104,18 @@ public class TestList {
 		assertEquals(0,b.size());
 		List<Integer> c = b.stream().filter(i -> i == 0).collect(Collectors.toList());
 		assertEquals(0, c.size());
+	}
+
+	@Test
+	public void _linkList(){
+		List<Integer> a = Arrays.asList(1, 2, 3, 4);
+		List<Integer> b = new LinkedList<>(a);
+
+		b.add(1, 10);
+		System.out.println("b = " + b);
+
+
+		b.add(5, 11);
+		System.out.println("b = " + b);
 	}
 }

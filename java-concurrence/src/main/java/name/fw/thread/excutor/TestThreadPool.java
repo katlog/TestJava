@@ -51,15 +51,18 @@ public class TestThreadPool {
     }
 
 
-    @Test(expected = java.lang.ArithmeticException.class)
+    /** 这种情况下不会抛出异常，没有future#get */
+    @Test
     public void submit() throws ExecutionException, InterruptedException {
         ExecutorService threadPool = Executors.newCachedThreadPool();
-        Future<Boolean> submit = threadPool.submit(() -> {
-            System.out.println("threadPool = " + 1 / 0);
-            return true;
-        });
+        // 不会抛异常出来
         threadPool.submit(() -> {
             System.out.println("threadPool = " + 2 / 0);
+            return true;
+        });
+        // 会抛异常出来（因为通过future#get了）
+        Future<Boolean> submit = threadPool.submit(() -> {
+            System.out.println("threadPool = " + 1 / 0);
             return true;
         });
         Boolean aBoolean = submit.get();

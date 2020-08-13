@@ -120,4 +120,8 @@ public class TestOptional {
         assertTrue(result.isPresent());
     }
 
+    @Test
+    public void flatMap(){
+    }
+
 }
