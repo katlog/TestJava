@@ -15,12 +15,14 @@ public class RemoteLoader {
 		StereoOnCommand stereoOn = new StereoOnCommand(stereo);
 		TVOnCommand tvOn = new TVOnCommand(tv);
 		HottubOnCommand hottubOn = new HottubOnCommand(hottub);
+
+		Command[] partyOn = { lightOn, stereoOn, tvOn, hottubOn};
+
 		LightOffCommand lightOff = new LightOffCommand(light);
 		StereoOffCommand stereoOff = new StereoOffCommand(stereo);
 		TVOffCommand tvOff = new TVOffCommand(tv);
 		HottubOffCommand hottubOff = new HottubOffCommand(hottub);
 
-		Command[] partyOn = { lightOn, stereoOn, tvOn, hottubOn};
 		Command[] partyOff = { lightOff, stereoOff, tvOff, hottubOff};
   
 		MacroCommand partyOnMacro = new MacroCommand(partyOn);

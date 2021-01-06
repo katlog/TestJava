@@ -46,7 +46,6 @@
 		<module>java-simple-framework</module>
 		<module>java-base-corejava</module>
         <module>java-base-8in-action</module>
-        <module>java-design-ddd</module>
     </modules>
 
     <distributionManagement>
