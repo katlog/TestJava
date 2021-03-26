@@ -8,6 +8,7 @@
  */ 
 package name.katlog.junit;
 
+import lombok.Data;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,13 +19,14 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 public class TestHamcrest {
-    class User implements Serializable{
-        protected int userId;        public int getUserId() { return userId;} public void setUserId(int userId) { this.userId = userId;}
-        protected String userName;   public String getUserName() { return userName;} public void setUserName(String userName) {this.userName = userName;}
-        protected String password;   public String getPassword() { return password; } public void setPassword(String password) {this.password = password;}
-        protected Date lastVisit;    public Date getLastVisit() { return lastVisit;} public void setLastVisit(Date lastVisit) { this.lastVisit = lastVisit;}
-        protected String lastIp;     public String getLastIp() { return lastIp;}public void setLastIp(String lastIp) { this.lastIp = lastIp;}
-        private int credits;         public int getCredits() {return credits;}  public void setCredits(int credits) {this.credits = credits;}
+    @Data
+    static class User implements Serializable{
+        protected int userId;
+        protected String userName;
+        protected String password;
+        protected Date lastVisit;
+        protected String lastIp;
+        private int credits;
         public User(){} public User(String userName,String password){ this.userName = userName; this.password = password; }
     }
     
@@ -32,9 +34,9 @@ public class TestHamcrest {
     private User john;
     @Before
     public void init() {
-        tom = new User("tom","1234");
+        tom = new User("tom", "1234");
         tom.setCredits(100);
-        john = new User("john","1234");
+        john = new User("john", "1234");
         john.setCredits(50);
     }
 
