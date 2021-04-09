@@ -11,7 +11,10 @@ package name.katlog.collection;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -117,5 +120,27 @@ public class TestList {
 
 		b.add(5, 11);
 		System.out.println("b = " + b);
+	}
+
+	/** 测试遍历的时候能否改: */
+	@Test
+	public void practice_iterUpdate(){
+		List<Up> list = new ArrayList<>();
+		list.add(new Up("origin"));
+
+		for (int i = 0; i < list.size(); i++) {
+			// 相当于一个新指针指向了list
+			Up up = list.get(i);
+			// 新指针指向新对象，所以什么也没改
+			up = new Up("up");
+			System.out.println("up = " + up);
+		}
+
+		System.out.println(Arrays.toString(list.toArray()));
+	}
+	@Data
+	@AllArgsConstructor
+	private static class Up{
+		String u;
 	}
 }

@@ -1,5 +1,6 @@
 package lambdasinaction.chap7;
 
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.*;
 
 public class ParallelStreams {
@@ -42,9 +43,23 @@ public class ParallelStreams {
 
     public static class Accumulator {
         private long total = 0;
-
+        /** 非原子操作 */
         public void add(long value) {
             total += value;
         }
+    }
+
+    public static class AccumulatorAtom {
+        private AtomicLong total = new AtomicLong(0); ;
+
+        public void add(long value) {
+            total.addAndGet(value);
+        }
+    }
+
+    public static long removeSideEffectParallelSum(long n) {
+        AccumulatorAtom accumulator = new AccumulatorAtom();
+        LongStream.rangeClosed(1, n).parallel().forEach(accumulator::add);
+        return accumulator.total.get();
     }
 }

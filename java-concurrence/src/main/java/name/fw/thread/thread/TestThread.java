@@ -45,11 +45,24 @@ public class TestThread {
         a.start();
 
         Thread b = new Thread(() -> {
+
+            // 先让main获取a锁
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             synchronized (a) {
+                System.err.println("b get lock...");
+
                 for (int i = 0; i < 10; i++) {
                     if (i == 3) {
                         try {
+                            System.err.println("b ready to release lock...");
+                            // 线程执行完毕了exit过程有一个notifyAll操作
                             a.join();
+                            System.err.println("b re get lock...");
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -62,7 +75,9 @@ public class TestThread {
         b.start();
 
         synchronized (a) {
+            System.err.println("main get lock...");
             a.wait();
+            System.err.println("main re get lock... ");
         }
         System.out.println("over... ");
     }

@@ -1,4 +1,4 @@
-package name.katlog.collection;
+package name.katlog.collection.stream;
 
 import com.google.common.collect.Lists;
 import lombok.AccessLevel;
@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
@@ -212,5 +213,20 @@ public class TestStream {
        }
     }
 
+    /** 可把流转换成并行流 */
+    @Test
+    public void parallel(){
+        Long sum = Stream.iterate(1L, i -> i + 1)
+                .limit(10_000)
+                .parallel()   // ←─将流转换为并行流
+                .reduce(0L, Long::sum);
 
+        System.out.println("sum = " + sum);
+    }
+
+    /** 可把并行流变成顺序流 */
+    @Test
+    public void sequential(){
+        
+    }
 }

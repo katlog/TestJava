@@ -28,7 +28,7 @@ public class TestClassLoader extends ClassLoader {
 		MyClassLoader diskLoader = new MyClassLoader(TestClassLoader.class.getResource("/").getPath());
 		try {
 //			Class c = diskLoader.loadClass("org.person.dfw.classloader.Test");
-			Class<?> c = diskLoader.findClass("org.person.dfw.classloader.Test");
+			Class<?> c = diskLoader.findClass("name.katlog.classloader.Test");
 			if (c != null) {
 				try {
 					Object obj = c.newInstance();
@@ -48,14 +48,19 @@ public class TestClassLoader extends ClassLoader {
 	
 	@Test public void getpath(){
 		ClassLoader appClassLoader = TestClassLoader.class.getClassLoader();
-		System.out.println(appClassLoader.getResource(""));//file:/C:/Users/lenovo/git/TestJava/TestJava/target/classes/
-		System.out.println(appClassLoader.getResource("/"));//null
-		System.out.println(appClassLoader.getSystemResource(""));//file:/C:/Users/lenovo/git/TestJava/TestJava/target/classes/
+
+		//file:/C:/Users/lenovo/git/TestJava/TestJava/target/classes/
+		System.out.println(appClassLoader.getResource(""));
+		//null
+		System.out.println(appClassLoader.getResource("/"));
+		//file:/C:/Users/lenovo/git/TestJava/TestJava/target/classes/
+		System.out.println(appClassLoader.getSystemResource(""));
 	}
 
 	// region-------------------------ContextClassLoader的使用
 	/**设置ClassPath下的类加载器，不用默认的AppClassLoader*/
-	@Test public void setContextClassLoader(){
+	@Test
+	public void setContextClassLoader(){
 		//当前的类加载器
 		ClassLoader appClassLoader1 = TestClassLoader.class.getClassLoader();
 		ClassLoader appClassLoader2 = Thread.currentThread().getContextClassLoader();
