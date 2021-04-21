@@ -53,13 +53,24 @@ public class BestPriceFinder {
                 shops.stream()
                 .map(shop -> CompletableFuture.supplyAsync(() -> shop.getName() + " price is "
                         + shop.getPrice(product), executor))
-                //.map(CompletableFuture::join) 直接在这join的话会顺序执行？
+                //.map(CompletableFuture::join) 直接在这join的话会顺序执行？[执行结果是顺序执行]
                 .collect(Collectors.toList());
 
         List<String> prices = priceFutures.stream()
                 .map(CompletableFuture::join)
                 .collect(Collectors.toList());
         return prices;
+
+    }
+
+    public List<String> findPricesFutureWrongWay(String product) {
+
+        return
+                shops.stream()
+                        .map(shop -> CompletableFuture.supplyAsync(() -> shop.getName() + " price is "
+                                + shop.getPrice(product), executor))
+                        .map(CompletableFuture::join) //直接在这join的话会顺序执行？[执行结果是顺序执行]
+                        .collect(Collectors.toList());
     }
 
     public List<String> findPricesInUSD(String product) {

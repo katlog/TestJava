@@ -54,70 +54,45 @@ public class TestThreadLocal {
         int age;
     }
 
-    @Test
-    public void set_whenGc() throws InterruptedException {
-
-      Thread t1=  new Thread(() -> {
-            ThreadLocal<Person> th2 = new ThreadLocal<>();
-            Person value2 = new Person("LI",18);
-            th2.set(value2);
-
-            threadMap(Thread.currentThread());
-
-            // 没有gc的时候 暂不回收key
-            th2 = null;
-            threadMap(Thread.currentThread());
-
-            /**
-             * 哈希表条目使用\作为键。但是，由于不使用引用队列，因此只有当表开始耗尽空间时，才保证删除过时的条目
-             * */
-            // gc 会把没有强引用的key回收 但 value和entry都还在
-            value2 = null;
-            System.gc();
-            threadMap(Thread.currentThread());
-
-
-
-        });
-
-      t1.start();
-      t1.join();
-
-      threadMap(t1);
-
-      Thread.sleep(100);
-    }
 
     @Test
-    public void _whenGc1() throws InterruptedException {
+    public void _whenGc() throws InterruptedException {
 
         Thread t1=  new Thread(() -> {
 
-            List<Person> personList = IntStream.rangeClosed(1, 17).mapToObj(value -> new Person("LI" + value, value))
-                    .collect(Collectors.toList());
-
             ThreadLocal<Person> th2 = new ThreadLocal<>();
-            Person value2 = new Person("LI",18);
-            th2.set(value2);
             th2.set(new Person("1", 1));
 
-            threadMap(Thread.currentThread());
-
+            th2 = null;
             // 没有gc的时候 暂不回收key
             threadMap(Thread.currentThread());
 
             /**
              * 哈希表条目使用\作为键。但是，由于不使用引用队列，因此只有当表开始耗尽空间时，才保证删除过时的条目
              * */
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             // gc 会把没有强引用的key回收 但 value和entry都还在
+            System.out.println("begin to gc....");
             System.gc();
             threadMap(Thread.currentThread());
 
-
+            // 保证主线程执行threadMap时t1线程还没执行完，否则，t1中的threadLocals字段为空了
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
         });
 
         t1.start();
+
+        Thread.sleep(100);
 
         threadMap(t1);
 
