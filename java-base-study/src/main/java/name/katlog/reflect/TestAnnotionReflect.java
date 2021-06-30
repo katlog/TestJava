@@ -5,7 +5,7 @@
  * @date: 2017年4月13日 上午9:31:27
  * @version: V1.0
  */
-package name.katlog.refelct;
+package name.katlog.reflect;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;

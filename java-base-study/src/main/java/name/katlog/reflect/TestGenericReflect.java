@@ -1,4 +1,4 @@
-package name.katlog.refelct;
+package name.katlog.reflect;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

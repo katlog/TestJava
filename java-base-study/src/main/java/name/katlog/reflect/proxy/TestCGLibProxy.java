@@ -1,4 +1,4 @@
-package name.katlog.refelct.proxy;
+package name.katlog.reflect.proxy;
 
 import java.lang.reflect.Method;
 

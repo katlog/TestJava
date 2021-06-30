@@ -6,7 +6,7 @@
  * @date: 2017年4月12日 上午9:13:10
  * @version: V1.0  
  */ 
-package name.katlog.refelct;
+package name.katlog.reflect;
 
 import org.junit.Test;
 import sun.misc.Contended;
@@ -195,10 +195,10 @@ public class TestReflect {
     public void classPath() throws MalformedURLException{
         
         String classPath = "file:/C:/Users/lenovo/git/TestJava/TestJava/target/classes/";
-        String packagePath = classPath+"org/person/dfw/refelct/";
+        String packagePath = classPath+"org/person/dfw/reflect/";
         
         /**不以'/'开头时，默认是从此类所在的包下取资源*/
-        assertEquals(TestReflect.class.getResource(""), new URL(packagePath));//file:/C:/Users/lenovo/git/TestJava/TestJava/target/classes/org/person/dfw/refelct/
+        assertEquals(TestReflect.class.getResource(""), new URL(packagePath));//file:/C:/Users/lenovo/git/TestJava/TestJava/target/classes/org/person/dfw/reflect/
         /**以'/'开头时，则是从项目的ClassPath根下获取资源配【技巧/相当于Linux下根目录感觉】*/
         assertEquals(TestReflect.class.getResource("/"), new URL(classPath));//file:/C:/Users/lenovo/git/TestJava/TestJava/target/classes/
         

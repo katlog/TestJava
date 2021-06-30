@@ -127,4 +127,22 @@ public class TestThread {
             }
         }
     }
+
+    /**
+     * 获取全部线程栈
+     *
+     */
+    @Test
+    public void getAllStackTraces(){
+        Thread.getAllStackTraces().forEach((thread, stackTraceElements) -> {
+            if (thread == Thread.currentThread()) {
+
+                for (StackTraceElement element : stackTraceElements) {
+                    System.out.println("element = " + element);
+                    int lineNumber = element.getLineNumber();
+                }
+
+            }
+        });
+    }
 }

@@ -16,7 +16,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.junit.Test;
-import name.katlog.refelct.util.BeanUtil;
+import name.katlog.reflect.util.BeanUtil;
 import name.katlog.util.collections.MapUtil;
 import name.katlog.util.Print;
 import org.w3c.dom.Attr;

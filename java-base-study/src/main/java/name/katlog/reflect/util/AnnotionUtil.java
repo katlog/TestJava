@@ -6,7 +6,7 @@
  * @date: 2017年4月19日 下午5:47:23
  * @version: V1.0  
  */ 
-package name.katlog.refelct.util;
+package name.katlog.reflect.util;
 
 /**
  * @moudle: AnnotionUtil 

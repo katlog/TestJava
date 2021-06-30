@@ -1,4 +1,4 @@
-package name.katlog.refelct;
+package name.katlog.reflect;
 
 import org.junit.Test;
 

@@ -63,13 +63,11 @@ public class TestThreadLocal {
             ThreadLocal<Person> th2 = new ThreadLocal<>();
             th2.set(new Person("1", 1));
 
-            th2 = null;
             // 没有gc的时候 暂不回收key
+            System.gc();
             threadMap(Thread.currentThread());
+            th2 = null;
 
-            /**
-             * 哈希表条目使用\作为键。但是，由于不使用引用队列，因此只有当表开始耗尽空间时，才保证删除过时的条目
-             * */
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
@@ -77,7 +75,8 @@ public class TestThreadLocal {
             }
 
             // gc 会把没有强引用的key回收 但 value和entry都还在
-            System.out.println("begin to gc....");
+            // key使用WeakReference(非必须对象)类型，只要有gc就会被回收
+            System.out.println("set null and begin to gc....");
             System.gc();
             threadMap(Thread.currentThread());
 

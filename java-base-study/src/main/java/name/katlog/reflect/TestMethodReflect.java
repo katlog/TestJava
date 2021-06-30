@@ -1,4 +1,4 @@
-package name.katlog.refelct;
+package name.katlog.reflect;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,19 +31,10 @@ public class TestMethodReflect {
     public void method1(){
     }
 
-    @Action
-    public String method2( String[] strings){
-        return strings[0];
-    }
 
     @Test
     public void _construct() throws NoSuchMethodException {
-
-        Method test = TestMethodReflect.class.getMethod("method1", null);
-        assertNotNull(test);
-
-        Method method2 = TestMethodReflect.class.getMethod("method2", String[].class);
-        method2.isVarArgs();
+        assertNotNull(method1);
     }
 
     @Test
@@ -60,8 +51,14 @@ public class TestMethodReflect {
     @Test
     public void getParameters() throws NoSuchMethodException {
         Parameter[] parameters = clazz.getDeclaredMethod("parameterMethod0", List.class).getParameters();
-        System.out.println("parameters = " + parameters);
+        assertEquals(1, parameters.length);
 
+        Parameter parameter = parameters[0];
+
+        assertEquals("arg0", parameter.getName());
+        assertEquals(List.class, parameter.getType());
+        assertEquals(0, parameter.getAnnotations().length);
+        // assertTrue(Modifier.isPrivate(parameter.getModifiers()));
     }
 
     private void genericParameterMethod0(List list){}
@@ -170,6 +167,44 @@ public class TestMethodReflect {
 
         Method bb = clazz.getMethod("nonReturnTypeMethod", null);
         assertEquals(String.class, bb.getAnnotatedReturnType().getType());
+    }
+
+
+
+    /** 方法的参数是不是可变数量参数 */
+    public String varArgsMethod(String... strings){
+        return strings[0];
+    }
+    @Test
+    public void isVarArgs() throws NoSuchMethodException {
+        Method varArgsMethod = TestMethodReflect.class.getMethod("varArgsMethod", String[].class);
+        assertTrue(varArgsMethod.isVarArgs());
+    }
+
+
+    /** 反射调用 */
+    public int run(){
+        System.out.println("run..." );
+        return 1;
+    }
+    public static int runStatic(){
+        System.out.println("run static..." );
+        return 1;
+    }
+    @Test
+    public void invoke() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        // 调用实例方法
+        Method runMethod = TestMethodReflect.class.getMethod("run", null);
+        Object result = runMethod.invoke(this, null);
+        assertEquals(1, result);
+
+        // 调用静态方法[obj]
+        Method runStatic = TestMethodReflect.class.getMethod("runStatic", null);
+        result = runStatic.invoke(null, null);
+        assertEquals(1, result);
+
+        result = runStatic.invoke(this, null);
+        assertEquals(1, result);
     }
 
 }

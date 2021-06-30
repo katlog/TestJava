@@ -7,7 +7,7 @@
  * @date: 2017年2月28日 下午2:49:02
  * @version: V1.0  
  */ 
-package name.katlog.refelct.util;
+package name.katlog.reflect.util;
 
 import java.io.File;
 import java.lang.reflect.Field;

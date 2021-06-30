@@ -172,4 +172,29 @@ public class TestLambda {
 		System.out.println("Sum of all prime numbers : " + stats.getSum());  
 		System.out.println("Average of all prime numbers : " + stats.getAverage());  
 	}
+
+	/** 测试lambda表达式是不是一个对象 */
+	@Test
+	public void _isLambdaObject(){
+
+		// 3次生成的同一个对象【可以用装饰器添加状态】
+		for (int i = 0; i < 3; i++) {
+			Action action = param -> {};
+			print(action);
+		}
+
+		// 3次生成的3个对象
+		for (int i = 0; i < 3; i++) {
+			print(new Action() {
+				@Override
+				public void run(String param) {
+				}
+			});
+		}
+	}
+
+	private void print(Action action){
+		System.out.println("action = " + action);
+		System.out.println("action = " + action.hashCode());
+	}
 }

@@ -2,7 +2,7 @@ package name.katlog.program.primitive;
 
 import java.util.Map;
 
-import name.katlog.refelct.util.BeanUtil;
+import name.katlog.reflect.util.BeanUtil;
 import org.junit.Test;
 import name.katlog.util.Print;
 import name.katlog.util.collections.MapUtil;

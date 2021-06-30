@@ -1,4 +1,4 @@
-package name.katlog.refelct.util;
+package name.katlog.reflect.util;
 
 import static org.junit.Assert.fail;
 

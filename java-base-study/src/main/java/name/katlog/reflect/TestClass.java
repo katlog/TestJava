@@ -1,11 +1,10 @@
-package name.katlog.refelct;
+package name.katlog.reflect;
 
 import org.junit.Test;
 import sun.misc.Contended;
 import sun.reflect.generics.factory.CoreReflectionFactory;
 import sun.reflect.generics.reflectiveObjects.TypeVariableImpl;
 import sun.reflect.generics.scope.ClassScope;
-import sun.reflect.generics.scope.Scope;
 import sun.reflect.generics.tree.FieldTypeSignature;
 
 import javax.annotation.Tainted;
@@ -56,6 +55,12 @@ public class TestClass {
                         DemoClass.PublicInnerClass.class
                         }
                     ,classes);
+    }
+
+    /** 获取规范名称 */
+    @Test
+    public void getCanonicalName(){
+        assertEquals("name.katlog.reflect.TestClass.DemoClass", clazz.getCanonicalName());
     }
 
 

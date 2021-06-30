@@ -6,7 +6,7 @@
  * @date: 2017年4月20日 下午3:37:46
  * @version: V1.0  
  */ 
-package name.katlog.refelct.proxy.demo;
+package name.katlog.reflect.proxy.demo;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -85,7 +85,7 @@ public class ConfigFactory {
         //java.io默认定位到当前用户目录("user.dir")下
         System.out.println(System.getProperty("user.dir"));
         IConfig config = ConfigFactory.create(new FileInputStream("java-base-study/src" +
-                "/main/java/org/person/dfw/refelct/proxy/demo/config.properties"));
+                "/main/java/org/person/dfw/reflect/proxy/demo/config.properties"));
         String dbUrl = config.dbUrl();
         System.out.println(dbUrl);
         boolean isLoginValidated = config.isValidated();

@@ -1,10 +1,16 @@
 package name.katlog.asm._06tree_api;
 
 import org.junit.Test;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.util.TraceClassVisitor;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,8 +18,8 @@ import static org.objectweb.asm.Opcodes.*;
 
 public class TreeApi {
 
+    /** 6.1.2 生成类 */
     @Test
-    /** 生成类 */
     public void classGenerate() {
         ClassNode cn = new ClassNode();
         cn.version = V1_5;
@@ -26,10 +32,15 @@ public class TreeApi {
         cn.fields.add(new FieldNode(ACC_PUBLIC + ACC_FINAL + ACC_STATIC,"GREATER", "I", null, new Integer(1)));
         cn.methods.add(new MethodNode(ACC_PUBLIC + ACC_ABSTRACT,"compareTo", "(Ljava/lang/Object;)I", null, null));
 
+        ClassWriter cw = new ClassWriter(Opcodes.ASM5);
+        TraceClassVisitor tcv = new TraceClassVisitor(cw, new PrintWriter(System.out));
+        cn.accept(tcv);
+
+        byte[] bytes = cw.toByteArray();
     }
 
+    /** 6.1.3 添加field  移除method*/
     @Test
-    /** 添加field  移除method*/
     public void addField() {
 
         class ClassTransformer {
@@ -95,9 +106,19 @@ public class TreeApi {
     }
 
     @Test
-    /** 组件合成 */
-    public void componentSynthesis() {
+    /** 6.2.1 组件合成：由一个类的字节数组表示来构造一个 ClassNode，或由 ClassNode 构造这个字节数组 */
+    public void componentSynthesis() throws IOException {
 
+        // ClassNode 扩展了ClassVisitor
+
+        // 要由字节数组构建 ClassNode，可将它与 ClassReader 合在一起，使 ClassReader生成的事件可供 ClassNode 组件使用
+        ClassNode cn = new ClassNode();
+        ClassReader cr = new ClassReader(String.class.getCanonicalName());
+        cr.accept(cn, 0);
+
+        for (FieldNode field : (List<FieldNode>)cn.fields) {
+            System.out.println("field = " + field.name);
+        }
     }
 
 

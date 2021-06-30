@@ -274,6 +274,8 @@ public class TestCompletableFuture {
             return t;
         });
         f1.thenAcceptBoth(f2, (t, u) -> System.out.println("f1="+t+";f2="+u+";"));
+
+        System.out.println("result ...");
         TimeUnit.SECONDS.sleep(3);
     }
 
