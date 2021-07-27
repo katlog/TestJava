@@ -1,5 +1,6 @@
 package name.katlog.program.primitive;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class TestInteger {
@@ -10,7 +11,8 @@ public class TestInteger {
         
     }
     
-    @Test public void toBinaryString(){
+    @Test
+    public void toBinaryString(){
         int i = 1111111170;
         System.out.println("Number = " + i);
        
@@ -20,5 +22,13 @@ public class TestInteger {
 
         // returns the number of one-bits 
         System.out.println("Number of one bits = " + Integer.bitCount(i)); 
+    }
+
+    @Test
+    public void Constant(){
+
+        Assert.assertEquals(-2147483648, Integer.MIN_VALUE);
+        Assert.assertEquals(2147483647, Integer.MAX_VALUE);
+
     }
 }

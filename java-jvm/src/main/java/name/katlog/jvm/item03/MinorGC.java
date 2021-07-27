@@ -54,6 +54,7 @@ public class MinorGC {
     static class MinorGC3 {
 
         /**
+         * 清单3-7　长期存活的对象进入老年代
          * VM参数：-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=1 -XX:+PrintTenuringDistribution
          */
         @SuppressWarnings("unused")
@@ -73,6 +74,7 @@ public class MinorGC {
     }
     static class MinorGC4 {
         /**
+         * 清单3-8　动态对象年龄判定
          * VM参数：-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=15 -XX:+PrintTenuringDistribution
          */
         @SuppressWarnings("unused")
@@ -94,21 +96,33 @@ public class MinorGC {
     static class MinorGC5{
 
         /**
+         * 清单3-9　空间分配担保
          * VM参数：-Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:-HandlePromotionFailure
          */
         @SuppressWarnings("unused")
         public static void testHandlePromotion() {
             byte[] allocation1, allocation2, allocation3, allocation4, allocation5, allocation6, allocation7;
+            System.out.println("allocation1 allocation ");
             allocation1 = new byte[2 * _1MB];
+            System.out.println("allocation2 allocation ");
             allocation2 = new byte[2 * _1MB];
+            System.out.println("allocation3 allocation ");
             allocation3 = new byte[2 * _1MB];
+            System.out.println("allocation1 clear ");
             allocation1 = null;
+            System.out.println("allocation4 allocation ");
             allocation4 = new byte[2 * _1MB];
+            System.out.println("allocation5 allocation ");
             allocation5 = new byte[2 * _1MB];
+            System.out.println("allocation6 allocation ");
             allocation6 = new byte[2 * _1MB];
+            System.out.println("allocation4 clear ");
             allocation4 = null;
+            System.out.println("allocation5 clear ");
             allocation5 = null;
+            System.out.println("allocation6 clear ");
             allocation6 = null;
+            System.out.println("allocation7 allocation ");
             allocation7 = new byte[2 * _1MB];
         }
 

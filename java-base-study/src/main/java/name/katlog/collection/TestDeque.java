@@ -1,6 +1,5 @@
 package name.katlog.collection;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,6 +10,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 import static org.junit.Assert.*;
 
+/** 双端队列接口 */
 public class TestDeque {
 
     private Deque<String> deque;
@@ -21,7 +21,7 @@ public class TestDeque {
     }
 
 
-    /** 添加元素：容量受限时 */
+    /** 添加元素：容量受限时抛异常 */
     @Test
     public void add(){
         deque.add("5");
@@ -42,7 +42,7 @@ public class TestDeque {
         deque.add(4);
     }
 
-    /** 添加元素 */
+    /** 添加元素：容量受限时不会抛异常，会返回false */
     @Test
     public void offer(){
         deque.offer("5");
@@ -63,12 +63,19 @@ public class TestDeque {
         assertArrayEquals(new Integer[]{1, 2, 3}, deque1.toArray());
     }
 
-    /** 取出元素：不删除 */
+    /** 取出元素：不删除，等同于peekFirst */
     @Test
     public void peek() {
         assertEquals("1", deque.peek());
 
         assertEquals("1", deque.peek());
+    }
+
+    @Test
+    public void peekLast(){
+        assertEquals("4", deque.peekLast());
+
+        assertEquals("4", deque.peekLast());
     }
 
     /** 取出元素：会删除 */
@@ -79,4 +86,18 @@ public class TestDeque {
         assertEquals("2", deque.poll());
     }
 
+    /** 等同于：removeFirst */
+    @Test
+    public void remove(){
+        assertEquals("1", deque.remove());
+
+        assertEquals("2", deque.remove());
+    }
+
+    @Test
+    public void removeLast(){
+        assertEquals("4", deque.removeLast());
+
+        assertEquals("3", deque.removeLast());
+    }
 }

@@ -30,7 +30,7 @@ public class TestQueue {
         System.out.println("queue = " + queue);
     }
 
-    /**  */
+    /** 不会删除 */
     @Test
     public void element(){
         Queue<Integer> queue = new PriorityQueue<>();
@@ -40,12 +40,12 @@ public class TestQueue {
 
         System.out.println("queue = " + queue);
 
-        int poll = queue.element();
-        System.out.println("poll = " + poll);
+        int element = queue.element();
+        System.out.println("element = " + element);
         System.out.println("queue = " + queue);
 
-        poll = queue.element();
-        System.out.println("poll = " + poll);
+        element = queue.element();
+        System.out.println("element = " + element);
         System.out.println("queue = " + queue);
     }
 
