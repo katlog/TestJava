@@ -1,8 +1,13 @@
 package name.katlog.collection.stream;
 
 import com.google.common.collect.Lists;
+import com.google.gson.JsonObject;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Setter;
+import name.katlog.util.JsonUtil;
+import net.sf.json.util.JSONUtils;
 import org.junit.Test;
 
 import java.util.*;
@@ -12,10 +17,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static java.util.stream.Collectors.*;
+import static org.junit.Assert.*;
 
 /**
  * Created by fw on 2018/12/24
@@ -71,6 +74,8 @@ public class TestStream {
         assertEquals(0, collect.size());
     }
 
+    /** --------------------  toMap  ----------------------------  */
+
     @Test
     public void collect_ToMap(){
         Map<String, String> stringMap = IntStream.rangeClosed(1, 100).mapToObj(Long::valueOf).collect(Collectors.toMap(o -> o + "", o -> o + ""));
@@ -89,6 +94,122 @@ public class TestStream {
         Map<String, String> stringMap = Lists.newArrayList("1", "2", "3", "1").stream().collect(toMap(Function.identity(), s->s + "-value", (s, s2) -> s + s2));
         assertEquals("1-value1-value", stringMap.get("1"));
     }
+    /** --------------------  toMap  ----------------------------  */
+
+
+    /** --------------------  groupBy  ----------------------------  */
+
+    @Data
+    @AllArgsConstructor
+    private static class Person implements Comparable<Person>{
+
+        private int age;
+        private String name;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Person person = (Person) o;
+            return Objects.equals(name, person.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name);
+        }
+
+        @Override
+        public int compareTo(Person o) {
+            return this.age - o.getAge();
+        }
+    }
+
+    /**
+     *
+     *  普通的单参数groupingBy(f)（其中f是分类函数）实际上是groupingBy(f, toList())的简便写法。
+     *
+     *  三个参数groupingBy(Fun classifier,Supplier<Map> map,Collector collector)
+     *      分类函数
+     *      生成Map的函数，默认HashMap
+     *      生成流的Collector，默认Collectors.toList()，对应到map中的value上
+     *
+     * */
+    @Test
+    public void collect_groupBy_toList(){
+        List<String> list = Lists.newArrayList("1", "2", "3", "4", "1", "2", "1");
+
+        // map1和map2是等价的
+        Map<String, List<String>> map1 = list.stream().collect(groupingBy(Function.identity()));
+
+        Map<String, List<String>> map2 = list.stream().collect(groupingBy(Function.identity(), toList()));
+
+    }
+
+    @Test
+    public void collect_groupBy_treeMap(){
+
+        // {1=[1, 1, 1], 2=[2, 2], 3=[3], 4=[4]}
+        TreeMap<String, List<String>> tree = Lists.newArrayList("1", "2", "3", "4", "1", "2", "1")
+                .stream()
+                .collect(groupingBy(Function.identity(), TreeMap::new, toList()));
+
+        Map.Entry<String, List<String>> firstEntry = tree.firstEntry();
+        assertEquals("1", firstEntry.getKey());
+        assertArrayEquals(new String[]{"1","1","1"}, firstEntry.getValue().toArray());
+
+        Map.Entry<String, List<String>> lastEntry = tree.lastEntry();
+        assertEquals("4", lastEntry.getKey());
+        assertArrayEquals(new String[]{"4"}, lastEntry.getValue().toArray());
+
+
+        //
+        TreeMap<Person, List<Person>> personTree = Lists.newArrayList(new Person(10, "ka"), new Person(9, "ka"), new Person(11, "ka")
+                , new Person(7, "li"), new Person(11, "li")
+                , new Person(17, "lin"))
+                .stream()
+                .collect(groupingBy(Function.identity(), TreeMap::new, toList()));
+
+        System.out.println("personTree = " + personTree);
+    }
+
+    /**
+     * mapping(Function<> mapper, Collector<> downstream)
+     *
+     */
+    @Test
+    public void collect_groupingBy_mapping(){
+
+        Map<Person, TreeSet<Person>> map = Lists.newArrayList(new Person(10, "ka"), new Person(9, "ka"), new Person(11, "ka")
+                , new Person(7, "li"), new Person(11, "li")
+                , new Person(17, "lin"))
+                .stream()
+                .collect(groupingBy(Function.identity(), mapping(
+                        Function.identity(), toCollection(TreeSet::new))));
+
+        // 根据 Person#name 判重
+        TreeSet<Person> kaTree = map.get(new Person(1, "ka"));
+        assertNotNull(kaTree);
+        assertEquals(9, kaTree.first().getAge());
+
+    }
+
+    /**
+     * collectingAndThen(Collector<> downstream, Function<R,RR> finisher)
+     *
+     * */
+    @Test
+    public void collect_collectingAndThen(){
+        Map<Integer, Person> collect = Lists.newArrayList(new Person(10, "ka"), new Person(9, "ka"), new Person(11, "ka")
+                , new Person(7, "li"), new Person(11, "li")
+                , new Person(17, "lin"))
+                .stream()
+                .collect(groupingBy(Person::getAge,
+                                    collectingAndThen(maxBy(Comparator.comparing(Person::getName)), Optional::get)));
+    }
+
+    /** --------------------  groupBy  ----------------------------  */
+
 
     @Test
     public void create() {

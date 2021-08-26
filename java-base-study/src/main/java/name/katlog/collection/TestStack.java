@@ -2,6 +2,7 @@ package name.katlog.collection;
 
 import org.junit.Test;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 import static org.junit.Assert.*;
@@ -52,6 +53,12 @@ public class TestStack {
         assertEquals("3", peek);
         peek = stack.peek();
         assertEquals("3", peek);
+    }
+
+    @Test(expected = EmptyStackException.class)
+    public void peekError(){
+        Stack<String> stack = new Stack<>();
+        stack.peek();
     }
 
     /** pop会删除栈顶元素 */

@@ -21,7 +21,7 @@ public class TestDeque {
     }
 
 
-    /** 添加元素：容量受限时抛异常 */
+    /** 添加元素：容量受限时抛异常  addLast*/
     @Test
     public void add(){
         deque.add("5");

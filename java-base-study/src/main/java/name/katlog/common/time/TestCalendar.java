@@ -25,6 +25,9 @@ import org.junit.Test;
  *
  */
 public class TestCalendar {
+
+	public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
+
 	/**
 	 * 获取存储时间
 	 * Title: getStoreTime
@@ -171,5 +174,15 @@ public class TestCalendar {
 		 
 		 Date endDate = calendar.getTime();
 		 System.out.println(sdf.format(endDate));
+	}
+
+
+
+	@Test
+	public void _common(){
+		Calendar calendar = Calendar.getInstance();
+		System.out.println("calendar = " + calendar);
+
+		System.out.println("calendar.getTime() = " + FORMAT.format(calendar.getTime()));
 	}
 }

@@ -7,7 +7,7 @@
  * @date: 2017年3月20日 下午6:01:10
  * @version: V1.0  
  */ 
-package name.katlog.collection;
+package name.katlog.collection.map;
 
 import org.junit.Test;
 
@@ -16,8 +16,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * @moudle: TestMap 
@@ -52,6 +51,28 @@ public class TestMap {
 		for (String key : keySet) {
 			System.out.println(key+":"+map.get(key));
 		}
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void get_NPE(){
+	 	Map<Integer,Integer> map = new HashMap<>();
+		map.put(2, 2);
+
+		// 等价于下面的 会报NPE
+		assertTrue(map.get(1) == 1);
+
+		assertEquals(1, (int) map.get(1));
+	}
+	
+	@Test
+	public void getOrDefault(){
+		Map<Integer,Integer> map = new HashMap<>();
+		map.put(2, 2);
+
+		// 等价于下面的 会报NPE
+		assertTrue(map.getOrDefault(1,1) == 1);
+
+		assertEquals(1, (int) map.getOrDefault(1, 1));
 	}
 
 	@Test
