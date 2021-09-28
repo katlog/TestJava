@@ -1,5 +1,6 @@
-package name.katlog.common.time;
+package name.katlog.common.instant;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.Timestamp;
@@ -9,7 +10,34 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import static java.time.Instant.*;
+import static java.time.Instant.ofEpochSecond;
+import static org.junit.Assert.assertEquals;
+
+/**
+ *  人类习惯于以星期几、几号、几点、几分这样的方式理解日期和时间，但对于计算机而言并不容易理解
+ *
+ *  从计算机的角度来看，建模时间最自然的格式是表示一个持续时间段上某个点的单一大整型数。
+ *
+ *  即Instant类对时间建模的方式，以Unix元年时间（传统的设定为UTC时区1970年1月1日午夜时分）开始所经历的秒数进行计算
+ * */
 public class TestInstant {
+
+
+    /**
+     * 通过向静态工厂方法ofEpochSecond传递一个代表秒数的值创建实例。
+     *
+     * 静态工厂方法ofEpochSecond还有一个增强的重载版本，它接收第二个以纳秒为单位的参数值，对传入作为秒数的参数进行调整。
+     * 重载的版本会调整纳秒参数，确保保存的纳秒分片在0到999 999999间。
+     * */
+    @Test
+    public void ofEpochSecond_(){
+
+        assertEquals(ofEpochSecond(3), ofEpochSecond(3, 0));
+
+        assertEquals(ofEpochSecond(2, 1_000_000_000), ofEpochSecond(4, -1_000_000_000));
+        assertEquals(ofEpochSecond(3), ofEpochSecond(2, 1_000_000_000));
+    }
 
     // 01. java.util.Date --> java.time.LocalDateTime
     public void UDateToLocalDateTime() {
@@ -71,7 +99,7 @@ public class TestInstant {
     final Timestamp timestamp = new Timestamp(date.getTime());
     final Calendar calendar = Calendar.getInstance();
 //
-    final Instant instant = Instant.now();
+    final Instant instant = now();
     final LocalDateTime localDateTime = LocalDateTime.now();
     final ZonedDateTime zonedDateTime = ZonedDateTime.now();
 
@@ -162,7 +190,7 @@ public class TestInstant {
         System.out.println("beginTime = " + beginTime);
 
 
-        Instant now = Instant.now();
+        Instant now = now();
         Instant maxTime = beginTime.minus(10, ChronoUnit.MINUTES);
         Instant minTime = beginTime.minus(-30, ChronoUnit.MINUTES);
 

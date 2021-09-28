@@ -56,6 +56,16 @@ public class TestStream {
                 .forEach(PRINTLN);
     }
 
+    /**
+     * collect三个参数，可替代Collector对象
+     *
+     * */
+    @Test
+    public void collect(){
+        HashSet<Object> set = Arrays.asList(4, 5, 13, 3, 54, 14, 56, 721)
+                .stream().collect(HashSet::new, HashSet::add, HashSet::addAll);
+    }
+
     @Test
     public void collect_toList(){
 
@@ -175,14 +185,16 @@ public class TestStream {
 
     /**
      * mapping(Function<> mapper, Collector<> downstream)
-     *
+     *      mapper 函数对流中的元素做变换
+     *      downstream 则将变换的结果对象收集起来
      */
     @Test
     public void collect_groupingBy_mapping(){
 
-        Map<Person, TreeSet<Person>> map = Lists.newArrayList(new Person(10, "ka"), new Person(9, "ka"), new Person(11, "ka")
+        List<Person> peoples = Lists.newArrayList(new Person(10, "ka"), new Person(9, "ka"), new Person(11, "ka")
                 , new Person(7, "li"), new Person(11, "li")
-                , new Person(17, "lin"))
+                , new Person(17, "lin"));
+        Map<Person, TreeSet<Person>> map = peoples
                 .stream()
                 .collect(groupingBy(Function.identity(), mapping(
                         Function.identity(), toCollection(TreeSet::new))));
@@ -192,11 +204,19 @@ public class TestStream {
         assertNotNull(kaTree);
         assertEquals(9, kaTree.first().getAge());
 
+        // map映射到name，并以LinkedList的形式收集起来
+        Map<Person, LinkedList<String>> map1 = peoples.stream().collect(groupingBy(Function.identity()
+                , mapping(Person::getName, toCollection(LinkedList::new))));
+
     }
 
     /**
      * collectingAndThen(Collector<> downstream, Function<R,RR> finisher)
+     *     downstream 要转换的收集器
+     *     finisher 及转换函数
+     *     返回另一个收集器。
      *
+     *  这个收集器相当于旧收集器的一个包装，collect操作的最后一步就是将返回值用转换函数做一个映射
      * */
     @Test
     public void collect_collectingAndThen(){

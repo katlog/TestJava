@@ -30,6 +30,23 @@ import static org.junit.Assert.assertEquals;
  */
 public class TestList {
 
+	/**
+	 * 两种添加：带坐标、不带坐标
+	 *  */
+	@Test
+	public void add(){
+		List<Integer>  list = new ArrayList<>();
+		list.add(0, 0);
+
+		for (int i = 0; i < 10; i++) {
+			list.add(i, i);
+		}
+		assertEquals(10, list.size());
+	}
+
+
+
+
 	@Test
 	public void size() {
 		List list = new ArrayList(100);

@@ -11,7 +11,9 @@ import java.util.stream.IntStream;
 import org.junit.Test;
 
 public class TestRuntime {
-	@Test public void _common() {
+
+	@Test
+	public void _common() {
 		// 获取Java运行时相关的运行时对象
 		Runtime rt = Runtime.getRuntime();
 		System.out.println("处理器数量：" + rt.availableProcessors() + " byte");
@@ -21,7 +23,8 @@ public class TestRuntime {
 		System.out.println("Jvm可用线程数量："+rt.availableProcessors());
 	}
 	
-	@Test public void exec(){//【路径这块一直很有问题啊！！！】
+	@Test
+	public void exec(){//【路径这块一直很有问题啊！！！】
 		  Runtime rt = Runtime.getRuntime();
 		  
 		  String thisClassPath = TestRuntime.class.getResource("runtimeExe.png").getFile();
@@ -34,8 +37,28 @@ public class TestRuntime {
 			e.printStackTrace();
 		}
 	}
+
+	@Test
+	public void exec_common() throws IOException {
+
+		Runtime runtime = Runtime.getRuntime();
+
+		//  是执行完dir命令后关闭命令窗口。
+		runtime.exec("cmd /c dir .");
+
+		//  是执行完dir命令后不关闭命令窗口。
+		runtime.exec("cmd /k dir");
+
+		// 会打开一个新窗口后执行dir指令，原窗口会关闭。
+		runtime.exec("cmd /c start dir ");
+
+		// 会打开一个新窗口后执行dir指令，原窗口不会关闭。
+		runtime.exec("cmd /k start dir c:");
+
+	}
 	
-	@Test public void addShutdownHook(){
+	@Test
+	public void addShutdownHook(){
 		// 定义线程1  
 		Thread thread1 = new Thread() {  
 			public void run() {  

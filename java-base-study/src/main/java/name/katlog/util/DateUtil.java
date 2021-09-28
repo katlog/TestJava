@@ -27,7 +27,7 @@ public final class DateUtil {
      /** 时间类型的格式 */
     private static final String TIME_FORMAT = "HH:mm:ss";
 
-    /** 注意SimpleDateFormat不是线程安全的 */
+    /** 注意SimpleDateFormat不是线程安全的(写spark任务中被坑过) */
     private static ThreadLocal<SimpleDateFormat> ThreadDateTime = new ThreadLocal<SimpleDateFormat>();
     private static ThreadLocal<SimpleDateFormat> ThreadDate = new ThreadLocal<SimpleDateFormat>();
     private static ThreadLocal<SimpleDateFormat> ThreadTime = new ThreadLocal<SimpleDateFormat>();

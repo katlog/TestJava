@@ -1,4 +1,4 @@
-package name.katlog.collection;
+package name.katlog.collection.set;
 
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
