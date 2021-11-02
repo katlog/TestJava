@@ -9,7 +9,7 @@ import java.util.concurrent.*;
  * @moudle: TestCountDownLatch
  * @author: katlog
  * @date: 2017年8月30日 下午5:42:04
- *	倒计数器 锁存器是一次性障碍，允许一个或者多个线程等待一个或者多个其它线程来做某些事情。
+ *	倒计数器 锁存器是一次性障碍，允许一个或多个线程等待一个或多个其它线程来做某些事情。
  *	CountDownLatch的唯一构造器带一个int类型的参数，这个int参数是指允许所有在等待线程被处理之前，
  *	必须在锁存器上调用countDown方法的次数
  *

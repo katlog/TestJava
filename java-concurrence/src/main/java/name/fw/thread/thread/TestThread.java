@@ -1,6 +1,9 @@
 package name.fw.thread.thread;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by fw on 2019/6/24
@@ -145,4 +148,25 @@ public class TestThread {
             }
         });
     }
+
+    /**
+     * 5种线程状态 new runnable blocked wait terminate
+     *  */
+    @Test
+    public void getState(){
+        Thread.State state = Thread.currentThread().getState();
+        assertEquals(Thread.State.RUNNABLE, state);
+
+        for (Thread.State value : Thread.State.values()) {
+            System.out.println("value = " + value);
+        }
+    }
+
+    @Test
+    public void active(){
+        /** 获取的不是很靠谱 */
+        int count = Thread.activeCount();
+        assertEquals(1, count);
+    }
+
 }
