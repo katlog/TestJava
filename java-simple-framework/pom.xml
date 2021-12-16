@@ -110,6 +110,19 @@
 
     <dependencies>
 
+        <!-- jcstress 核心包 -->
+        <dependency>
+            <groupId>org.openjdk.jcstress</groupId>
+            <artifactId>jcstress-core</artifactId>
+            <version>0.3</version>
+        </dependency>
+        <!-- jcstress测试用例包 -->
+        <dependency>
+            <groupId>org.openjdk.jcstress</groupId>
+            <artifactId>jcstress-samples</artifactId>
+            <version>0.3</version>
+        </dependency>
+
         <!--*****************************ASM字节码***********************************-->
         <dependency>
             <groupId>org.ow2.asm</groupId>

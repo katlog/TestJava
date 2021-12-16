@@ -12,6 +12,7 @@ http://www.broadview.com.cn/31065
 */
 package io.github.viscent.mtia.ch2;
 
+/** 清单2-11　猜测执行示例代码 */
 public class SpeculativeLoadExample {
   private boolean ready = false;
   private int[] data = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };

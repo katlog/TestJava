@@ -161,7 +161,7 @@ public class TestNIO {
 		}
 	}
 	
-	
+	/** 内存映射文件 */
 	@Test
 	public void testMappedByteBuffer() throws IOException{
 		FileInputStream fis = new FileInputStream("D:\\processor.txt");

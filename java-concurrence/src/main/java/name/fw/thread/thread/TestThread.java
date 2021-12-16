@@ -25,6 +25,21 @@ public class TestThread {
         System.out.println("diff = " + diff);
     }
 
+    @Test
+    public void sleep_state() throws InterruptedException {
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+
+        Thread.sleep(10);
+        assertEquals(Thread.State.TIMED_WAITING, thread.getState());
+    }
+
     /** 等待终止指定的线程
      *
      *  可让一个线程强制运行，线程强制运行期间其他线程无法运行，必须等此线程完成后才可继续执行。
@@ -167,6 +182,15 @@ public class TestThread {
         /** 获取的不是很靠谱 */
         int count = Thread.activeCount();
         assertEquals(1, count);
+    }
+
+    @Test
+    public void setUncaughtExceptionHandler(){
+        Thread t = new Thread(() -> {
+
+        });
+        t.start();
+
     }
 
 }

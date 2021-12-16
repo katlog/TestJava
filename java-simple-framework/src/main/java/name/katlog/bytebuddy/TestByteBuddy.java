@@ -28,6 +28,39 @@ import static net.bytebuddy.matcher.ElementMatchers.named;
 public class TestByteBuddy {
 
 
+    @Test
+    public void name(){
+        // 1 第一次输出一个简单的结构体
+        DynamicType.Unloaded<?> dynamicType = new ByteBuddy()
+                // 定义继承的类
+                .subclass(Object.class)
+                // 定义命名空间
+                .name("com.bd")
+                .make();
+
+        // 输出类字节码
+        outputClazz(dynamicType.getBytes(), 1);
+    }
+
+    /** 添加方法 */
+    @Test
+    public void addMethod(){
+        // 2 增加一些参数、属性信息
+        DynamicType.Unloaded<?> dynamicType2 = new ByteBuddy()
+                // 定义继承的类
+                .subclass(Object.class)
+                // 定义命名空间
+                .name("com.bd")
+                // 定义一个main方法，public权限，并且是static
+                .defineMethod("main", void.class, Modifier.PUBLIC + Modifier.STATIC)
+                // 定义参数
+                .withParameter(String[].class, "args")
+                // 定义一个局部变量为"Hello World!"
+                .intercept(FixedValue.value("Hello World!"))
+                .make();
+        outputClazz(dynamicType2.getBytes(), 2);
+    }
+
 
     /** 添加类方法 */
     @Test
@@ -142,7 +175,21 @@ public class TestByteBuddy {
     }
 
     public static class Moo{
+       public int mo;
+    }
 
+    @Test
+    public void modifField() throws IllegalAccessException, InstantiationException {
+        Moo mo = new ByteBuddy()
+                .subclass(Moo.class)
+                .field(named("mo"))
+                .attribute(typeDescription -> (fieldVisitor, fieldDescription, annotationValueFilter) -> {
+
+                    System.out.println("fieldVisitor = " + fieldVisitor);
+                }).make().load(ClassLoader.getSystemClassLoader())
+                .getLoaded().newInstance();
+
+        System.out.println("mo.mo = " + mo.mo);
     }
 
     @Test
@@ -187,4 +234,25 @@ public class TestByteBuddy {
         }
 
     }
+
+    private static void outputClazz(byte[] bytes, Integer num) {
+        FileOutputStream out = null;
+        try {
+            String pathName = TestByteBuddy.class.getResource("/").getPath() + "ByteBuddyHelloWorld_" + num + ".class";
+            out = new FileOutputStream(pathName);
+            System.out.println("类输出路径：" + pathName);
+            out.write(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != out) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }
