@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 import static org.junit.Assert.*;
 
@@ -21,6 +22,14 @@ public class TestOptional {
     class User{
         private String email;
         private String phone;
+        private Optional<String> address;
+
+        public User(String email, String phone) {
+            this.email = email;
+            this.phone = phone;
+        }
+
+
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -122,6 +131,25 @@ public class TestOptional {
 
     @Test
     public void flatMap(){
+        User user = new User("anna@gmail.com", "1234", Optional.of("wall street 885."));
+
+        // 注意flatMap与map的区别
+        Optional<String> s = Optional.ofNullable(user)
+                .flatMap(User::getAddress);
+
+        Optional<Optional<String>> s1 = Optional.ofNullable(user)
+                .map(User::getAddress);
+
+
     }
+
+    public <A, B, C> Optional<C> map2(Optional<A> a, Optional<B> b, BiFunction<A, B, C> f) {
+        return a.flatMap(aa ->
+                b.map(bb ->
+                        f.apply(aa, bb))
+        );
+
+    }
+
 
 }

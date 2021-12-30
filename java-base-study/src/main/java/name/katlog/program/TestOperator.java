@@ -2,8 +2,11 @@ package name.katlog.program;
 
 import java.util.Arrays;
 
+import org.junit.Assert;
 import org.junit.Test;
 import name.katlog.util.Print;
+
+import static org.junit.Assert.*;
 
 /**
  * 运算符测试
@@ -14,15 +17,17 @@ import name.katlog.util.Print;
 public class TestOperator {
 	
 	/**单目运算*/
-	@Test public void _2_unary(){
+	@Test
+	public void _2_unary(){
 		int i = 0;
-		System.out.println(i++);
+		assertEquals(0, i++);
 		int j = 0;
-		System.out.println(++j);
+		assertEquals(1, ++j);
 	}
 	
 	/**创建对象和类型转换*/
-	@Test public void _3_createObject_typeCast(){
+	@Test
+	public void _3_createObject_typeCast(){
 		
 		//创建对象
 		
@@ -49,13 +54,16 @@ public class TestOperator {
 	}
 	
 	/** 乘 除 余*/
-	@Test public void _4_times_multiply(){
+	@Test
+	public void _4_times_multiply(){
 		
 		//
 		System.out.println(1/10);
-		System.out.println(10/10);
+		assertEquals(0.0, 1 / 10,0.00);
+		assertEquals(1,10/10);
 		System.out.println(11/10);
-		
+		System.out.println(5/2);
+
 		System.out.println(18.0/3);					//
 		System.out.println(1%10);
 		System.out.println(10%10);

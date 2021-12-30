@@ -20,7 +20,8 @@ import org.junit.Test;
 public class TestObject {
 	
 	
-	@Test public void _hashCode(){
+	@Test
+	public void _hashCode(){
 		String s = "OK";
 		StringBuffer sb = new StringBuffer(s);
 		System.out.println(s.hashCode()+"---"+sb.hashCode());
@@ -32,7 +33,7 @@ public class TestObject {
 	}
 
 	@Test
-	public void test() {
+	public void 	test() {
 		int a = 1;
 		System.out.println("a = " + a);
 		int b = a;

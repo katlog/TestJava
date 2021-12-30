@@ -22,6 +22,14 @@
         <!--</repository>-->
     <!--</repositories>-->
 
+    <repositories>
+        <repository>
+            <id>1</id>
+            <name>spring</name>
+            <url>https://repo.spring.io/plugins-release/</url>
+        </repository>
+    </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 

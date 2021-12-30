@@ -155,6 +155,8 @@ public class TestString {
     	//substring 截取 [begin,end)
     	assertEquals("3456789","123456789".substring(2));
         assertEquals("123","123456789".substring(0, 3));
+        // 注意，substring第二个参数不包含，最大到str.length，而不是str.length-1
+        assertEquals("123456789","123456789".substring(0, 9));
 
     	//常用按照分割符号来获取字符串   常用方式
         assertEquals("123456", ("123456:789".substring(0, "123456:789".indexOf(":"))));

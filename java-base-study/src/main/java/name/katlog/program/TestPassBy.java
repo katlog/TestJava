@@ -16,6 +16,13 @@ public class TestPassBy {
         changeNum(num);
         System.out.println("num = " + num);
 
+        /**  注意++i和i++在传递时的影响 */
+        changeNum(num++);
+        System.out.println("num = " + num);
+
+        changeNum(++num);
+        System.out.println("num = " + num);
+
         // 第二个例子：没有提供改变自身方法的引用类型
         String str = "before";
         changeStr(str);

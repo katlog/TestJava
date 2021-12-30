@@ -3,6 +3,7 @@ package name.katlog.collection;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -42,7 +43,7 @@ public class TestDeque {
         deque.add(4);
     }
 
-    /** 添加元素：容量受限时不会抛异常，会返回false */
+    /** 添加元素： 等同addLast 容量受限时不会抛异常，会返回false */
     @Test
     public void offer(){
         deque.offer("5");
@@ -71,6 +72,14 @@ public class TestDeque {
         assertEquals("1", deque.peek());
     }
 
+    /**   取出元素：不删除，等同于peekFirst  会报异常*/
+    @Test
+    public void getFirst(){
+        assertEquals("1", deque.getFirst());
+
+        assertEquals("1", deque.getFirst());
+    }
+
     @Test
     public void peekLast(){
         assertEquals("4", deque.peekLast());
@@ -78,7 +87,7 @@ public class TestDeque {
         assertEquals("4", deque.peekLast());
     }
 
-    /** 取出元素：会删除 */
+    /** 取出元素：会删除   等同 pollFirst*/
     @Test
     public void poll(){
         assertEquals("1", deque.poll());
@@ -86,7 +95,7 @@ public class TestDeque {
         assertEquals("2", deque.poll());
     }
 
-    /** 等同于：removeFirst */
+    /** 等同于：removeFirst  会报异常*/
     @Test
     public void remove(){
         assertEquals("1", deque.remove());

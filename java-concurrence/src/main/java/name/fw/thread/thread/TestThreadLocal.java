@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.sf.json.util.JSONUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.util.ReflectionUtils;
 
@@ -13,6 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class TestThreadLocal {
 
@@ -24,17 +28,17 @@ public class TestThreadLocal {
         th1.set("main");
 
         // 有值
-        System.out.println(Thread.currentThread().getName() + "thread th1. = " + th1.get());
+        assertEquals("main", th1.get());
 
         // 空值
         new Thread(() -> {
-            System.out.println(Thread.currentThread().getName() +" thread th1 = " + th1.get()
-            );
+            assertNull(th1.get());
         }).start();
     }
 
     @Test
     public void withInitial(){
+        // 延迟产生所以都有
         ThreadLocal<String> th1 = ThreadLocal.withInitial(() -> "value");
 
         // 有值
@@ -52,6 +56,14 @@ public class TestThreadLocal {
     class Person{
         String name;
         int age;
+
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
     }
 
 
@@ -61,12 +73,16 @@ public class TestThreadLocal {
         Thread t1=  new Thread(() -> {
 
             ThreadLocal<Person> th2 = new ThreadLocal<>();
-            th2.set(new Person("1", 1));
+            Person person = new Person("1", 1);
+            th2.set(person);
 
             // 没有gc的时候 暂不回收key
-            System.gc();
+            // ①
             threadMap(Thread.currentThread());
             th2 = null;
+            person = null;
+            // ①
+            threadMap(Thread.currentThread());
 
             try {
                 Thread.sleep(50);
@@ -78,6 +94,7 @@ public class TestThreadLocal {
             // key使用WeakReference(非必须对象)类型，只要有gc就会被回收
             System.out.println("set null and begin to gc....");
             System.gc();
+            // ②
             threadMap(Thread.currentThread());
 
             // 保证主线程执行threadMap时t1线程还没执行完，否则，t1中的threadLocals字段为空了
@@ -93,6 +110,7 @@ public class TestThreadLocal {
 
         Thread.sleep(100);
 
+        // ③
         threadMap(t1);
 
         Thread.sleep(100);
@@ -133,7 +151,7 @@ public class TestThreadLocal {
                     Field referentField = entryClass.getSuperclass().getSuperclass().getDeclaredField("referent");
                     referentField.setAccessible(true);
                     Object key = referentField.get(entry);
-                    System.out.println("key:" + key + ",value:" + value + "\t,entry:" + entry);
+                    System.out.println("key:" + key + ",\t\tvalue:" + value + "\t\t,entry:" + entry);
                 }
             }
 
